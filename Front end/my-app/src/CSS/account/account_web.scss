@@ -1,0 +1,241 @@
+@media (min-width: 660px)
+{
+    body
+    {
+      margin: 0% auto ;
+      
+      .AccountContainer
+      {
+        position: absolute;
+        margin-bottom: 50px;
+        left: 36% ;
+        top: 17%;
+        display: table-cell;   
+        vertical-align: middle; 
+        width: auto;
+        height: auto;
+      }
+      .signin
+      {
+        flex-direction: column;
+        display: flex;
+        width: 80%;
+        justify-content: left;
+        margin-bottom: 5%;
+      }
+      .signup
+      { 
+        flex-direction: column;
+        display: flex;
+        width: 80%;
+        justify-content: left;
+        margin-bottom: 5%;
+      }
+        .third_paties_Container
+        {
+          margin-top: 3%;
+          margin-left: 0%;
+          text-align: center;
+        }
+        .fb_submit
+        {
+          text-decoration: none ;
+          color: white ; 
+          font-family: 'Glacial Indifference';
+          font-weight: bolder ;
+          background-color: #4267B2;
+          padding: 0.8em 2em ;
+          border-radius: 15px ;
+          transition: all 0.2s ;
+          border: none ;
+          width: 100%;
+          cursor: pointer;
+          outline: none;
+          margin-bottom: 5%;
+        }
+        .fb_submit:hover
+        {
+          background-color: rgb(85, 132, 226);
+        }
+        .gl_submit
+        {
+          text-decoration: none ;
+          color: #f2f2f2 ; 
+          font-family: 'Glacial Indifference';
+          font-weight: bolder ;
+          background-color: #4285F4;
+          padding: 0.8em 2em ;
+          border-radius: 15px ;
+          transition: all 0.2s ;
+          border: none ;
+          width: 100%;
+          cursor: pointer;
+          outline: none;
+          margin-bottom: 5%;
+        }
+        .gl_submit:hover
+        {
+
+          background-color: rgb(112, 163, 246);
+        }
+        .inf
+        { 
+          position: relative;
+          /* Adjust these values accordingly */
+          top: 28px;
+          right: 160px;
+          color: #f2f2f2;
+        }
+        .ing
+        {
+          position: relative;
+          /* Adjust these values accordingly */
+          top: 28px;
+          right: 160px;
+          color: #f2f2f2;
+        }
+        .icong
+        {
+          color: #f2f2f2 ;
+          position: relative;
+          /* Adjust these values accordingly */
+          top: 28px;
+          right: 160px;
+        }
+        .iconf
+        {
+          color: #f2f2f2 ;
+          position: relative;
+          /* Adjust these values accordingly */
+          top: 28px;
+          right: 160px;
+        }
+        .icon 
+        {
+          color: #FF7E6A;
+          position: absolute;
+          right: 5%;
+          top: 50% ;
+        }
+        .icin 
+        {
+            color: #FF7E6A;
+            position: absolute;
+            right: 5%;
+            top: 50% ;
+        }
+        .span
+        {
+          font-family: 'Publica Play';
+          text-align: center;
+          left: 35%;
+          position: absolute;
+          background: #ffffff;
+          color: gray;
+        }
+        h1 
+        {
+          font-family: 'Glacial indifference';
+          color: #2a2929;
+          font-weight: bolder ;
+          padding-bottom: 3%;
+          text-align: center;
+        }
+        .inputs
+        {
+          position: relative;
+        }
+        .field
+        {
+          border: 1px solid transparent;
+          border-radius: 10px ;
+          background-color: #F2F2F2;
+          padding: 5px 10px ;
+          margin-top: 5%;
+          margin-right: 2%;
+          outline: none ;
+          font-family: 'Publica Play';
+          box-sizing: border-box ;
+          display: inline-flex ;  
+        }
+        .in 
+        {
+            width: 30vw;
+            height: 7vh;
+          
+        }
+        .up 
+        {
+          width: 30vw;
+          height: 45px;
+        }
+        label
+        {
+          font-family: 'Glacial indifference';
+          color: #2a2929;
+          font-weight: bolder ;   
+    
+        }
+        .descr
+        {
+          font-size: 10px ; 
+          font-family: 'Publica Play';
+          text-align: center ;
+          color: gray;
+          text-align: center;
+        }
+        a
+        {
+          font-size: 10px ; 
+          font-family: 'Publica Play';
+          text-align: center ;
+          color : #FF4123 ;
+          text-align: center;
+        }
+        .Submitbutton
+        {
+          
+          text-decoration: none ;
+          color: white ; 
+          font-family: 'Glacial Indifference';
+          font-weight: bolder ;
+          background-color: #FF4123 ;
+          padding: 0.8em 2em ;
+          border-radius: 15px ;
+          transition: all 0.2s ;
+          border: none ;
+          width: 60%;
+          cursor: pointer;
+        }
+        .submitContainer
+        {
+          margin-top: 3%;
+          margin-left: 0%;
+          text-align: center;
+        }
+        .Submitbutton:hover
+        {
+          background-color: #2a2929 ;
+          transition: all 0.2s ;
+        }
+        .field:focus
+        {
+          border: 1px solid #FF7E6A;
+        }
+        .field:hover
+        {
+          border: 1px solid #FF7E6A;
+        }
+        
+      
+    }
+    
+    .Animo_logo_orange_2
+        {
+          position: absolute ;
+          left: 43% ;
+          top: 30px;
+          z-index: initial;
+          width: 15%;
+        }
+}
