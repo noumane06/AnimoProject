@@ -16,36 +16,36 @@ class signup extends React.Component {
                 <div className="third_paties_Container">
                     <i class="fa fa-google icong fa-lg"></i>
                     <button className='gl_submit' type="submit">Sign up with google</button>
-                </div>
+                </div><br/>
                
-                <p><span className="span">Or use your email</span></p> <br/><br/>
+                <p className="span">Or use your email</p>
                 
 
                 <form> 
                     <label>First name : </label>
                     <div className="inputs">
                          <i class="fa fa-user icon"></i>
-                        <input className='field up' type="text" id="first_name"/><br/>
+                        <input className='field ' type="text" id="first_name"/><br/>
                     </div><br/>
                     <label>Last name : </label> 
                     <div className="inputs">
                          <i class="fa fa-user icon"></i>
-                         <input className='field up' type="text" id="last_name"/><br/>
+                         <input className='field ' type="text" id="last_name"/><br/>
                     </div><br/>
                     <label>Email : </label>
                     <div className="inputs">
                          <i class="fa fa-envelope icon"></i>
-                         <input className='field up' type="text" id="email"/><br/>
+                         <input className='field ' type="text" id="email"/><br/>
                     </div><br/>
                     <label>Phone number : </label>
                     <div className="inputs">
                          <i class="fa fa-phone icon"></i>
-                         <input className='field up' type="tel" id="phone_number"/><br/>
+                         <input className='field ' type="tel" id="phone_number"/><br/>
                     </div><br/>
                     <label>Password : </label>
                     <div className="inputs">
                          <i class="fa fa-lock icon"></i>
-                         <input className='field up' type="password" id="password"/><br/>
+                         <input className='field ' type="password" id="password"/><br/>
                     </div><br/>
                 
                 <div className="submitContainer">

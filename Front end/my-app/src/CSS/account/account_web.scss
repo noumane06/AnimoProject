@@ -1,4 +1,6 @@
-@media (min-width: 660px)
+// Web formaatt
+
+@media all and(min-width: 681px)
 {
     body
     {
@@ -8,33 +10,15 @@
       {
         position: absolute;
         margin-bottom: 50px;
-        left: 36% ;
+        left: 35.2% ;
         top: 17%;
-        display: table-cell;   
-        vertical-align: middle; 
-        width: auto;
+        width: 30vw;
         height: auto;
-      }
-      .signin
-      {
-        flex-direction: column;
-        display: flex;
-        width: 80%;
-        justify-content: left;
-        margin-bottom: 5%;
-      }
-      .signup
-      { 
-        flex-direction: column;
-        display: flex;
-        width: 80%;
-        justify-content: left;
-        margin-bottom: 5%;
-      }
+
+      
         .third_paties_Container
         {
-          margin-top: 3%;
-          margin-left: 0%;
+          margin: 0%;
           text-align: center;
         }
         .fb_submit
@@ -51,7 +35,6 @@
           width: 100%;
           cursor: pointer;
           outline: none;
-          margin-bottom: 5%;
         }
         .fb_submit:hover
         {
@@ -71,27 +54,27 @@
           width: 100%;
           cursor: pointer;
           outline: none;
-          margin-bottom: 5%;
         }
         .gl_submit:hover
         {
-
           background-color: rgb(112, 163, 246);
         }
         .inf
         { 
           position: relative;
           /* Adjust these values accordingly */
+          float: left;
           top: 28px;
-          right: 160px;
+          left: 5%;
           color: #f2f2f2;
         }
         .ing
         {
           position: relative;
           /* Adjust these values accordingly */
+          float: left;
           top: 28px;
-          right: 160px;
+          left: 5%;
           color: #f2f2f2;
         }
         .icong
@@ -99,23 +82,28 @@
           color: #f2f2f2 ;
           position: relative;
           /* Adjust these values accordingly */
+          float: left;
           top: 28px;
-          right: 160px;
+          left: 5%;
         }
         .iconf
         {
           color: #f2f2f2 ;
           position: relative;
           /* Adjust these values accordingly */
+          float: left;
           top: 28px;
-          right: 160px;
+          left: 5%;
         }
         .icon 
         {
           color: #FF7E6A;
-          position: absolute;
-          right: 5%;
-          top: 50% ;
+          position: relative;
+          float: left;
+          /* Adjust these values accordingly */
+          top: 30px;
+          left: 8px;
+          padding: 0 10px;
         }
         .icin 
         {
@@ -124,13 +112,11 @@
             right: 5%;
             top: 50% ;
         }
-        .span
+        p
         {
           font-family: 'Publica Play';
           text-align: center;
-          left: 35%;
-          position: absolute;
-          background: #ffffff;
+          width: 100%;
           color: gray;
         }
         h1 
@@ -143,31 +129,21 @@
         }
         .inputs
         {
-          position: relative;
+          margin: 0%;
         }
         .field
-        {
+        { 
+          height: 7vh;
+          width: 100%;
           border: 1px solid transparent;
           border-radius: 10px ;
           background-color: #F2F2F2;
-          padding: 5px 10px ;
-          margin-top: 5%;
-          margin-right: 2%;
+          padding: 0.8em 4em ;
+          margin-bottom: 2%;
           outline: none ;
           font-family: 'Publica Play';
           box-sizing: border-box ;
           display: inline-flex ;  
-        }
-        .in 
-        {
-            width: 30vw;
-            height: 7vh;
-          
-        }
-        .up 
-        {
-          width: 30vw;
-          height: 45px;
         }
         label
         {
@@ -226,16 +202,21 @@
         {
           border: 1px solid #FF7E6A;
         }
+
         
-      
+     }  
+
+
     }
     
     .Animo_logo_orange_2
-        {
+      {
           position: absolute ;
           left: 43% ;
           top: 30px;
           z-index: initial;
           width: 15%;
-        }
+       }
 }
+
+

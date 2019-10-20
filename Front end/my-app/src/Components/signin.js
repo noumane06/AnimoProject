@@ -15,7 +15,7 @@ class signin extends React.Component {
                     <button className='gl_submit' type="submit">Sign in with google</button>
                 </div>
                
-                <p><span className="span">Or use your email</span></p> <br/><br/>
+                <p><span className="span">Or use your email</span></p> 
                 
 
                 <form> 

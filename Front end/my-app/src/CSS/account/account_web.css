@@ -1,51 +1,20 @@
-@media (min-width: 660px) {
+@media all and (min-width: 681px) {
   body {
     margin: 0% auto;
   }
   body .AccountContainer {
     position: absolute;
     margin-bottom: 50px;
-    left: 36%;
+    left: 35.2%;
     top: 17%;
-    display: table-cell;
-    vertical-align: middle;
-    width: auto;
+    width: 30vw;
     height: auto;
   }
-  body .signin {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 80%;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
-    margin-bottom: 5%;
-  }
-  body .signup {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 80%;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
-    margin-bottom: 5%;
-  }
-  body .third_paties_Container {
-    margin-top: 3%;
-    margin-left: 0%;
+  body .AccountContainer .third_paties_Container {
+    margin: 0%;
     text-align: center;
   }
-  body .fb_submit {
+  body .AccountContainer .fb_submit {
     text-decoration: none;
     color: white;
     font-family: 'Glacial Indifference';
@@ -59,12 +28,11 @@
     width: 100%;
     cursor: pointer;
     outline: none;
-    margin-bottom: 5%;
   }
-  body .fb_submit:hover {
+  body .AccountContainer .fb_submit:hover {
     background-color: #5584e2;
   }
-  body .gl_submit {
+  body .AccountContainer .gl_submit {
     text-decoration: none;
     color: #f2f2f2;
     font-family: 'Glacial Indifference';
@@ -78,76 +46,81 @@
     width: 100%;
     cursor: pointer;
     outline: none;
-    margin-bottom: 5%;
   }
-  body .gl_submit:hover {
+  body .AccountContainer .gl_submit:hover {
     background-color: #70a3f6;
   }
-  body .inf {
+  body .AccountContainer .inf {
     position: relative;
     /* Adjust these values accordingly */
+    float: left;
     top: 28px;
-    right: 160px;
+    left: 5%;
     color: #f2f2f2;
   }
-  body .ing {
+  body .AccountContainer .ing {
     position: relative;
     /* Adjust these values accordingly */
+    float: left;
     top: 28px;
-    right: 160px;
+    left: 5%;
     color: #f2f2f2;
   }
-  body .icong {
-    color: #f2f2f2;
-    position: relative;
-    /* Adjust these values accordingly */
-    top: 28px;
-    right: 160px;
-  }
-  body .iconf {
+  body .AccountContainer .icong {
     color: #f2f2f2;
     position: relative;
     /* Adjust these values accordingly */
+    float: left;
     top: 28px;
-    right: 160px;
+    left: 5%;
   }
-  body .icon {
+  body .AccountContainer .iconf {
+    color: #f2f2f2;
+    position: relative;
+    /* Adjust these values accordingly */
+    float: left;
+    top: 28px;
+    left: 5%;
+  }
+  body .AccountContainer .icon {
+    color: #FF7E6A;
+    position: relative;
+    float: left;
+    /* Adjust these values accordingly */
+    top: 30px;
+    left: 8px;
+    padding: 0 10px;
+  }
+  body .AccountContainer .icin {
     color: #FF7E6A;
     position: absolute;
     right: 5%;
     top: 50%;
   }
-  body .icin {
-    color: #FF7E6A;
-    position: absolute;
-    right: 5%;
-    top: 50%;
-  }
-  body .span {
+  body .AccountContainer p {
     font-family: 'Publica Play';
     text-align: center;
-    left: 35%;
-    position: absolute;
-    background: #ffffff;
+    width: 100%;
     color: gray;
   }
-  body h1 {
+  body .AccountContainer h1 {
     font-family: 'Glacial indifference';
     color: #2a2929;
     font-weight: bolder;
     padding-bottom: 3%;
     text-align: center;
   }
-  body .inputs {
-    position: relative;
+  body .AccountContainer .inputs {
+    margin: 0%;
   }
-  body .field {
+  body .AccountContainer .field {
+    height: 7vh;
+    width: 100%;
     border: 1px solid transparent;
     border-radius: 10px;
     background-color: #F2F2F2;
-    padding: 5px 10px;
-    margin-top: 5%;
-    margin-right: 2%;
+    padding: 0.8em 4em;
+    margin-bottom: 2%;
     outline: none;
     font-family: 'Publica Play';
     -webkit-box-sizing: border-box;
@@ -156,34 +129,26 @@
     display: -ms-inline-flexbox;
     display: inline-flex;
   }
-  body .in {
-    width: 30vw;
-    height: 7vh;
-  }
-  body .up {
-    width: 30vw;
-    height: 45px;
-  }
-  body label {
+  body .AccountContainer label {
     font-family: 'Glacial indifference';
     color: #2a2929;
     font-weight: bolder;
   }
-  body .descr {
+  body .AccountContainer .descr {
     font-size: 10px;
     font-family: 'Publica Play';
     text-align: center;
     color: gray;
     text-align: center;
   }
-  body a {
+  body .AccountContainer a {
     font-size: 10px;
     font-family: 'Publica Play';
     text-align: center;
     color: #FF4123;
     text-align: center;
   }
-  body .Submitbutton {
+  body .AccountContainer .Submitbutton {
     text-decoration: none;
     color: white;
     font-family: 'Glacial Indifference';
@@ -197,20 +162,20 @@
     width: 60%;
     cursor: pointer;
   }
-  body .submitContainer {
+  body .AccountContainer .submitContainer {
     margin-top: 3%;
     margin-left: 0%;
     text-align: center;
   }
-  body .Submitbutton:hover {
+  body .AccountContainer .Submitbutton:hover {
     background-color: #2a2929;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
   }
-  body .field:focus {
+  body .AccountContainer .field:focus {
     border: 1px solid #FF7E6A;
   }
-  body .field:hover {
+  body .AccountContainer .field:hover {
     border: 1px solid #FF7E6A;
   }
   .Animo_logo_orange_2 {

@@ -1,77 +1,133 @@
-body {
-  margin: 0%;
+@media all and (min-width: 900px) {
+  body {
+    margin: 0%;
+  }
+  body #getstarted {
+    text-decoration: none;
+    color: white;
+    font-family: 'Glacial Indifference';
+    font-weight: bolder;
+    background-color: #FF4123;
+    float: right;
+    position: absolute;
+    right: 50px;
+    top: 40px;
+    padding: 1em 2em;
+    border-radius: 5px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    width: 100px;
+    font-size: 15px;
+  }
+  body #getstarted:hover {
+    background-color: #2a2929;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  body .Animo_logo_orange {
+    top: 40px;
+    width: 15%;
+  }
+  body .Container {
+    margin: 50px;
+  }
+  body .Container .presentation {
+    position: absolute;
+    top: 45%;
+  }
+  body .Container .presentation .Left_text {
+    width: 39.23vw;
+    height: 23.17vh;
+  }
+  body .Container .presentation .Left_text span {
+    font-family: 'Riffic Free';
+    font-size: 50px;
+    color: #2a2929;
+  }
+  body .Container .presentation .Left_text p {
+    font-family: 'Publica Play';
+    font-size: 21px;
+    font-weight: bolder;
+    color: #2a2929;
+  }
+  body .Container .presentation img {
+    float: right;
+    position: absolute;
+    left: 55vw;
+    top: -20vh;
+  }
+  #bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 90%;
+    min-height: 100%;
+    z-index: -1;
+  }
 }
 
-body #getstarted {
-  text-decoration: none;
-  color: white;
-  font-family: 'Glacial Indifference';
-  font-weight: bolder;
-  background-color: #FF4123;
-  float: right;
-  position: absolute;
-  right: 50px;
-  top: 40px;
-  padding: 1em 2em;
-  border-radius: 5px;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  width: 100px;
-  font-size: 15px;
-}
-
-body #getstarted:hover {
-  background-color: #2a2929;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-}
-
-body .Animo_logo_orange {
-  top: 40px;
-  width: 15%;
-}
-
-body .Container {
-  margin: 50px;
-}
-
-body .Container .presentation {
-  position: absolute;
-  top: 45%;
-}
-
-body .Container .presentation .Left_text {
-  width: 39.23vw;
-  height: 23.17vh;
-}
-
-body .Container .presentation .Left_text span {
-  font-family: 'Riffic Free';
-  font-size: 50px;
-  color: #2a2929;
-}
-
-body .Container .presentation .Left_text p {
-  font-family: 'Publica Play';
-  font-size: 21px;
-  font-weight: bolder;
-  color: #2a2929;
-}
-
-body .Container .presentation img {
-  float: right;
-  position: absolute;
-  left: 55vw;
-  top: -20vh;
-}
-
-#bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* Preserve aspet ratio */
-  min-width: 90%;
-  min-height: 100%;
-  z-index: -1;
+@media all and (max-width: 900px) {
+  body #getstarted {
+    text-decoration: none;
+    color: white;
+    font-family: 'Glacial Indifference';
+    font-weight: bolder;
+    background-color: #FF4123;
+    position: fixed;
+    right: 28vw;
+    bottom: 40px;
+    padding: 1em 2em;
+    border-radius: 5px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    width: 100px;
+    font-size: 15px;
+  }
+  body #getstarted:hover {
+    background-color: #2a2929;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  body .Animo_logo_orange {
+    position: absolute;
+    top: 40px;
+    width: 40%;
+    left: 30vw;
+  }
+  body .Container {
+    margin-left: 10px;
+  }
+  body .Container .presentation {
+    position: absolute;
+    top: 35%;
+  }
+  body .Container .presentation .Left_text {
+    width: 80%;
+    height: 50%;
+  }
+  body .Container .presentation .Left_text span {
+    font-family: 'Riffic Free';
+    font-size: 40px;
+    color: #2a2929;
+  }
+  body .Container .presentation .Left_text p {
+    font-family: 'Publica Play';
+    font-size: 15px;
+    font-weight: bolder;
+    color: #2a2929;
+  }
+  body .Container .presentation img {
+    display: none;
+  }
+  #bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 90%;
+    min-height: 100%;
+    z-index: -1;
+  }
 }
 /*# sourceMappingURL=main.css.map */
