@@ -39,7 +39,7 @@
     width: 39.23vw;
     height: 23.17vh;
   }
-  body .Container .presentation .Left_text span {
+  body .Container .presentation .Left_text h1 {
     font-family: 'Riffic Free';
     font-size: 50px;
     color: #2a2929;
@@ -53,8 +53,8 @@
   body .Container .presentation img {
     float: right;
     position: absolute;
-    left: 55vw;
-    top: -20vh;
+    left: 50vw;
+    top: -5vh;
   }
   #bg {
     position: fixed;
@@ -106,7 +106,7 @@
     width: 80%;
     height: 50%;
   }
-  body .Container .presentation .Left_text span {
+  body .Container .presentation .Left_text h1 {
     font-family: 'Riffic Free';
     font-size: 40px;
     color: #2a2929;

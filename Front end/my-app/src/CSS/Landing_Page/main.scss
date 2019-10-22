@@ -37,17 +37,17 @@
       {
         position: absolute ;
         top: 45%;
-        
-        
         .Left_text
-        {
+        {  
           width: 39.23vw ;
           height: 23.17vh ;
-          span
+          
+          h1
           {
             font-family: 'Riffic Free'; 
             font-size: 50px;
             color: #2a2929;
+
           }
           p
           {
@@ -62,8 +62,8 @@
           {
             float: right ; 
             position: absolute ;
-            left: 55vw ;
-            top: -20vh;
+            left: 50vw ;
+            top: -5vh;
           }
       }
     }
@@ -128,7 +128,7 @@
         {
           width: 80% ;
           height: 50%;
-          span
+          h1
           {
             font-family: 'Riffic Free'; 
             font-size: 40px;

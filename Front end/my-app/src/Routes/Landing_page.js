@@ -10,6 +10,7 @@ class Landing_page extends React.Component {
     render() { 
         return (  
             <div className="Container">
+            <title>Animo | Welcome</title>
             <img id="bg" src={require('../res/Background-illust/Animo – 1.png')}/>
                 <Navbar />
                 <Presentation />

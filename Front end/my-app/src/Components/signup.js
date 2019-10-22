@@ -8,6 +8,7 @@ class signup extends React.Component {
     render() { 
         return ( 
             <div className="AccountContainer">
+             <title>Animo | Sign up</title>
                 <h1>Sign up</h1>
                 <div className="third_paties_Container">
                     <i class="fa fa-facebook-square iconf fa-lg"></i>
@@ -49,7 +50,7 @@ class signup extends React.Component {
                     </div><br/>
                 
                 <div className="submitContainer">
-                    <button className='Submitbutton' type="submit">Login</button><br/>  
+                    <button className='Submitbutton' type="submit">Sign up</button><br/>  
                     <span className="descr">Don't have an account </span><br/>
                     <NavLink to="/account/signin">Sign in now</NavLink>
                 </div>

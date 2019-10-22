@@ -17,10 +17,9 @@ class Container extends React.Component {
   render() { 
     return (
         <Router>
+            
             <Route default exact path="/" component={Landing_page}/>
             <Route path="/account/" component={Account_page}/>
-            
-            
         </Router>      
       );
   }
