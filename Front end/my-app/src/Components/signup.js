@@ -8,7 +8,7 @@ class signup extends React.Component {
     render() { 
         return ( 
             <div className="AccountContainer">
-             <title>Animo | Sign up</title>
+             <title>Sign up | Animo</title>
                 <h1>Sign up</h1>
                 <div className="third_paties_Container">
                     <i class="fa fa-facebook-square iconf fa-lg"></i>

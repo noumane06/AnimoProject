@@ -30,6 +30,13 @@
   margin-left: 5%;
 }
 
+@media all and (max-width: 900px) {
+  .slide {
+    margin-top: -4%;
+    margin-left: 20%;
+  }
+}
+
 .slide h1 {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;

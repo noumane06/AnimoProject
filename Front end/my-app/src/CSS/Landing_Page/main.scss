@@ -39,9 +39,10 @@
         top: 45%;
         .Left_text
         {  
+          position: absolute;
+          top: 0%;
           width: 39.23vw ;
           height: 23.17vh ;
-          
           h1
           {
             font-family: 'Riffic Free'; 
@@ -58,12 +59,48 @@
     
           }
         }
-        img
+        .ilus_3
+        {
+          float: right ; 
+          position: absolute ;
+          left: 50vw ;
+          top: -5vh;
+        }
+        .Right_text
+        {
+          width: 39.23vw ;
+          height: 23.17vh ;
+          float: right ;
+          position: absolute ;
+          left: 45vw ;
+          top: 0vh;
+          h1
+          {
+            font-family: 'Riffic Free'; 
+            font-size: 3rem;
+          line-height: 3.25rem;
+            color: #2a2929;
+          }
+          p
+          {
+            font-family: 'Publica Play';
+            font-size: 1rem;
+            font-weight: bolder ;
+            color: #2a2929;
+    
+          }
+        }
+        .Left_illust
+        {
+          position: absolute ;
+          top: -9vh;
+        }
+        .Right_illustr
           {
             float: right ; 
             position: absolute ;
             left: 50vw ;
-            top: -5vh;
+            top: -8vh;
           }
       }
     }
@@ -73,13 +110,16 @@
     position: fixed; 
     top: 0; 
     left: 0; 
-    
+    width: 100%;
     /* Preserve aspet ratio */
     min-width: 90%;
     min-height: 100%;
     z-index: -1;
   }
 }
+
+
+// phone size
 
 
 @media all and (max-width: 900px)
@@ -94,14 +134,16 @@
       font-family: 'Glacial Indifference';
       font-weight: bolder ;
       background-color: #FF4123 ;
-      position: fixed ;
-      right: 28vw;
-      bottom: 40px;
       padding: 1em 2em ;
       border-radius: 5px ;
       transition: all 0.2s ;
-      width: 100px;
       font-size: 15px;
+      height:20px; 
+      width:100px; 
+      position:fixed;
+      margin: -20px -50px;
+      top:90%; 
+      left:45%;
     }
     #getstarted:hover
     {
@@ -117,38 +159,70 @@
     }
     .Container
     {
-      margin-left: 10px;
+      margin: 0px;
       .presentation
       {
         position: absolute ;
-        top: 35%;
-        
-        
+        top: 45%;
+        h1
+        {
+          font-family: 'Riffic Free'; 
+          font-size: 2.5rem;
+          line-height: 3rem;
+          color: #2a2929;
+        }
+        p
+        {
+          font-family: 'Publica Play';
+          font-size: 1em;
+          font-weight: bolder ;
+          color: #2a2929;
+          
+        }
         .Left_text
         {
           width: 80% ;
-          height: 50%;
-          h1
-          {
-            font-family: 'Riffic Free'; 
-            font-size: 40px;
-            color: #2a2929;
-          }
-          p
-          {
-            font-family: 'Publica Play';
-            font-size: 15px;
-            font-weight: bolder ;
-            color: #2a2929;
-    
-          }
+          
         }
+        .Right_text
+        {
+          width: 70% ;
+          height: 50%;
+        }
+        
         img
           {
             display: none;
           }
       }
     }
+  }
+  @media all and (max-width: 600px)
+  {
+    body
+    {
+      .Container
+      {
+        .presentation
+        {
+          top: 32vh;
+          text-align: center;
+          h1 
+          {
+            font-size: 2em;
+          }
+          p
+          {
+            font-size: 15px;
+          }
+        }
+        
+      } 
+    }
+    
+    
+
+      
   }
   #bg {
     position: fixed; 

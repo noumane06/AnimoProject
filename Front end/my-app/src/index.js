@@ -3,13 +3,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route ,  Redirect , BrowserRouter as Router} from 'react-router-dom';
+import {Route  , BrowserRouter as Router} from 'react-router-dom';
 
 // Internal files and compenents 
 
 import Landing_page from './Routes/Landing_page';
 import Account_page from './Routes/Account_page';
-
+import Home_page from './Routes/Home_page';
 // *****************************
 
 class Container extends React.Component {
@@ -20,6 +20,7 @@ class Container extends React.Component {
             
             <Route default exact path="/" component={Landing_page}/>
             <Route path="/account/" component={Account_page}/>
+            <Route path="/home/" component={Home_page}/>
         </Router>      
       );
   }
