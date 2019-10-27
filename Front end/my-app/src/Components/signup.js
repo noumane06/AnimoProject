@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink } from 'react-router-dom';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 import '../CSS/account/account_mobile.css';
 
@@ -17,10 +18,18 @@ class signup extends React.Component {
             username : "",
             phone : null , 
             isvalid : true ,
-            isLoading : false
+            isLoading : false,
+            error : null 
         };
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
+    }
+    UNSAFE_componentWillMount()
+    {
+        const token = window.localStorage.getItem("Tokens");
+        var decoded = jwt.verify(token,'secret',function (err) {
+            this.setState({error : err});
+        }.bind(this));
     }
     handlechange(e)
     {
@@ -38,7 +47,7 @@ class signup extends React.Component {
             {
                 const authToken = response.data.token ; 
                 window.localStorage.setItem("Tokens", authToken);
-                window.location.replace("/home");
+                window.location.replace("/profile_conf");
             }else
             {
                 console.log("entred");
@@ -61,6 +70,10 @@ class signup extends React.Component {
         e.preventDefault();
     }
     render() { 
+        if (this.state.error == null) {
+            window.location.replace("/home");
+        }else
+        {
         return ( 
             <div className="AccountContainer">
              <title>Sign up | Animo</title>
@@ -134,7 +147,7 @@ class signup extends React.Component {
                     </div>
                 
                 <div className="submitContainer">
-                <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading" : "SignUp"}></input><br/>  
+                <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading..." : "Sign up"}></input><br/>  
                     <span className="descr">Already have an account ?</span><br/>
                     <NavLink to="/account/signin">Sign in now</NavLink>
                 </div>
@@ -142,6 +155,7 @@ class signup extends React.Component {
                 </form>
             </div>
          );
+        }
     }
 }
  

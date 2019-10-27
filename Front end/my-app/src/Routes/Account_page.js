@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch,  Route  } from 'react-router-dom';
+import {BrowserRouter as Router,Route,Redirect,Switch } from 'react-router-dom';
 
 import signin from '../Components/signin';
 import signup from '../Components/signup';
@@ -8,7 +8,8 @@ import '../CSS/account/account_mobile.css';
 class Account_page extends React.Component {
     render() { 
         return ( 
-            <div >
+          <Router>
+          <div >
             <a href="/">
             <img src={
               require('../res/Logo/animo iluustration icon.svg')}
@@ -19,10 +20,13 @@ class Account_page extends React.Component {
             </a>
             <Switch>
               <Route  path="/account/signin" component={signin} />
+              <Redirect exact from='/account/' to="/account/signin" />
               <Route path="/account/signup" component={signup} />
             </Switch>
 
-            </div>
+          </div> 
+          </Router>
+            
          );
     }
 }

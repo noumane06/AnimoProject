@@ -1,0 +1,15 @@
+body {
+  margin: 0% auto;
+}
+
+body .username {
+  position: absolute;
+  right: 2%;
+  top: 0%;
+}
+
+body .skip {
+  position: absolute;
+  right: 2%;
+}
+/*# sourceMappingURL=home.css.map */

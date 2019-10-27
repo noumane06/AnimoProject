@@ -16,7 +16,30 @@
         width: 30vw;
         height: auto;
 
-      
+       .sign_alert
+       {
+        font-family: 'Glacial Indifference';
+        font-weight: bolder ;
+        border: 1px solid #D8000C;
+        background-color: #FFBABA !important ;
+        padding: 5%;
+        color: #D8000C;
+        border-radius: 5px;
+        text-align: center ;
+        transition: 0.5s;
+        transition-timing-function: ease-out;
+        transform: translateY(0);
+        opacity: 1;    
+       }
+       .hide_sign
+       {
+        transition: 0.25s;
+        transition-timing-function: ease-out;
+        
+        transform: translateY(0);
+        opacity: 1;
+         visibility: hidden;
+       }
         .third_paties_Container
         {
           margin: 0%;
@@ -125,7 +148,7 @@
           font-family: 'Glacial indifference';
           color: #2a2929;
           font-weight: bolder ;
-          padding-bottom: 3%;
+          padding-bottom: 0%;
           text-align: center;
         }
         .inputs

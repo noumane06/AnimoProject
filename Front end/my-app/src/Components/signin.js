@@ -1,7 +1,10 @@
 import React from 'react';
 import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
 import '../CSS/account/account_mobile.css';
+
 class signin extends React.Component {
     constructor(props)
     {
@@ -10,7 +13,10 @@ class signin extends React.Component {
             email : "",
             password : "",
             isvalid : true, 
-            isLoading : false
+            isLoading : false,
+            ref : false ,
+            mssg : "",
+            error : null 
         };
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
@@ -34,12 +40,12 @@ class signin extends React.Component {
                 window.location.replace("/home");
             }else
             {
-                console.log("entred");
+                
                 this.setState({
                     isvalid : false ,
                     isLoading : false
                 });
-               console.log(response);
+               
             }
         })
         .catch(err =>{
@@ -53,13 +59,40 @@ class signin extends React.Component {
         })
         e.preventDefault();
     }
+    UNSAFE_componentWillMount()
+    {
+        const token = window.localStorage.getItem("Tokens");
+        var decoded = jwt.verify(token,'secret',function (err) {
+            this.setState({error : err});
+        }.bind(this));
+    }
+    componentDidMount()
+    {   
+        var url = new URL(window.location.href);
+        var ref = url.searchParams.get("ref");
+        console.log(ref);
+        if (ref === "sign_first") {
+            this.setState({
+                ref: true,
+                mssg : "Please sign in first !"});
+        }
+        setTimeout(function(){
+            this.setState({
+                ref: false,
+                mssg : ""});
+       }.bind(this),5000);      
+    }
     render() { 
-        return ( 
+        if (this.state.error == null) {
+            window.location.replace("/home");
+        }else
+        {
+           return ( 
             <div className="AccountContainer">
              <title>Sign in | Animo</title>
 
                 <h1>Sign in</h1>
-
+                <div className={this.state.ref ? "sign_alert":"hide_sign"}>{this.state.mssg}</div>
                 {/* Third party sign  */}
                 <div className="third_paties_Container">
                     <i className="fa fa-facebook-square fa-lg inf"></i>
@@ -96,14 +129,15 @@ class signin extends React.Component {
                     </div>
                 
                     <div className="submitContainer">
-                        <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading" : "Signin"}></input><br/>  
+                        <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading..." : "Sign in"}></input><br/>  
                         <span className="descr">Don't have an account </span><br/>
                         <NavLink to="/account/signup">Sign up now</NavLink>
                     </div>
 
                 </form>
             </div>
-         );
+         ); 
+        } 
     }
 }
  

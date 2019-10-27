@@ -1,6 +1,12 @@
+// Dependencies *********************
 import React from 'react';
-import jwt from 'jsonwebtoken'
-import Axios from 'axios';
+import jwt from 'jsonwebtoken';
+// **********************************
+
+import '../../CSS/Profile/Profile_conf.css';
+import Navbar from '../../Components/Home/Navbar';
+import Profile_popup from '../../Components/Home/Profile_popup';
+import Post_container from '../../Components/Home/Post_container';
 
 class Account_page extends React.Component {
     constructor(props)
@@ -13,9 +19,8 @@ class Account_page extends React.Component {
             error : null 
         };
         this.handleLogout = this.handleLogout.bind(this);
-        this.hadnledelete = this.hadnledelete.bind(this);
     }
-    componentDidMount()
+    UNSAFE_componentWillMount()
     {
         const token = window.localStorage.getItem("Tokens");
         try {
@@ -36,26 +41,16 @@ class Account_page extends React.Component {
         localStorage.removeItem("Tokens");
         window.location.replace("/account/signin");
     }
-    hadnledelete()
-    {   
-        
-        Axios.delete('/users/'+this.state.userId)
-          .then(response => console.log(response))
-          .catch(err => console.log(err));
-    }
     render() { 
         if (this.state.error !== null) {
-            window.location.replace("/account/signin");
+            window.location.replace("/account/signin?ref=sign_first");
         }else
         {
              return ( 
             <div> 
-                 <title>Home | animo</title>
-                 <h1>Welcome home {this.state.username}</h1>
-                 <h2>Your email : {this.state.email}</h2>
-                 <h3>Your userId : {this.state.userId}</h3>
-                 <button onClick={this.handleLogout}> Logout</button>
-                 <button onClick={this.hadnledelete}> Delete account</button>
+                <Navbar/>
+                <Post_container/>
+                <Profile_popup/>
             </div>
          );
         }
@@ -63,4 +58,4 @@ class Account_page extends React.Component {
     }
 }
  
-export default Account_page;
+export default Account_page;    
