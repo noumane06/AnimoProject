@@ -29,13 +29,26 @@ exports.user_signup = (req,res,next)=>{
                      password : hash ,
                      firstname : req.body.firstname , 
                      lastname : req.body.lastname , 
-                     username : req.body.username
+                     username : req.body.username,
+                     phone : req.body.phone
                     });
                  user.save()
                 .then(result => {
                     console.log(result);
+                    const token = jwt.sign(
+                        {
+                            email : result.email , 
+                            userId : result._id ,
+                            username : result.username
+                        },
+                        "secret",
+                        {
+                            expiresIn : "1h"
+                        }
+                    );
                     res.status(200).json({
-                        message : "User created succefully"
+                        message : "User created succefully",
+                        token : token 
                     });
                 })
                 .catch(err => {
@@ -67,7 +80,7 @@ exports.user_signin = (req,res,next)=>{
                         message : "Auth failed 1"
                     });
                 }
-                if(result) {
+                    if(result) {
                     console.log("we made it")
                     const token = jwt.sign(
                         {

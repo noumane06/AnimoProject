@@ -1,13 +1,16 @@
 import React from 'react';
 import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
+import '../CSS/account/account_mobile.css';
 class signin extends React.Component {
     constructor(props)
     {
         super(props);
         this.state = {
             email : "",
-            password : ""
+            password : "",
+            isvalid : true, 
+            isLoading : false
         };
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
@@ -15,12 +18,14 @@ class signin extends React.Component {
     handlechange(e)
     {
         this.setState({
-            [e.target.id] : e.target.value 
+            [e.target.id] : e.target.value ,
+            isvalid : true 
         });
     }
     handlesubmit(e)
     {
-        axios.post("/users/signin/",this.state)
+       this.setState({isLoading : true});
+       axios.post("/users/signin/",this.state)
         .then(response =>{
             if(response.status === 200)
             {
@@ -29,8 +34,22 @@ class signin extends React.Component {
                 window.location.replace("/home");
             }else
             {
-                console.log(response.statusText);
+                console.log("entred");
+                this.setState({
+                    isvalid : false ,
+                    isLoading : false
+                });
+               console.log(response);
             }
+        })
+        .catch(err =>{
+            console.log("entred");
+                this.setState({
+                    isvalid : false,
+                    isLoading : false 
+                });
+            console.log(err); 
+
         })
         e.preventDefault();
     }
@@ -53,26 +72,31 @@ class signin extends React.Component {
 
                 {/* ************************ */}
 
-                <p><span className="span">Or use your email</span></p> 
+                <p className="span"><span >Or use your email</span></p> 
                 
 
                 <form onSubmit={this.handlesubmit} method="post"> 
                     <label>Email address : </label>
                     <div className="inputs">
                          <i className="fa fa-user icon"></i>
-                        <input className='field up' type="email" id="email" onChange={this.handlechange}/><br/>
+                        <input className={this.state.isvalid ? 'field' : 'field invalid' } type="email" id="email" onChange={this.handlechange} required/><br/>
                     </div>
-                    <div className="alert">
-                        <p style={{visibility: 'hidden'}}>placeholder</p>
+                    <div className={this.state.isvalid ? 'val' : 'inv_msg' } >
+                        <i className="fa fa-close"></i>
+                        <p>Wrong email</p>
                     </div>
                     <label>Password : </label>
                     <div className="inputs">
                          <i className="fa fa-lock icon"></i>
-                         <input className='field up' type="password" id="password" onChange={this.handlechange}/><br/>
-                    </div><br/>
+                         <input className={this.state.isvalid ? 'field' : 'field invalid' } type="password" id="password" onChange={this.handlechange} required/><br/>
+                    </div>
+                    <div className={this.state.isvalid ? 'val' : 'inv_msg' } >
+                    <i className="fa fa-close"></i>
+                        <p>Wrong password</p>
+                    </div>
                 
                     <div className="submitContainer">
-                        <button className='Submitbutton' type="submit">Sign in</button><br/>  
+                        <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading" : "Signin"}></input><br/>  
                         <span className="descr">Don't have an account </span><br/>
                         <NavLink to="/account/signup">Sign up now</NavLink>
                     </div>

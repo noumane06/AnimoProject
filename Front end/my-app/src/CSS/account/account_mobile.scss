@@ -167,6 +167,23 @@
           border: none ;
           width: 60%;
           cursor: pointer;
+          outline: none;
+        }
+        .loading
+        {
+          text-decoration: none ;
+          color: #2a2929 ; 
+          font-family: 'Glacial Indifference';
+          font-weight: bolder ;
+          background-color: rgb(195, 195, 195) ;
+          padding: 0.8em 2em ;
+          border-radius: 15px ;
+          transition: all 0.2s ;
+          border: none ;
+          width: 60%;
+          pointer-events: none;
+          cursor: disabled;
+          outline: none;
         }
         .submitContainer
         {
@@ -179,6 +196,41 @@
           background-color: #2a2929 ;
           transition: all 0.2s ;
         }
+        .val 
+        { 
+          margin: 0%;
+          padding: 0%;
+          visibility: hidden;
+          p
+          { 
+            
+            margin: 0%;
+            padding-left: 15px;
+            text-align: left;
+            color : #D8000C ;
+            font-family: 'Glacial indifference';
+          }
+        }
+        .inv_msg
+        { 
+          margin: 0%;
+          padding-bottom: 4.5%;
+          .fa-close
+          {
+            color: #D8000C;
+            position: absolute;
+            font-size: 17px;
+            margin-right: 10px;
+          }
+          p
+          { 
+            margin: 0%;
+            padding-left: 20px;
+            text-align: left;
+            color : #D8000C ;
+            font-family: 'Glacial indifference';
+          }
+        } 
         label
         {
           font-family: 'Glacial indifference';
@@ -202,6 +254,16 @@
           text-align: center ;
           color : #FF4123 ;
           text-align: center;
+        }
+        .invalid,
+        .invalid:-webkit-autofill,
+        .invalid:-webkit-autofill:hover, 
+        .invalid:-webkit-autofill:focus, 
+        .invalid:-webkit-autofill:active
+        { 
+          -webkit-box-shadow: 0 0 0 30px #FFBABA inset !important;
+          border: 1px solid #D8000C;
+          background-color: #FFBABA !important ;
         }
         
     }

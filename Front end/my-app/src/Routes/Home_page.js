@@ -1,5 +1,6 @@
 import React from 'react';
 import jwt from 'jsonwebtoken'
+import Axios from 'axios';
 
 class Account_page extends React.Component {
     constructor(props)
@@ -11,6 +12,8 @@ class Account_page extends React.Component {
             username : '',
             error : null 
         };
+        this.handleLogout = this.handleLogout.bind(this);
+        this.hadnledelete = this.hadnledelete.bind(this);
     }
     componentDidMount()
     {
@@ -28,9 +31,21 @@ class Account_page extends React.Component {
             });
         } 
     }
+    handleLogout()
+    {
+        localStorage.removeItem("Tokens");
+        window.location.replace("/account/signin");
+    }
+    hadnledelete()
+    {   
+        
+        Axios.delete('/users/'+this.state.userId)
+          .then(response => console.log(response))
+          .catch(err => console.log(err));
+    }
     render() { 
         if (this.state.error !== null) {
-            return <h1>Token expired</h1>
+            window.location.replace("/account/signin");
         }else
         {
              return ( 
@@ -39,6 +54,8 @@ class Account_page extends React.Component {
                  <h1>Welcome home {this.state.username}</h1>
                  <h2>Your email : {this.state.email}</h2>
                  <h3>Your userId : {this.state.userId}</h3>
+                 <button onClick={this.handleLogout}> Logout</button>
+                 <button onClick={this.hadnledelete}> Delete account</button>
             </div>
          );
         }
