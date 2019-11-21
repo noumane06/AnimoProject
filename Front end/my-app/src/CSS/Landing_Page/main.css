@@ -16,8 +16,9 @@
     border-radius: 5px;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
-    width: 100px;
+    width: 160px;
     font-size: 15px;
+    text-align: center;
   }
   body #getstarted:hover {
     background-color: #2a2929;

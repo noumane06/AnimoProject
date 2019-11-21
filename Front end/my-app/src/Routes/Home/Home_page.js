@@ -3,7 +3,7 @@ import React from 'react';
 import jwt from 'jsonwebtoken';
 // **********************************
 
-import '../../CSS/Profile/Profile_conf.css';
+import '../../CSS/home/home.css';
 import Navbar from '../../Components/Home/Navbar';
 import Profile_popup from '../../Components/Home/Profile_popup';
 import Post_container from '../../Components/Home/Post_container';
@@ -41,10 +41,10 @@ class Account_page extends React.Component {
         localStorage.removeItem("Tokens");
         window.location.replace("/account/signin");
     }
-    render() { 
+    render() /*{ 
         if (this.state.error !== null) {
             window.location.replace("/account/signin?ref=sign_first");
-        }else
+        }else*/
         {
              return ( 
             <div> 
@@ -55,7 +55,7 @@ class Account_page extends React.Component {
          );
         }
        
-    }
+    //}
 }
  
 export default Account_page;    

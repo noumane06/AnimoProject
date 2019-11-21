@@ -1,6 +1,6 @@
 import React from 'react';
 import jwt from 'jsonwebtoken'
-import '../../  CSS/Profile/Profile_conf.css';
+import '../../CSS/Profile/Profile_conf.css';
 
 class Account_page extends React.Component {
     constructor(props)

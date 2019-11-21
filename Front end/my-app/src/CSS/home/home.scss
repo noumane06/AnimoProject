@@ -1,16 +1,130 @@
-body
-    
-{
-      margin: 0% auto ;
-      .username
-      {
-        position: absolute;
-        right: 2%;
-        top: 0%;
-      }
-      .skip
-      {
-        position: absolute;
-        right: 2%;
-      }
+
+.Navbar {
+  font-family: 'Publica Play';
+  display: flex;
+  padding: 0 5%;
+  background-color: #ffffff;
+  box-shadow: 0.1px 0.1px 5px #bdbdbd;
+  .Navbar__Items {
+    display:flex;
+  }
+  .Navbar__Link {
+    color: #818181;
+    text-align: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .Navbar__Items--right {
+    margin-left:auto;
+  }
+  .Navbar__Link-toggle {
+    display: none;
+  }
+  a:hover {
+    color: rgb(255, 59, 59);
+  }
+  a.active {
+    border-bottom: solid 3px #FF4123;
+    color: #FF4123;
+  }
+  .wrap
+  {
+    margin: 5px 25px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    width: 200px;
+    height: 15px;
+  }
+  .wrap:hover
+  {
+    border: 1px solid #FF4123;
+  }
+  .wrap:focus-within
+  {
+    border: 1px solid #FF4123;
+    box-shadow: 0px 0px 5px #FF4123;
+  }
+  .searchButton {
+    height: 15px;
+    border: none;
+    background-color : transparent ;
+    color: #FF4123;
+    cursor: pointer;
+    font-size: 15px;
+    outline : none ;
+  }
+  .searchTerm
+  {
+    border: none;
+    background-color: transparent;
+    outline: none;
+
+  }
+    #createOffer
+    {
+      text-decoration: none ;
+      color: white ; 
+      font-family: 'Glacial Indifference';
+      font-weight: bolder ;
+    }
+    .Create_offers
+    {
+      
+      background-color: #25D366 ;
+      border-radius: 5px ;
+      transition: all 0.2s ;
+      border: none ;
+      font-size: 15px;
+      width: 100px;
+      cursor: pointer;
+      outline: none;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-right: 20px;
+    }
+    .Create_offers:hover
+    {
+      background-color: rgb(37, 179, 89) ;
+    }
+    .dot {
+      height: 33px;
+      width: 33px;
+      background-color: rgb(0, 0, 0);
+      border-radius: 50%;
+      margin-top: 1.5%;
+      padding: 0;
+    }
+  }
+
+@media only screen and (max-width: 910px) {
+
+  .Navbar__Items,
+  .Navbar {
+    flex-direction: column;
+  }
+  .Navbar
+  {
+    .Navbar__Items {
+      display:none;
+    }
+      
+    .Navbar__Items--right {
+      margin-left:0;
+
+    }
+      
+    .Navbar__ToggleShow {
+      display: flex;
+    }
+      
+   .Navbar__Link-toggle {
+      align-self: flex-end;
+      display: initial;
+      position: absolute;
+      cursor: pointer;
+    } 
+  }
+ 
 }
