@@ -18,9 +18,10 @@
 .Navbar .Navbar__Link {
   color: #818181;
   text-align: center;
-  padding: 10px 15px;
+  padding: 12px 15px 0px 15px;
   text-decoration: none;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .Navbar .Navbar__Items--right {
@@ -32,7 +33,7 @@
 }
 
 .Navbar a:hover {
-  color: #ff3b3b;
+  color: #494949;
 }
 
 .Navbar a.active {
@@ -45,7 +46,11 @@
   border: 1px solid #b1b1b1;
   border-radius: 5px;
   width: 200px;
-  height: 15px;
+  padding: 8px 15px;
+}
+
+.Navbar .animo_home_logo {
+  padding: 8px 35px 8px 10px;
 }
 
 .Navbar .wrap:hover {
@@ -82,6 +87,7 @@
 }
 
 .Navbar .Create_offers {
+  padding-top: 10px;
   background-color: #25D366;
   border-radius: 5px;
   -webkit-transition: all 0.2s;
@@ -137,4 +143,4 @@
     cursor: pointer;
   }
 }
-/*# sourceMappingURL=home.css.map */
+/*# sourceMappingURL=navbar.css.map */

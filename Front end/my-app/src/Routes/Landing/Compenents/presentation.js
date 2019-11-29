@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-animated-slider';
-import '../CSS/Landing_Page/slider.css'; 
+import '../CSS/slider.css'; 
 
 class Presentation extends React.Component {
 
@@ -10,7 +10,7 @@ class Presentation extends React.Component {
                 id : 1 ,
                 title: 'Welcome to animo ! ',
                 description: 'Animo is plateform for adopting , selling and buying pets . Its totally free .',
-                image : require('../res/Background-illust/Group 1.svg'),
+                image : require('../../../res/Background-illust/Group 1.svg'),
                 classname : "Right_illustr"
                
             },
@@ -18,14 +18,14 @@ class Presentation extends React.Component {
                 id : 2 ,
                 title: 'How does it work ?',
                 description: 'Accenderat super his incitatum propositum ad nocendum aliqua mulier vilis, ',
-                image : require('../res/Background-illust/Group 15.svg'),
+                image : require('../../../res/Background-illust/Group 15.svg'),
                 classname : "Left_illust" 
             },
             { 
                 id : 3 ,
                 title: 'Should i pay ?',
                 description: 'Accenderat super his incitatum propositum ad nocendum aliqua mulier vilis, ',
-                image : require('../res/Background-illust/Group 10.svg'),
+                image : require('../../../res/Background-illust/Group 10.svg'),
                 classname : "ilus_3"          
             }
         ];

@@ -1,12 +1,6 @@
-// Dependencies *********************
 import React from 'react';
-import jwt from 'jsonwebtoken';
-// **********************************
-
-import '../../CSS/home/home.css';
-import Navbar from '../../Components/Home/Navbar';
-import Profile_popup from '../../Components/Home/Profile_popup';
-import Post_container from '../../Components/Home/Post_container';
+import jwt from 'jsonwebtoken'
+import './CSS/Profile_conf.css';
 
 class Account_page extends React.Component {
     constructor(props)
@@ -18,9 +12,9 @@ class Account_page extends React.Component {
             username : '',
             error : null 
         };
-        this.handleLogout = this.handleLogout.bind(this);
+        this.handleSkip = this.handleSkip.bind(this) ;
     }
-    UNSAFE_componentWillMount()
+    componentDidMount()
     {
         const token = window.localStorage.getItem("Tokens");
         try {
@@ -36,26 +30,26 @@ class Account_page extends React.Component {
             });
         } 
     }
-    handleLogout()
+    handleSkip()
     {
-        localStorage.removeItem("Tokens");
-        window.location.replace("/account/signin");
+        window.location.replace("/home");
     }
-    render() /*{ 
+    render() { 
         if (this.state.error !== null) {
-            window.location.replace("/account/signin?ref=sign_first");
-        }else*/
+            window.location.replace("/account/signin");
+        }else
         {
              return ( 
             <div> 
-                <Navbar/>
-                <Post_container/>
-                <Profile_popup/>
+                 <title>Home | animo</title>
+                 <h1 className="message">Continue the configuration of your profile</h1>
+                 <h2 className="username">{this.state.username}</h2>
+                 <button onClick={this.handleSkip} className="skip"> SKIP</button>
             </div>
          );
         }
        
-    //}
+    }
 }
  
-export default Account_page;    
+export default Account_page;

@@ -1,6 +1,7 @@
 import React from 'react';
 //import jwt from 'jsonwebtoken';
 
+import './CSS/navbar.css';
 class Navbar extends React.Component {
 
     
@@ -20,12 +21,12 @@ class Navbar extends React.Component {
 
             <div class="Navbar">
                 <img src={
-                require('../../res/Logo/animo iluustration icon.svg')}
+                require('../../../../../res/Logo/animo iluustration icon.svg')}
                 alt="animo's logo orange version"
                 width = "100px"
-                className="Navbar__Link animo_home_logo" 
+                className="animo_home_logo" 
                 />
-                <div class="Navbar__Link Navbar__Link-toggle">
+                <div class="Navbar__Link-toggle">
                         <i class="fa fa-bars"></i>
                  </div>
                 <nav class="Navbar__Items">
@@ -40,7 +41,7 @@ class Navbar extends React.Component {
     
                 </nav>
                 <nav className='Navbar__Items Navbar__Items--right '>
-                    <div class="Navbar__Link wrap">
+                    <div class="wrap">
                             <input type="text" class="searchTerm" placeholder="Search animo"/>
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>

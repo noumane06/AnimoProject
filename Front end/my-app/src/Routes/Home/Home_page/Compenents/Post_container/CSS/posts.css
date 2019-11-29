@@ -1,0 +1,74 @@
+body {
+  margin: 0%;
+}
+
+body .post_container {
+  font-family: 'Publica Play';
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 5%;
+}
+
+body .Post {
+  margin-right: 5%;
+  width: 300px;
+  height: 400px;
+  border-radius: 25px;
+  -webkit-box-shadow: 0.5px 0.5px 2px #808080;
+          box-shadow: 0.5px 0.5px 2px #808080;
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+body .Post img {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+body .container {
+  padding: 0px 10px;
+}
+
+body .container .offerType {
+  font-size: 13px;
+  font-weight: bold;
+  color: #1769FF;
+}
+
+body .container .offerTitle {
+  font-family: 'Riffic Free';
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+body .container p {
+  font-weight: 'regular';
+  font-size: 13px;
+  font-family: 'Nunito';
+}
+
+body .container .descr {
+  font-size: 13px;
+  font-style: italic;
+  color: #a0a0a0;
+  cursor: pointer;
+}
+
+body .container .priceTag {
+  background-color: #2A2A2A;
+  font-weight: bolder;
+  color: white;
+  width: 20%;
+  text-align: center;
+  padding: 3px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+body .container .interstButt {
+  float: right;
+}
+/*# sourceMappingURL=posts.css.map */

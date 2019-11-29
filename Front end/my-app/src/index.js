@@ -7,10 +7,10 @@ import {Route  , BrowserRouter as Router} from 'react-router-dom';
 
 // Internal files and compenents 
 
-import Landing_page from './Routes/Landing_page';
-import Account_page from './Routes/Account_page';
-import Home_page from './Routes/Home/Home_page';
-import Home_profileCont from './Routes/Home/Home_profileCont';
+import Landing_page from './Routes/Landing/Landing_page';
+import Account_page from './Routes/Account/Account_page';
+import Home_page from './Routes/Home/Home_page/Home_page';
+import Home_profileCont from './Routes/Home/Home_after_signup/Home_profileCont';
 // *****************************
 
 class Container extends React.Component {

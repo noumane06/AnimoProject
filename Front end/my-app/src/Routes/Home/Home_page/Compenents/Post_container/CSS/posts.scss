@@ -1,0 +1,70 @@
+body
+{
+    margin: 0%;
+    .post_container
+    {
+        font-family: 'Publica Play';
+        display: flex;
+        flex-wrap: wrap;
+        margin: 5%;
+    }
+
+    .Post
+    {   margin-right: 5%;
+        width: 300px;
+        height: 400px;
+        border-radius: 25px;
+        box-shadow: 0.5px 0.5px 2px #808080;
+        margin-bottom: 25px;
+        display: inline-block; 
+        img
+        {
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+
+    }
+    .container {
+        padding: 0px 10px;
+        .offerType
+        {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1769FF;
+        }
+        .offerTitle
+        {
+            font-family: 'Riffic Free';
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+        p
+        {   font-weight: 'regular';
+            font-size: 13px;
+            font-family: 'Nunito';
+        }
+        .descr
+        {
+            font-size: 13px;
+            font-style: italic;
+            color: #a0a0a0;
+            cursor: pointer;
+        }
+        .priceTag
+        {
+            background-color: #2A2A2A;
+            font-weight: bolder;
+            color : white ; 
+            width: 20%;
+            text-align: center;
+            padding: 3px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .interstButt
+        {
+            float: right;
+        }
+
+      }
+}
