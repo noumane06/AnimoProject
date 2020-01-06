@@ -10,6 +10,9 @@ class Post_container extends React.Component {
             <div className="post_container">
                 <title>(18) Home | Animo</title> 
                 <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
             </div>
             
          );
