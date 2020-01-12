@@ -1,56 +1,155 @@
-.Navbar {
-    font-family: 'Publica Play';
-    display: flex;
-    padding: 0 5%;
-    background-color: #ffffff;
-    box-shadow: 0.1px 0.1px 5px #bdbdbd;
-    .Navbar__Items {
-      display:flex;
-    }
-    .Navbar__Link {
-      color: #818181;
-      text-align: center;
-      padding: 12px 15px 0px 15px;
-      text-decoration: none;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    .Navbar__Items--right {
-      margin-left:auto;
-    }
-    .Navbar__Link-toggle {
-      display: none;
-    }
-    a:hover {
-      color: rgb(73, 73, 73);
-    }
-    a.active {
-      border-bottom: solid 3px #FF4123;
-      color: #FF4123;
-    }
-    .wrap
-    {
-      margin: 5px 25px;
-      border: 1px solid #b1b1b1;
-      border-radius: 5px;
-      width: 200px;
-      //height: 15px;
-      padding: 8px 15px;
-    }
+.SideNav {
+    a { text-decoration: none;}
+    // Side navv -----------------------
+    height: 100%;
+    width: 230px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    border-right: 1px solid #dddddd;
+    padding-top: 30px;
+    padding-left: 40px;
+    box-sizing: border-box;
     .animo_home_logo
     {
-      padding: 8px 35px 8px 10px;
+      padding-left: 10px;
     }
-    .wrap:hover
+    // end of side nav -----------------------------------------------
+
+    .Nav_Container
+    {   
+        margin-top: 35%;
+
+        .Navlink 
+        {
+          outline-style: none;
+          -webkit-box-direction: normal;
+          -webkit-box-orient: vertical;
+          flex-direction: column;
+          -webkit-box-align: start;
+          align-items: flex-start;
+          -webkit-box-flex: 1;
+          flex-grow: 1;
+          flex-flow: row wrap;
+          width: 100%;
+          padding-bottom: 5px;
+          padding-top: 5px;
+          font-family: 'Glacial Indifference';
+          text-decoration: none;
+          font-size: 16px;
+          display: flex;
+          color: #2A2A2A; 
+          font-weight: bolder;
+          box-sizing: border-box;
+          flex-basis: auto;
+          flex-shrink: 0;
+          margin-bottom: 15px;
+          margin-left: 0px;
+          margin-right: 0px;
+          margin-top: 0px;
+          min-height: 0px;
+          min-width: 0px;
+          padding-left: 0px;
+          padding-right: 0px;
+          position: relative;
+          cursor: pointer;
+          
+          .home_icon
+          {
+            -webkit-box-align: stretch;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+            display: flex;
+            flex-basis: auto;
+            flex-direction: column;
+            flex-shrink: 0;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 15px;
+            margin-top: 0px;
+            min-height: 0px;
+            min-width: 0px;
+            padding-bottom: 3px;
+            padding-left: 10px;
+            padding-right: 0px;
+            padding-top:3px;
+            position: relative;
+
+          }
+          .legend
+          {
+            overflow-wrap: break-word;
+            max-width: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            box-sizing: border-box;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 6px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            
+          }
+        }
+        .active
+        {
+          color: rgb(255, 99, 75)  ; 
+          .fa_home
+          {
+            color: rgb(255, 99, 75)  ; 
+          }
+        }
+        
+    }
+    .Navlink:hover
     {
-      border: 1px solid #FF4123;
+      transition: all 0.1s;
+      background-color: rgb(255, 240, 238);
+      width: 80%;
+      border-radius: 10px;
+      color: rgb(255, 99, 75)  ; 
+      .not_ico
+          {
+            color: rgb(255, 99, 75)  ; 
+          }
     }
-    .wrap:focus-within
+    .CreateOffers
     {
-      border: 1px solid #FF4123;
-      box-shadow: 0px 0px 5px #FF4123;
+      #createOffer
+      {
+        text-decoration: none ;
+        color: white ; 
+        font-family: 'Glacial Indifference';
+        font-weight: bolder ;
+        padding: 10px 25px;
+        background-color: #25D366 ;
+        border-radius: 5px ;
+        transition: all 0.2s ;
+        border: none ;
+        font-size: 15px;
+        width: 100px;
+        cursor: pointer;
+        outline: none;
+        text-align: center;
+        float: bottom;
+        position: absolute;
+        bottom: 85px;
+      }
+      #createOffer:hover
+      {
+        background-color: rgb(37, 179, 89) ;
+      }
     }
-    .searchButton {
+    
+    /*.searchButton {
       height: 15px;
       border: none;
       background-color : transparent ;
@@ -65,43 +164,9 @@
       background-color: transparent;
       outline: none;
   
-    }
-      #createOffer
-      {
-        text-decoration: none ;
-        color: white ; 
-        font-family: 'Glacial Indifference';
-        font-weight: bolder ;
-      }
-      .Create_offers
-      {
-        padding-top:10px;
-        background-color: #25D366 ;
-        border-radius: 5px ;
-        transition: all 0.2s ;
-        border: none ;
-        font-size: 15px;
-        width: 100px;
-        cursor: pointer;
-        outline: none;
-        text-align: center;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-right: 20px;
-      }
-      .Create_offers:hover
-      {
-        background-color: rgb(37, 179, 89) ;
-      }
-      .dot {
-        height: 33px;
-        width: 33px;
-        background-color: rgb(0, 0, 0);
-        border-radius: 50%;
-        margin-top: 1.5%;
-        padding: 0;
-      }
-    }
+    }*/
+
+  }
   
   @media only screen and (max-width: 910px) {
   
@@ -133,3 +198,18 @@
     }
    
   }
+
+  /* 
+  
+
+<svg width="20px"
+	 height="24px" viewBox="0 0 20 24" style="enable-background:new 0 0 20 24;" xml:space="preserve">
+<defs>
+</defs>
+<path d="M19.93,20.24l-1.72-2.86C17.42,16.06,17,14.55,17,13.01V10.5c0-3.16-2.11-5.84-5-6.7V2c0-1.1-0.9-2-2-2S8,0.9,8,2V3.8
+	c-2.89,0.86-5,3.54-5,6.7v2.51c0,1.54-0.42,3.05-1.21,4.37l-1.72,2.86c-0.09,0.16-0.1,0.35-0.01,0.5C0.15,20.9,0.32,21,0.5,21h19
+	c0.18,0,0.35-0.1,0.43-0.25C20.02,20.59,20.02,20.4,19.93,20.24z M6.85,22c0.56,1.18,1.76,2,3.15,2s2.59-0.82,3.15-2H6.85z"/>
+</svg>
+
+
+*/

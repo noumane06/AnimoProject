@@ -11,7 +11,7 @@ body .post_container {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 5% 15%;
+  margin: 10% 5% 5% 20%;
 }
 
 body .Post {
