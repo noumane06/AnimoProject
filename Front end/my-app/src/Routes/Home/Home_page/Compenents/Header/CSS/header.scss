@@ -1,0 +1,41 @@
+body
+{
+    .Header 
+    {
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin-left: 20%;
+        font-family: 'Glacial indifference';
+        color: #2A2A2A;
+        .wrap
+        {
+            border : 1px solid #dddddd;
+            width: 250px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            float: right;
+            margin-right: 160px;
+            margin-top: -50px;
+            .searchButton {
+                height: 15px;
+                border: none;
+                background-color : transparent ;
+                color: #FF4123;
+                cursor: pointer;
+                font-size: 15px;
+                outline : none ;
+                float : right ;
+
+                }
+            .searchTerm
+            {
+                border: none;
+                background-color: transparent;
+                outline: none;
+            }
+        }
+        
+    }
+
+}

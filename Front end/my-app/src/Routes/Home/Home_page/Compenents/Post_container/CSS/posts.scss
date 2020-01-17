@@ -1,13 +1,19 @@
 body
 {
-    margin: 0%;
+    .time
+    {
+        margin: 2.7% 5% 3% 20%;
+        font-family: 'Roboto';
+        color : #1665D8 ;
+    }
+
     .post_container
     {
         font-family: 'Publica Play';
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        margin: 10% 5% 5% 20%;
+        margin: 0% 5% 5% 20%;
     }
 
     .Post

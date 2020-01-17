@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import Navbar from './Compenents/Navbar/Navbar';
 import Profile_popup from './Compenents/Profile_popup';
 import Post_container from './Compenents/Post_container/Post_container';
+import Header from './Compenents/Header/Header';
 
 class Account_page extends React.Component {
     constructor(props)
@@ -48,6 +49,8 @@ class Account_page extends React.Component {
         {
              return ( 
             <div> 
+                <Header/>
+                <hr style={{border : '0.5px solid #dddddd'}}/>
                 <Navbar/>
                 <Post_container/>
                 <Profile_popup/>

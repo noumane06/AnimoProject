@@ -1,5 +1,7 @@
-body {
-  margin: 0%;
+body .time {
+  margin: 2.7% 5% 3% 20%;
+  font-family: 'Roboto';
+  color: #1665D8;
 }
 
 body .post_container {
@@ -11,7 +13,7 @@ body .post_container {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 10% 5% 5% 20%;
+  margin: 0% 5% 5% 20%;
 }
 
 body .Post {
