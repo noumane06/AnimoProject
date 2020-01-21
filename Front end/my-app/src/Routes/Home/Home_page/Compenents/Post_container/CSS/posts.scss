@@ -5,6 +5,7 @@ body
         margin: 2.7% 5% 3% 20%;
         font-family: 'Roboto';
         color : #1665D8 ;
+        
     }
 
     .post_container
@@ -13,12 +14,20 @@ body
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        margin: 0% 5% 5% 20%;
+        margin: 0% 0% 5% 20%;
+        cursor:context-menu;
     }
-
+    
+    .Post:hover
+    {
+        background-color: rgba(74, 144, 255, .09);
+    }
     .Post
     {   
+        border-radius: 15px;
+        box-sizing: border-box;
         width: 25%;
+        padding: 15px;
         margin-right: 75px;
         margin-bottom: 75px;
         .Profile
@@ -35,9 +44,10 @@ body
                 margin-left: 5px;
                 margin-top: 2px;
                 padding: 0;
+                cursor: pointer;
               }
             font-family: 'Glacial indifference';
-            .name{font-weight: bolder;}
+            .name{font-weight: bolder;cursor: pointer;}
             .post_time
              {
                 font-size: 14px;
@@ -58,6 +68,7 @@ body
                 width: 100%;
                 height: 100%;
                 transition: .4s all;
+                cursor: pointer;
             }
             margin-bottom: 5px ;
         }
@@ -83,12 +94,14 @@ body
                     float : left ;
                     .fa-star{color : #ED8A19 ;} 
                     font-size: 14px;
+                    cursor: pointer;
                 }
                 
                 .bookmark
                 {
                     float: right;
                     font-size: 14px;
+                    cursor: pointer;
                 }
                 margin-bottom: 35px;
             }
@@ -103,12 +116,14 @@ body
                     color : #1665D8 ;
                     float : left ;
                     font-weight: bolder;
+                    cursor: pointer;
                 }
                 .price
                 {
                     font-family: 'Roboto';
                     font-weight: bolder;
                     float: right;
+                    cursor: pointer;
                 }
         }
     }

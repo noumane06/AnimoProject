@@ -13,11 +13,20 @@ body .post_container {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0% 5% 5% 20%;
+  margin: 0% 0% 5% 20%;
+  cursor: context-menu;
+}
+
+body .Post:hover {
+  background-color: rgba(74, 144, 255, 0.09);
 }
 
 body .Post {
+  border-radius: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 25%;
+  padding: 15px;
   margin-right: 75px;
   margin-bottom: 75px;
 }
@@ -38,10 +47,12 @@ body .Post .Profile .dot {
   margin-left: 5px;
   margin-top: 2px;
   padding: 0;
+  cursor: pointer;
 }
 
 body .Post .Profile .name {
   font-weight: bolder;
+  cursor: pointer;
 }
 
 body .Post .Profile .post_time {
@@ -64,6 +75,7 @@ body .Post .Thumbnail_container .Thumbnail_img {
   height: 100%;
   -webkit-transition: .4s all;
   transition: .4s all;
+  cursor: pointer;
 }
 
 body .Post h2 {
@@ -94,6 +106,7 @@ body .Post .infos .Interaction_user {
 body .Post .infos .Interaction_user .ratings {
   float: left;
   font-size: 14px;
+  cursor: pointer;
 }
 
 body .Post .infos .Interaction_user .ratings .fa-star {
@@ -103,6 +116,7 @@ body .Post .infos .Interaction_user .ratings .fa-star {
 body .Post .infos .Interaction_user .bookmark {
   float: right;
   font-size: 14px;
+  cursor: pointer;
 }
 
 body .Post .price_infos {
@@ -116,11 +130,13 @@ body .Post .price_infos .status_type {
   color: #1665D8;
   float: left;
   font-weight: bolder;
+  cursor: pointer;
 }
 
 body .Post .price_infos .price {
   font-family: 'Roboto';
   font-weight: bolder;
   float: right;
+  cursor: pointer;
 }
 /*# sourceMappingURL=posts.css.map */

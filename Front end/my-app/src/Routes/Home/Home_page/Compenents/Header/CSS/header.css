@@ -8,13 +8,15 @@ body .Header {
 }
 
 body .Header .wrap {
-  border: 1px solid #dddddd;
+  border: 1px solid transparent;
   width: 250px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 10px 15px;
+  border-radius: 50px;
   float: right;
+  background-color: rgba(0, 0, 0, 0.04);
   margin-right: 160px;
-  margin-top: -50px;
+  margin-top: -55px;
+  font-family: 'Glacial indifference';
 }
 
 body .Header .wrap .searchButton {
@@ -32,5 +34,35 @@ body .Header .wrap .searchTerm {
   border: none;
   background-color: transparent;
   outline: none;
+  color: #2A2A2A;
+  font-family: 'Glacial indifference';
+  font-size: 15px;
+}
+
+body .Header .wrap .searchTerm::-webkit-input-placeholder {
+  color: #b4b1b1;
+}
+
+body .Header .wrap .searchTerm:-ms-input-placeholder {
+  color: #b4b1b1;
+}
+
+body .Header .wrap .searchTerm::-ms-input-placeholder {
+  color: #b4b1b1;
+}
+
+body .Header .wrap .searchTerm::placeholder {
+  color: #b4b1b1;
+}
+
+body .Header .wrap:hover {
+  border: 1px solid #f69b8d;
+}
+
+body .Header .wrap:focus-within {
+  border: 1px solid #f69b8d;
+  -webkit-box-shadow: 0px 0px 0px 0.5px #ff3212;
+          box-shadow: 0px 0px 0px 0.5px #ff3212;
+  font-weight: bolder;
 }
 /*# sourceMappingURL=header.css.map */

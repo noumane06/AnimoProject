@@ -14,6 +14,7 @@ class Post_container extends React.Component {
                     <Post/>
                     <Post/>
                     <Post/>
+                    <Post/>
                 </div>
             </div>  
             
