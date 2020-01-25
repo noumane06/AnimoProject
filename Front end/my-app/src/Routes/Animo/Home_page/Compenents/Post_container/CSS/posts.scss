@@ -2,7 +2,6 @@ body
 {
     .time
     {
-        margin: 2.7% 5% 3% 20%;
         font-family: 'Roboto';
         color : #1665D8 ;
         
@@ -14,7 +13,6 @@ body
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        margin: 0% 0% 5% 20%;
         cursor:context-menu;
     }
     
@@ -26,7 +24,7 @@ body
     {   
         border-radius: 15px;
         box-sizing: border-box;
-        width: 25%;
+        width: 300px;
         padding: 15px;
         margin-right: 75px;
         margin-bottom: 75px;

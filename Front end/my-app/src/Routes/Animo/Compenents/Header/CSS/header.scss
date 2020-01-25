@@ -1,11 +1,17 @@
 body
 {
+    .Content
+    {
+        margin-left: 270px;
+        padding: 1px 16px;
+
+    }
     .Header 
     {
         position: relative;
         margin-top: 30px;
         margin-bottom: 30px;
-        margin-left: 20%;
+        margin-right: 90px;
         font-family: 'Glacial indifference';
         color: #2A2A2A;
         .wrap
@@ -16,7 +22,6 @@ body
             border-radius: 50px;
             float: right;
             background-color:rgba(0, 0, 0, 0.04);
-            margin-right: 160px;
             margin-top: -55px;
             font-family: 'Glacial indifference'; 
             .searchButton {
@@ -30,6 +35,7 @@ body
                 float : right ;
 
                 }
+
             .searchTerm
             {
                 border: none;
@@ -52,7 +58,7 @@ body
             .wrap:focus-within
          {
                 border : 1px solid rgb(246, 155, 141);
-                box-shadow:0px 0px 0px 0.5px rgb(255, 50, 18) ; 
+                box-shadow: 0 0 5px rgb(246, 155, 141) ; 
                 font-weight: bolder;
          }
          

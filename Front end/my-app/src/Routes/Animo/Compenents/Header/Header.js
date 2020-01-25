@@ -7,7 +7,7 @@ class Header extends React.Component {
              return ( 
             <div className="Header">
                 <div className="Page_title">
-                    <h2>HOME</h2>
+                    <h2>{this.props.value}</h2>
                 </div>
                 <div class="wrap">
                     <input type="text" class="searchTerm" placeholder="Search animo"/>

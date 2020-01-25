@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CACJ;EACI,MAAM,EAAE,MAAM;CACjB",
+    "sources": [
+        "notification.scss"
+    ],
+    "names": [],
+    "file": "notification.css"
+}
