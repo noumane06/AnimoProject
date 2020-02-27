@@ -11,9 +11,8 @@ import Settings from './Compenents/settings_butt';
 // ---------------------------------------------
 import './CSS/Sidebar.css';
 import {NavLink} from "react-router-dom";
-class Navbar extends React.Component {
+function Side_bar() {
 
-    render() { 
              return ( 
 
             <div className="SideNav">
@@ -26,12 +25,10 @@ class Navbar extends React.Component {
             {/* ------------ Nav container  : -------------------------------------- */}
                 <div className="Nav_Container">
                     
-                    <NavLink to='/home' activeClassName="active" ><Home/></NavLink>    
+                    <NavLink exact  to='/home' activeClassName="active" className={window.location.pathname == "/" ? "active" : ""}><Home/></NavLink>    
 
-           
                     <NavLink to='/notification' activeClassName="active" ><Notif/></NavLink>
                   
-
                     <NavLink to='/explore' activeClassName="active" ><Explore/></NavLink>
               
                     <NavLink to='/profile' activeClassName="active"  ><Profile/></NavLink>
@@ -51,11 +48,9 @@ class Navbar extends React.Component {
                 
             </div>
             
-         );
-        }
-       
+         );   
 }
  
-export default Navbar;    
+export default Side_bar;    
 
 

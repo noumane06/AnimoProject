@@ -5,7 +5,7 @@
           top: 50%;
           transform: translateY(-50%);
           z-index: 100;
-          background: url('../../../res/fields_icons/main_next.svg') no-repeat center center / 32px;
+          background: url('../../../../res/fields_icons/main_next.svg') no-repeat center center / 32px;
           width: 64px;
           height: 64px;
           text-indent: -9999px;
@@ -13,7 +13,7 @@
   }
   
   .previousButton:hover, .nextButton:hover {
-    background: url('../../../res/fields_icons/next_hover.svg') no-repeat center center / 32px;
+    background: url('../../../../res/fields_icons/next_hover.svg') no-repeat center center / 32px;
   }
   
   .previousButton {

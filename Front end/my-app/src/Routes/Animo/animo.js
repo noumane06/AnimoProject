@@ -9,7 +9,7 @@ import {Route  , BrowserRouter as Router} from 'react-router-dom';
 
 import Home from './Home_page/Home_page';
 import Header from './Compenents/Header/Header';
-import Navbar from './Compenents/SideBar/Sidebar';
+import Side_bar from './Compenents/SideBar/Sidebar';
 import Notif from './Notification/notification'
 // *****************************
 
@@ -18,7 +18,7 @@ class animo_Container extends React.Component {
   render() { 
     return (
         <div>
-          <Navbar/>
+            <Side_bar/>
           <div className="Content">
             <Header value="HOME"/>
             <hr style={{border : '0.5px solid #dddddd'}}/>

@@ -22,7 +22,7 @@ class Home extends React.Component {
                             <div className="legend">
                                 <span>Home</span>
                             </div>
-                        </div>
+                </div>
          );
         }
        

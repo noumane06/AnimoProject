@@ -38,7 +38,7 @@
   -webkit-box-orient: vertical;
   -webkit-box-align: start;
   -webkit-box-flex: 1;
-  width: 100%;
+  width: 80%;
   padding-bottom: 5px;
   padding-top: 5px;
   font-family: 'Glacial Indifference';
@@ -128,7 +128,6 @@
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
   background-color: #fff0ee;
-  width: 80%;
   border-radius: 10px;
   color: #ff634b;
 }
@@ -192,4 +191,4 @@
     cursor: pointer;
   }
 }
-/*# sourceMappingURL=navbar.css.map */
+/*# sourceMappingURL=Sidebar.css.map */

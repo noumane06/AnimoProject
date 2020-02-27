@@ -5,31 +5,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from "react-router-dom";
 
 // Internal files and compenents 
 
-import Main_router from './router';
+import Landing_page from './Landing/Landing_page';
+import Account_page from './Sign/Account_page';
 
 
 // *****************************
 
-class Container extends React.Component {
+class Welcome_container extends React.Component {
 
   render() { 
     return (
       <Router>
-        
             <meta name="theme-color" content="#FF4123" />
-            <Route path="/" component={Main_router}/>
-
+            <Route exact path="/" component={Landing_page}/>
+            <Route path="/account" component={Account_page}/>
       </Router>
        
       );
   }
 }
 
-
-ReactDOM.render(<Container/>,document.getElementById('root'));
+export default Welcome_container ;

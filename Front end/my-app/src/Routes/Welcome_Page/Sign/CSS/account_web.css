@@ -1,6 +1,7 @@
 @media all and (min-width: 681px) {
   body {
     margin: 0% auto;
+    height: 100%;
   }
   body .AccountContainer {
     position: absolute;
@@ -8,7 +9,6 @@
     left: 35.2%;
     top: 17%;
     width: 30vw;
-    height: auto;
   }
   body .AccountContainer .sign_alert {
     font-family: 'Glacial Indifference';

@@ -30,7 +30,7 @@ class Landing_page extends React.Component {
             return (  
             <div className="Container">
             <title>Welcome | Animo</title>
-            <img id="bg" src={require('../../res/Background-illust/Web 1920 – 3.png') } alt="background illustration"/>
+            <img id="bg" src={require('../../../res/Background-illust/Web 1920 – 3.png') } alt="background illustration"/>
                 <Navbar />
                 <Presentation />
                 {disableBodyScroll()}
