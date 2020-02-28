@@ -1,13 +1,15 @@
 // Dependencies *********************
 import React from 'react';
-import jwt from 'jsonwebtoken';
+//import jwt from 'jsonwebtoken';
+import { Provider } from 'mobx-react';
+import postsStore from '../../../Stores/ModelStore';
 // **********************************
 
-import Post_container from './Compenents/Post_container/Post_container';
+import Post_container from './Components/Post_container/Post_container';
 
 
 class Account_page extends React.Component {
-    constructor(props)
+    /*constructor(props)
     {
         super(props);
         this.state = {
@@ -38,16 +40,17 @@ class Account_page extends React.Component {
     {
         localStorage.removeItem("Tokens");
         window.location.replace("/account/signin");
-    }
+    }*/
     render() /*{ 
         if (this.state.error !== null) {
             window.location.replace("/account/signin?ref=sign_first");
         }else*/
         {
-             return ( 
-            <div>             
-                <Post_container/>
-            </div>
+             return (
+                <Provider postsStore={postsStore}>         
+                    <Post_container/>
+                </Provider>
+            
          );
         }
        

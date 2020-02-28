@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router,Route,Redirect,Switch } from 'react-router-dom';
 
-import signin from './Signin/Compenents/signin';
-import signup from './Signup/Compenents/signup';
+import signin from './Signin/Components/signin';
+import signup from './Signup/Components/signup';
 
 
 class Account_page extends React.Component {

@@ -3,8 +3,8 @@ import React from 'react';
 import { disableBodyScroll  } from 'body-scroll-lock';
 import jwt from 'jsonwebtoken'
 // FIles import 
-import Presentation from './Compenents/presentation';
-import Navbar from './Compenents/navbar';
+import Presentation from './Components/presentation';
+import Navbar from './Components/navbar';
 import './CSS/main.css'
 
 class Landing_page extends React.Component {

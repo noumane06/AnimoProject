@@ -8,8 +8,8 @@ import {Route  , BrowserRouter as Router} from 'react-router-dom';
 // Internal files and compenents 
 
 import Home from './Home_page/Home_page';
-import Header from './Compenents/Header/Header';
-import Side_bar from './Compenents/SideBar/Sidebar';
+import Header from './Components/Header/Header';
+import Side_bar from './Components/SideBar/Sidebar';
 import Notif from './Notification/notification'
 // *****************************
 
