@@ -1,9 +1,11 @@
 // Dependencies *********************
 import React from 'react';
-import jwt from 'jsonwebtoken';
-// **********************************
-import './Css/notification.css';
-class Account_page extends React.Component {
+//import jwt from 'jsonwebtoken';
+
+
+// internal files and components
+import './Css/notification.scss';
+class Notification extends React.Component {
     
     render() 
         {
@@ -13,8 +15,7 @@ class Account_page extends React.Component {
             </div>
          );
         }
-        
-    //}
+ 
 }
  
-export default Account_page;    
+export default Notification;    

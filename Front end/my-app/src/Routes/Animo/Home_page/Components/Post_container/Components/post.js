@@ -1,6 +1,8 @@
+// Modules import 
+
 import React from 'react';
 
-// dependecies 
+// internal files and componenets 
 
 import Stars from './stars'
 class Post extends React.Component {
@@ -11,12 +13,15 @@ class Post extends React.Component {
              return ( 
                 <div class="Post"> 
                         <div className="Profile">
-                            <span className="dot"></span>
+                            
+                            <span className="dot">
+                                <img src={post.usrImg} alt="profile"  className="prof" />
+                            </span>
                             <div className="name">{post.usrPost}</div>
                             <div className="post_time">17 min ago.</div>
                         </div>
                         <div className="Thumbnail_container">
-                            <div className="Thumbnail_img"></div>
+                                <img src={post.img} alt="puppies" width="100%" className="Thumbnail_img"/>
                         </div>
                         <h2>{post.title}</h2>
                         <div className="infos">

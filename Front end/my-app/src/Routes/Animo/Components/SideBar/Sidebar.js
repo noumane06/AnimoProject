@@ -1,16 +1,20 @@
-import React from 'react';
-//import jwt from 'jsonwebtoken';
-// Navbar buttons 
+// Modules import 
 
+import React from 'react';
+import {NavLink} from "react-router-dom";
+// import jwt from 'jsonwebtoken';
+
+// internal files and components
 import Home from './Compenents/home_butt';
 import Notif from './Compenents/notif_butt';
 import Explore from './Compenents/explore_butt';
 import Profile from './Compenents/profile_butt';
 import Settings from './Compenents/settings_butt';
+import './CSS/Sidebar.scss';
 
 // ---------------------------------------------
-import './CSS/Sidebar.css';
-import {NavLink} from "react-router-dom";
+
+
 function Side_bar() {
 
              return ( 

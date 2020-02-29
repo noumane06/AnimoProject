@@ -1,14 +1,18 @@
-// dependecies 
+// Modules import 
+
 import React from 'react';
 import { disableBodyScroll  } from 'body-scroll-lock';
-import jwt from 'jsonwebtoken'
-// FIles import 
+//import jwt from 'jsonwebtoken'
+
+// internal files and components
 import Presentation from './Components/presentation';
 import Navbar from './Components/navbar';
-import './CSS/main.css'
+import './CSS/main.scss'
 
+
+// *************** Container for the illustrations and the getting started button ****************
 class Landing_page extends React.Component {
-    constructor(props)
+   /* constructor(props)
     {
         super(props);
         this.state = {
@@ -21,12 +25,12 @@ class Landing_page extends React.Component {
         var decoded = jwt.verify(token,'secret',function (err) {
             this.setState({error : err});
         }.bind(this));
-    }
+    }*/
     render() { 
-        if (this.state.error == null) {
+        /*if (this.state.error == null) {
             window.location.replace("/home");
         }else
-        {
+        {*/
             return (  
             <div className="Container">
             <title>Welcome | Animo</title>
@@ -38,7 +42,7 @@ class Landing_page extends React.Component {
         );
         }
         
-    }
+    //}
 }
  
 export default Landing_page ;

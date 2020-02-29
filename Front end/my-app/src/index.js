@@ -1,15 +1,14 @@
 
-// dependecies
+// Modules imports
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from "react-router-dom";
 
-// Internal files and compenents 
+// Internal files and components 
 
 import Main_router from './router';
 

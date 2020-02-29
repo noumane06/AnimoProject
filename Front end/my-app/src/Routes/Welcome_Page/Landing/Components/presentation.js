@@ -1,6 +1,13 @@
+// Modules import 
+
 import React from 'react';
 import Slider from 'react-animated-slider';
-import '../CSS/slider.css'; 
+
+// internal files and components
+
+import '../CSS/slider.scss'; 
+
+// *************** Presentation and infos about the website  ****************
 
 class Presentation extends React.Component {
 

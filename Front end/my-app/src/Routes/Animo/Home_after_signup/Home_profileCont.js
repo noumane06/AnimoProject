@@ -1,9 +1,14 @@
+// Modules import 
+
 import React from 'react';
-import jwt from 'jsonwebtoken'
-import './CSS/Profile_conf.css';
+//import jwt from 'jsonwebtoken';
+
+// internal files and components
+
+import './CSS/Profile_conf.scss';
 
 class Account_page extends React.Component {
-    constructor(props)
+    /*constructor(props)
     {
         super(props);
         this.state = {
@@ -33,12 +38,12 @@ class Account_page extends React.Component {
     handleSkip()
     {
         window.location.replace("/home");
-    }
+    }*/
     render() { 
-        if (this.state.error !== null) {
+        /*if (this.state.error !== null) {
             window.location.replace("/account/signin");
         }else
-        {
+        {*/
              return ( 
             <div> 
                  <title>Home | animo</title>
@@ -49,7 +54,7 @@ class Account_page extends React.Component {
          );
         }
        
-    }
+    //}
 }
  
 export default Account_page;

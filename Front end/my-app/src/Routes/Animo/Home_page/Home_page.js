@@ -1,10 +1,12 @@
-// Dependencies *********************
+// Modules import 
+
 import React from 'react';
 //import jwt from 'jsonwebtoken';
 import { Provider } from 'mobx-react';
-import postsStore from '../../../Stores/ModelStore';
-// **********************************
 
+// internal files and components
+
+import postsStore from '../../../Stores/ModelStore';
 import Post_container from './Components/Post_container/Post_container';
 
 

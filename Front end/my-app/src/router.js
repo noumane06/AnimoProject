@@ -1,11 +1,7 @@
-
-// dependecies
-
+// modules imports
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Route  , BrowserRouter as Router} from 'react-router-dom';
 
-// Internal files and compenents 
+// Internal files and components imports
 
 import Animo_Container from './Routes/Animo/animo';
 import Welcome_router from './Routes/Welcome_Page/Welcome_router';

@@ -1,8 +1,7 @@
 
-// dependecies
+// Modules import 
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Route  , BrowserRouter as Router} from 'react-router-dom';
 
 // Internal files and compenents 
@@ -13,7 +12,7 @@ import Side_bar from './Components/SideBar/Sidebar';
 import Notif from './Notification/notification'
 // *****************************
 
-class animo_Container extends React.Component {
+class AnimoContainer extends React.Component {
 
   render() { 
     return (
@@ -33,4 +32,4 @@ class animo_Container extends React.Component {
   }
 }
 
-export default animo_Container ;
+export default AnimoContainer ;

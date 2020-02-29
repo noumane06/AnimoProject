@@ -3,7 +3,7 @@ import Post from './Components/post'
 import {observer , inject } from 'mobx-react';
 //************************************* */
 
-import './CSS/posts.css';
+import './CSS/posts.scss';
 
 @inject('postsStore')
 @observer

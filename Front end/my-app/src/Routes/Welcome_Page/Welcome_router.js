@@ -1,23 +1,21 @@
 
-// dependecies
+// Modules import
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
 
-// Internal files and compenents 
+// Internal files and components 
 
 import Landing_page from './Landing/Landing_page';
 import Account_page from './Sign/Account_page';
 
 
-// *****************************
+// ************* Router between the info page and sign page ****************
 
 class Welcome_container extends React.Component {
-
   render() { 
     return (
       <Router>

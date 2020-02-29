@@ -1,5 +1,8 @@
+// Modules imports 
+
 import React from 'react';
 
+// *************** Container of the logo and the getting started button ************* 
 class Navbar extends React.Component {
     render() { 
         return (
