@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+//import jwt from 'jsonwebtoken';
 
 import '../../CSS/account_mobile.css';
 
@@ -59,13 +59,13 @@ class signin extends React.Component {
         })
         e.preventDefault();
     }
-    UNSAFE_componentWillMount()
+    /*UNSAFE_componentWillMount()
     {
         const token = window.localStorage.getItem("Tokens");
         var decoded = jwt.verify(token,'secret',function (err) {
             this.setState({error : err});
         }.bind(this));
-    }
+    }*/
     componentDidMount()
     {   
         var url = new URL(window.location.href);

@@ -3,8 +3,8 @@ import React from 'react';
 
 // Internal files and components imports
 
-import Animo_Container from './Routes/Animo/animo';
-import Welcome_router from './Routes/Welcome_Page/Welcome_router';
+import AnimoContainer from './Routes/Animo/animo';
+import WelcomeRouter from './Routes/Welcome_Page/Welcome_router';
 
 // *****************************
 
@@ -21,7 +21,7 @@ class Main_router extends React.Component {
     return (
         <div>
         {
-            this.state.id == 2 ? <Animo_Container/> : <Welcome_router/>
+            this.state.id === 2 ? <AnimoContainer/> : <WelcomeRouter/>
         }
         </div>
       )

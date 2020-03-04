@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink } from 'react-router-dom';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+//import jwt from 'jsonwebtoken';
 
 import '../../CSS/account_mobile.css';
 
@@ -24,13 +24,13 @@ class signup extends React.Component {
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
     }
-    UNSAFE_componentWillMount()
+    /*UNSAFE_componentWillMount()
     {
         const token = window.localStorage.getItem("Tokens");
         var decoded = jwt.verify(token,'secret',function (err) {
             this.setState({error : err});
         }.bind(this));
-    }
+    }*/
     handlechange(e)
     {
         this.setState({

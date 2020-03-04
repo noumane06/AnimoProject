@@ -7,7 +7,7 @@ import { Provider } from 'mobx-react';
 // internal files and components
 
 import postsStore from '../../../Stores/ModelStore';
-import Post_container from './Components/Post_container/Post_container';
+import MainContainer from './Components/MainContainer/MainContainer';
 
 
 class Account_page extends React.Component {
@@ -50,7 +50,7 @@ class Account_page extends React.Component {
         {
              return (
                 <Provider postsStore={postsStore}>         
-                    <Post_container/>
+                    <MainContainer/>
                 </Provider>
             
          );

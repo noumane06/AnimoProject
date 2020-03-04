@@ -29,7 +29,7 @@ function Side_bar() {
             {/* ------------ Nav container  : -------------------------------------- */}
                 <div className="Nav_Container">
                     
-                    <NavLink exact  to='/home' activeClassName="active" className={window.location.pathname == "/" ? "active" : ""}><Home/></NavLink>    
+                    <NavLink exact  to='/home' activeClassName="active" className={window.location.pathname === "/" ? "active" : ""}><Home/></NavLink>    
 
                     <NavLink to='/notification' activeClassName="active" ><Notif/></NavLink>
                   
@@ -40,7 +40,7 @@ function Side_bar() {
                     <NavLink to='/settings' activeClassName="active" ><Settings/></NavLink>
 
                     <div className="CreateOffers">
-                        <a id='createOffer' href=''>
+                        <a id='createOffer' href='/home'>
                              Create offer
                         </a>
                     </div>

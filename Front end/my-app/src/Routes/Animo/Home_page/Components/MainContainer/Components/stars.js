@@ -7,7 +7,7 @@ class Stars extends React.Component {
 
              for (var i = 0; i < 5 ; i++){
 
-                    if (i == this.props.size) {
+                    if (i === this.props.size) {
                         for (let j = 0; j < 5-i ; j++) {
                             stars.push(<i className="fa fa-star-o"></i>); 
                         }

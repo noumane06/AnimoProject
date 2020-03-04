@@ -4,7 +4,6 @@ body
     {
         font-family: 'Roboto';
         color : #1665D8 ;
-        
     }
 
     .post_container
@@ -67,7 +66,9 @@ body
             {
                 border-radius: 15px;
                 transition: .4s all;
+                height: 140px;
                 cursor: pointer;
+                object-fit: cover;
             }
             margin-bottom: 5px ;
         }

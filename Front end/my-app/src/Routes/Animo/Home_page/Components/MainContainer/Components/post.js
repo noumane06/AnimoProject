@@ -38,7 +38,6 @@ class Post extends React.Component {
                             <div className="status_type">{post.postType}</div>
                             <div className="price">MAD {post.price}</div>
                         </div>
-                   
                 </div>
          );
         }
