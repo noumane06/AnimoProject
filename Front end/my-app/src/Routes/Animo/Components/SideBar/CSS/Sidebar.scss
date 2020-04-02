@@ -1,3 +1,4 @@
+
 .SideNav {
 
     a { text-decoration: none;}
@@ -17,6 +18,7 @@
     .animo_home_logo
     {
       padding-left: 10px;
+      fill:#FF4123;
     }
     // end of side nav -----------------------------------------------
 
@@ -32,6 +34,7 @@
         
         .Navlink 
         {
+          
           outline-style: none;
           -webkit-box-direction: normal;
           -webkit-box-orient: vertical;
@@ -125,6 +128,7 @@
       transition: all 0.1s;
       background-color: rgb(255, 240, 238);
       border-radius: 10px;
+      box-shadow: 0px 0px 16px rgb(255, 240, 238);
       color: rgb(255, 99, 75)  ; 
       .icon
           {
@@ -142,6 +146,7 @@
         background-color: #25D366 ;
         border-radius: 5px ;
         transition: all 0.2s ;
+        
         border: none ;
         cursor: pointer;
         outline: none;
@@ -156,6 +161,7 @@
       #createOffer:hover
       {
         background-color: rgb(37, 179, 89) ;
+        box-shadow: 0px 0px 6px #25D366;
       }
     }
     

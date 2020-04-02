@@ -1,9 +1,22 @@
 body
 {
+    @import './skeletonStyle.scss';
+    a:-webkit-any-link {
+        color: inherit;
+    }
+    .LinkContainer
+    {
+        text-decoration: none;
+        margin-right: 75px;
+        margin-bottom: 25px;
+    }
     .time
     {
         font-family: 'Roboto';
+        font-weight: 700;
         color : #1665D8 ;
+        margin-top: 55px;
+        margin-bottom: 35px;
     }
 
     .post_container
@@ -12,7 +25,6 @@ body
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        cursor:context-menu;
     }
     
     .Post:hover
@@ -21,13 +33,15 @@ body
     }
     .Post
     {   
-        border : 0.5px rgb(233, 233, 233) solid ;
+        box-shadow: 0px 0px 6px rgb(209, 208, 208);
+        text-decoration: none;
+        //border : 0.5px rgb(233, 233, 233) solid ;
         border-radius: 15px;
         box-sizing: border-box;
         width: 270px;
         padding: 15px;
-        margin-right: 75px;
-        margin-bottom: 75px;
+        
+        transition: all ease-in-out ;
         .Profile
         {
             margin-bottom: 15px;
@@ -51,7 +65,7 @@ body
                 height: 35px;
             }
             font-family: 'Glacial indifference';
-            .name{font-weight: bolder;cursor: pointer;}
+            .name{font-weight: bolder;cursor: pointer;color: #2a2929;}
             .post_time
              {
                 font-size: 14px;
@@ -73,8 +87,12 @@ body
             margin-bottom: 5px ;
         }
         h2 
-        {font-family: 'Roboto'; margin: 0;
-        font-size: 20px;}
+        {
+            font-family: 'Roboto';
+            margin: 0;
+            font-size: 20px;
+            color: #2a2929;
+        }
         .infos
         {
             margin-top: 5px;
@@ -84,11 +102,23 @@ body
                 font-size: 14px;
                 color: rgb(91, 92, 95);
                 margin-bottom: 0;
+                i
+                {
+                    font-weight: bolder;
+                    text-decoration: underline;
+                    color: rgb(0, 45, 179);
+                    cursor: pointer;
+                }
             }
             .Interaction_user
             {  
                 margin-top: 0;
                 align-items: center;
+                color: #2a2a2a;
+                hr
+                {
+                    color: #2a2a2a;
+                }
                 .ratings
                 {
                     float : left ;
@@ -110,21 +140,24 @@ body
         .price_infos
         {
                 align-items: center;
+                overflow: auto;
                 .status_type
                 {   
                     font-family: 'Roboto';
                     color : #1665D8 ;
                     float : left ;
-                    font-weight: bolder;
+                    font-weight: 1000;
                     cursor: pointer;
                 }
                 .price
                 {
                     font-family: 'Roboto';
-                    font-weight: bolder;
+                    font-weight: 1000;
+                    color: #2a2929;
                     float: right;
                     cursor: pointer;
                 }
         }
     }
+  
 }

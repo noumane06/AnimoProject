@@ -1,12 +1,12 @@
 import React from 'react';
-import PostContainer from './PostContainer';
+import PostContainer from './PostContainer/PostContainer';
 import DateComponent from './DateComponent';
 
 export default function Divider(postsStore) {
         
         var rows = [];
         var posts = [];
-        let CurrentDate = new Date().getDate() ;
+        let CurrentDate = new Date() ;
         let lastDate = null ;
         var container = postsStore.posts ;
         
@@ -18,23 +18,26 @@ export default function Divider(postsStore) {
             }
 
             let date = new Date(container[i].date);
-            if (CurrentDate === date.getDate() ) {
+            if (CurrentDate.getDate() === date.getDate() && CurrentDate.getMonth() === date.getMonth() && CurrentDate.getFullYear() === date.getFullYear()) 
+            {
                 if (lastDate !== date.getDate()) {
-                    rows.push(<DateComponent className="time" Title="Last 24 hours" key={container[i].id} />);
+                    console.log(lastDate);
+                    console.log(date.getDate());
+                    rows.push(<DateComponent className="time" Title="Last 24 hours" key={date} />);
                 }
                 posts.push(container[i]);
                 if (nextDate!== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts}/>);
+                    rows.push(<PostContainer posts={posts} key={container[i].id} />);
                     posts = [];
                 } 
             }else
             {
                 if (lastDate !== date.getDate()) {
-                    rows.push(<DateComponent className="time" Title={date} key={container[i].id} />);
+                    rows.push(<DateComponent className="time" Title={date} key={date} />);
                 }
                 posts.push(container[i]);
                 if (nextDate !== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts}/>);
+                    rows.push(<PostContainer posts={posts} key={container[i].id}/>);
                     posts = [];
                 } 
             }

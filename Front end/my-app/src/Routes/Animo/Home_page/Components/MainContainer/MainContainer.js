@@ -19,7 +19,9 @@ class MainContainer extends React.Component {
         let rows = divider(postsStore);
         return (
         <div>
+        <title>HOME | animo</title>
             {rows}
+        
         </div>
         );
         }

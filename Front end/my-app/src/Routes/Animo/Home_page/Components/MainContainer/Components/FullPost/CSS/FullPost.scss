@@ -1,0 +1,168 @@
+body
+{
+
+    .FullPostContainer
+    {
+        margin-top: 55px ;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 6px rgb(209, 208, 208);
+        border-radius: 15px;
+        padding: 15px;
+        height: 1050px;
+        .HeadContainer
+        {
+            overflow: auto;
+            font-family: 'Glacial indifference'; 
+            .Profile
+            {
+                float: left;
+                margin-bottom: 15px;
+                .dot {
+                    float: left;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                    margin-left: 5px;
+                    margin-top: 2px;
+                    padding: 0;
+                    cursor: pointer;
+                }
+                .prof
+                {
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset ;
+                    width: 35px;
+                    height: 35px;
+                }
+                .usrInfo
+                {
+                    float: right;
+                   .name{font-weight: bolder;cursor: pointer;color: #2a2929;}
+                    .post_time
+                    {
+                        font-size: 14px;
+                        color: rgb(91, 92, 95);
+                    } 
+                }
+                 
+            }
+            .PhoneNumber
+            {
+                font-family: 'Roboto';
+                font-weight: bolder;
+                float : right ;
+                width: 20px;
+                height: 20px;
+                overflow: hidden;
+                box-shadow: 0px 0px 5px rgb(209, 208, 208);
+                border-radius: 50px;
+                text-align: center;
+                padding: 5px 10px;
+                transition: width 0.3s;
+                background-color: #2a2a2a;
+                cursor: pointer;
+                .phone_text
+                {
+                    color: rgb(228, 228, 228);
+                    float: right;
+                    text-align: center;
+                    margin-top: 0px;
+                    transition: 0.4s ;
+                    opacity:0;
+                    transition-timing-function: ease-in-out;
+                    //display: none;
+                }
+                .phone_ico
+                {
+                    float: left;
+                }
+            }
+            .PhoneNumber:hover
+            {
+                
+                width: 200px;
+                .phone_text
+                {
+                    display: block;
+                    opacity:1;
+                }
+            }
+        }
+        .ThumbnailContainer
+        {
+            float: left;
+            width: 50%;
+            .Post_type
+            {
+                font-family: 'Roboto';
+                margin: 0;
+                font-size: 20px;
+                color: rgb(0, 45, 179);
+                padding: 4px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .Images_container
+            {
+                box-sizing: border-box;
+                display: -ms-flexbox; 
+                display: flex;
+                -ms-flex-wrap: wrap; 
+                flex-wrap: wrap;
+                padding: 0 4px;
+                float: left;
+                width : 100%;
+                
+                .Img_Column 
+                {
+                    -ms-flex: 25%; 
+                    flex: 25%;
+                   // max-width: 25%;
+                    padding: 0 2px;
+                    .img
+                    {
+                        height: 140px;
+                        cursor: pointer;
+                        object-fit: cover;
+                        margin-top: 2px;
+                        box-shadow: 0px 0px 6px rgb(209, 208, 208);
+                        //border-radius : 20px;
+                        
+                    }
+                    .img1{border-radius: 15px 0 0 0 ;} .img2{border-radius:  0 0 0 15px;}.img3{border-radius:  0 15px 0 0 ;}
+                    .img4{border-radius: 0 0 15px  0 ;}
+                }
+            }
+            
+        }
+        .AnimalInfo
+        {
+            float: right;
+            width: 45%;
+            font-family: 'Glacial indifference';
+            .InfosContainer
+            {   
+                margin-top: 20px;
+                box-sizing: border-box;
+                padding: 15px;
+                height: 290px;
+                box-shadow: 0px 0px 6px rgb(209, 208, 208);
+                background-color: #8a8a8a;
+                border-radius: 15px;
+            }   
+        }
+        .DescriptionContainer
+        {
+            float: left;
+            width: 100%;
+            font-family: 'Glacial indifference';
+            .Description_title
+            {
+                font-weight: bolder;
+            }
+        }
+    }
+}

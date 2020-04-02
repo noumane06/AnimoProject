@@ -6,7 +6,7 @@ function Datecomponent(props) {
       
       if ( typeof(MonthId) === 'object' ) {
         var dateDay = props.Title.getDate();
-        MonthId = MonthName[MonthId.getMonth()] + ' ' + dateDay + "th";
+        MonthId = MonthName[MonthId.getMonth()] + ' ' + dateDay + (dateDay == 1 ? "st" : "th");
       }
   
       return ( 

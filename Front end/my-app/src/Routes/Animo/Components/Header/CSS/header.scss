@@ -1,34 +1,60 @@
 body
 {
+    
     .Content
     {
         margin-left: 270px;
         padding: 1px 16px;
-
     }
     .Header 
     {
         position: relative;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        margin-right: 90px;
+        margin-bottom: 80px;
+        margin-top: 25px;
         font-family: 'Glacial indifference';
         color: #2A2A2A;
+        .Page_title
+        {
+            float: left;
+           
+            .Title
+            {
+                float : right ;
+                font-family: 'Glacial indifference'; 
+                font-weight: bolder ;
+                color: #2A2A2A;
+                margin: 0;
+                padding: 0;
+                margin-top: 3px;
+            }
+            .arrowBack
+            {
+                float: left ;
+                margin-right: 15px;
+                border-radius: 50px;
+                padding: 5px 7px;
+            }
+            .arrowBack:hover
+            {
+                background-color: rgba(255, 130, 111, 0.04);
+            }
+            
+        }
         .wrap
         {
-            border : 1px solid transparent;
+            box-shadow: 0px 0px 3px rgb(209, 208, 208);
+            //border : 1px solid transparent;
             width: 250px;
             padding: 10px 15px;
-            border-radius: 50px;
+            border-radius: 10px;
             float: right;
             background-color:rgba(0, 0, 0, 0.04);
-            margin-top: -55px;
             font-family: 'Glacial indifference'; 
             .searchButton {
                 height: 15px;
                 border: none;
                 background-color : transparent ;
-                color: #FF4123;
+                color: rgb(255, 130, 111) ;
                 cursor: pointer;
                 font-size: 15px;
                 outline : none ;
@@ -53,13 +79,16 @@ body
         }
         .wrap:hover
         {
-            border : 1px solid rgb(246, 155, 141);
+            background-color: #fff;
+            -webkit-box-shadow: 0 0 0 3px rgba(234,76,137,0.1);
+            box-shadow: 0 0 0 3px rgba(234,76,137,0.1);
         }
             .wrap:focus-within
          {
-                border : 1px solid rgb(246, 155, 141);
-                box-shadow: 0 0 5px rgb(246, 155, 141) ; 
-                font-weight: bolder;
+            
+            background-color: #fff;
+            -webkit-box-shadow: 0 0 0 3px rgba(234,76,137,0.1);
+            box-shadow: 0 0 0 3px rgba(234,76,137,0.1);
          }
          
         

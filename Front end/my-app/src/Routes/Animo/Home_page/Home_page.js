@@ -3,11 +3,14 @@
 import React from 'react';
 //import jwt from 'jsonwebtoken';
 import { Provider } from 'mobx-react';
-
+import {Route } from 'react-router-dom';
 // internal files and components
 
 import postsStore from '../../../Stores/ModelStore';
 import MainContainer from './Components/MainContainer/MainContainer';
+
+import FullPost from './Components/MainContainer/Components/FullPost/FullPost';
+import Header from '../Components/Header/Header';
 
 
 class Account_page extends React.Component {
@@ -47,10 +50,27 @@ class Account_page extends React.Component {
         if (this.state.error !== null) {
             window.location.replace("/account/signin?ref=sign_first");
         }else*/
-        {
+        
+        {   
              return (
-                <Provider postsStore={postsStore}>         
+                <Provider postsStore={postsStore}>
+                {/* Render the maincontainer of the home page */}
+                <Route exact path="/">
+                    <Header/>
+                    <hr style={{border : '0.5px solid #dddddd'}}/>
                     <MainContainer/>
+                </Route>
+                <Route exact path="/home">
+                    <Header/>
+                    <hr style={{border : '0.5px solid #dddddd'}}/>
+                    <MainContainer/>
+                </Route>
+                {/* Render a fullpost page (onclick) */}
+                <Route exact path="/home/test">
+                    <Header config="test"/>
+                    <hr style={{border : '0.5px solid #dddddd'}}/>
+                    <FullPost/>
+                </Route>
                 </Provider>
             
          );

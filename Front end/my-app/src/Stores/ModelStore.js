@@ -5,21 +5,21 @@ import {observable  , computed} from 'mobx';
       @observable posts =[
       {
         id : 1 ,
-        usrPost : "noumane agouzil ",
+        usrPost : "Noumane agouzil ",
         usrImg : "https://img1.looper.com/img/gallery/the-social-network-screenwriter-aaron-sorkin-says-there-should-be-a-sequel/intro-1547327354.jpg",
         img : 'https://cdn.aarp.net/content/dam/aarp/money/scams_fraud/2019/12/1140-puppy-sad.jpg' ,
         title : "Labrador for sell" ,
-        descr : "description test for fetching from stores",
+        descr : "Et Epigonus quidem amictu tenus philosophus, ut apparuit, prece frustra temptata, sulcatis lateribus mortisque metu admoto turpi confessione cogitatorum socium, quae nulla erant, fuisse firmavit cum nec vidisset quicquam nec audisset penitus expers forensium rerum; Eusebius vero obiecta fidentius negans, suspensus in eodem gradu constantiae stetit latrocinium illud esse, non iudicium clamans",
         stars : 4 ,
         postType : "Selling offer",
         price : 180 ,
         localisation : "casablanca",
-        date : 'Wed Mar 04 2020 09:35:52 GMT+0100 (GMT+01:00)'
+        date : 'Thu Apr 02 2020 09:35:52 GMT+0100 (GMT+01:00)'
       },
       {
         id : 2 ,
-        usrPost : "Marie allen",
-        usrImg : "https://feweek.co.uk/wp-content/uploads/2019/12/Corrina-Hembury-profile-700px.jpg",
+        usrPost : "Mark zuckerberg",
+        usrImg : "https://about.fb.com/wp-content/uploads/2019/01/mz.jpg",
         img : 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg' ,
         title : "Labrador for sell" ,
         descr : "description test for fetching from stores",
@@ -27,12 +27,12 @@ import {observable  , computed} from 'mobx';
         postType : "Selling offer",
         price : 180 ,
         localisation : "casablanca",
-        date : 'Wed Mar 04 2020 09:35:52 GMT+0100 (GMT+01:00)'
+        date : 'Wed Apr 01 2020 09:35:52 GMT+0100 (GMT+01:00)'
       },
       {
         id : 3 ,
         usrPost : "arthur fleck",
-        usrImg : "https://content.linkedin.com/content/dam/business/talent-solutions/global/en_us/blog/2019/07/linkedin-profile-summaries-hero-v2.jpg",
+        usrImg : "https://image.tmdb.org/t/p/original/ugMwak0OmtGHVeKmxIwUqjal1R5.jpg",
         img : 'https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg' ,
         title : "Labrador for sell" ,
         descr : "description test for fetching from stores",
@@ -45,7 +45,7 @@ import {observable  , computed} from 'mobx';
       {
         id : 4 ,
         usrPost : "Bruce wayne",
-        usrImg : "https://cdn.pixabay.com/photo/2016/11/21/14/53/adult-1845814__340.jpg",
+        usrImg : "https://vignette.wikia.nocookie.net/thedarkknighttrilogy/images/9/96/Bruce_Wayne.jpg",
         img : 'https://parade.com/wp-content/uploads/2018/03/golden-puppy-life-national-geographic-ftr.jpg' ,
         title : "Labrador for sell" ,
         descr : "description test for fetching from stores",
