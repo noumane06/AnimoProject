@@ -14,8 +14,8 @@ const Description  = inject(
             var post = postsStore.posts[0] ;
             return(
                 <div className="DescriptionContainer">
-                    <h2 className="Description_title">Description :</h2>
-                    <div className="Descrption">
+                    <h2 className="title">Description :</h2>
+                    <div className="Description">
                         <p>
                             {post.descr}
                         </p>

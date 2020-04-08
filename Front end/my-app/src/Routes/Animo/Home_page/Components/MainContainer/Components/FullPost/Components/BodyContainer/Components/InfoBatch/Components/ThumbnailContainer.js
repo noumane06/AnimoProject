@@ -12,6 +12,7 @@ const ThumbnailContainer  = inject(
     observer(
         ({postsStore})=>{
             var post = postsStore.posts ;
+            console.log(post[0].animalsInfo.Name);
             return(
                 <div className="ThumbnailContainer">
                      <h2 className="Post_type">{post[0].postType}</h2>

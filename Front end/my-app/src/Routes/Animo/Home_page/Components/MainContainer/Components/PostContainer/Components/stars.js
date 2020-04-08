@@ -1,23 +1,23 @@
 import React from 'react';
+import { Rate } from 'antd';
+
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+
 class Stars extends React.Component {
-
-    render() 
-        {   
-            const stars = [] ;
-
-             for (var i = 0; i < 5 ; i++){
-
-                    if (i === this.props.size) {
-                        for (let j = 0; j < 5-i ; j++) {
-                            stars.push(<i className="fa fa-star-o"></i>); 
-                        }
-                        break ;
-                    }
-                    stars.push(<i className="fa fa-star"></i>);
-             };
-             return stars;
+    state = {
+        value: this.props.size,
+    };
+    handleChange = value => {
+        this.setState({ value });
+    };
+     
+        render() {
+            const { value } = this.state;
+            return (
+                <span>
+                    <Rate tooltips={desc} onChange={this.handleChange} value={value} />
+                </span>
+            );
         }
-       
 }
- 
 export default Stars;

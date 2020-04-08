@@ -14,7 +14,14 @@ import {observable  , computed} from 'mobx';
         postType : "Selling offer",
         price : 180 ,
         localisation : "casablanca",
-        date : 'Thu Apr 02 2020 09:35:52 GMT+0100 (GMT+01:00)'
+        date : 'Thu Apr 02 2020 09:35:52 GMT+0100 (GMT+01:00)',
+        animalsInfo : {
+          Name : "cat" ,
+          Age : "6 months",
+          Species : "Cat",
+          Race : "Siamoa" , 
+          Medical_History : "No medical records"
+        }
       },
       {
         id : 2 ,
@@ -27,7 +34,14 @@ import {observable  , computed} from 'mobx';
         postType : "Selling offer",
         price : 180 ,
         localisation : "casablanca",
-        date : 'Wed Apr 01 2020 09:35:52 GMT+0100 (GMT+01:00)'
+        date: 'Wed Apr 01 2020 09:35:52 GMT+0100 (GMT+01:00)',
+        animalsInfo: {
+          Name: "cat",
+          Age: "6 months",
+          Species: "Cat",
+          Race: "Siamoa",
+          Medical_History: "No medical records"
+        }
       },
       {
         id : 3 ,
@@ -40,7 +54,14 @@ import {observable  , computed} from 'mobx';
         postType : "Selling offer",
         price : 160 ,
         localisation : "casablanca",
-        date : 'Mon Mar 02 2020 19:55:07 GMT+0100 (GMT+01:00)'
+        date: 'Mon Mar 02 2020 19:55:07 GMT+0100 (GMT+01:00)',
+        animalsInfo: {
+          Name: "cat",
+          Age: "6 months",
+          Species: "Cat",
+          Race: "Siamoa",
+          Medical_History: "No medical records"
+        }
       },
       {
         id : 4 ,
@@ -53,7 +74,14 @@ import {observable  , computed} from 'mobx';
         postType : "Selling offer",
         price : 150 ,
         localisation : "casablanca",
-        date : 'Sun Mar 01 2020 16:04:33 GMT+0100 (GMT+01:00)'
+        date: 'Sun Mar 01 2020 16:04:33 GMT+0100 (GMT+01:00)',
+        animalsInfo: {
+          Name: "cat",
+          Age: "6 months",
+          Species: "Cat",
+          Race: "Siamoa",
+          Medical_History: "No medical records"
+        }
       }
     ];
       @computed get PostsCounter()
