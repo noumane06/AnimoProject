@@ -1,7 +1,7 @@
 // Dependencies *********************
 import React from 'react';
 //import jwt from 'jsonwebtoken';
-import Header from '../Components/Header/Header';
+//import Header from '../Components/Header/Header';
 
 // internal files and components
 import './Css/notification.scss';

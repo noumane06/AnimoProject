@@ -67,7 +67,7 @@ class Account_page extends React.Component {
                 </Route>
                 {/* Render a fullpost page (onclick) */}
                 <Route exact path="/home/test">
-                    <Header config="test"/>
+                    <Header config="test"/> 
                     <hr style={{border : '0.5px solid #dddddd'}}/>
                     <FullPost/>
                 </Route>

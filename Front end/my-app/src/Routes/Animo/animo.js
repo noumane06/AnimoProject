@@ -4,13 +4,16 @@
 import React from 'react';
 import {Route  , BrowserRouter ,Switch } from 'react-router-dom';
 
-// Internal files and compenents 
-
+// routes  import
 import Home from './Home_page/Home_page';
 import Notif from './Notification/notification';
 import Not_found from '../404notfound/404not_found';
-import Side_bar from './Components/SideBar/Sidebar';
+
+// components import 
+import SideBar from './Components/SideBar/Sidebar';
 import Header from './Components/Header/Header';
+import CreateOffer from './Create_offer/createIndex';
+
 // *****************************
 
 class AnimoContainer extends React.Component {
@@ -25,14 +28,14 @@ class AnimoContainer extends React.Component {
                   {/* default route render the home page  */}
                     <Route default exact path="/">
                     <div className="Content"> 
-                        <Side_bar/>
+                        <SideBar/>
                         <Home/>
                     </div>
                     </Route>
                     {/* home route render the home page */}
                     <Route default  path="/home">
                     <div className="Content"> 
-                        <Side_bar/>
+                        <SideBar/>
                         <Home/>
                     </div>
                     </Route>
@@ -41,11 +44,14 @@ class AnimoContainer extends React.Component {
 
                     <Route path="/notification" component={Notif}>
                     <div className="Content"> 
-                        <Side_bar/>
+                        <SideBar/>
                         <Header/>
                         <hr style={{border : '0.5px solid #dddddd'}}/>
                         <Notif/>
                     </div>
+                    </Route>
+                    <Route path="/createoffer" component={Notif}>
+                        <CreateOffer/>
                     </Route>
                     <Route path ="*" component={Not_found}/>
                   

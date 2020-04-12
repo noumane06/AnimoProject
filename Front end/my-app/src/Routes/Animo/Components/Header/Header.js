@@ -14,7 +14,7 @@ const Header  = inject(
         const title = postsStore.posts[0].title ;
         let location = useLocation();
         let Title = location.pathname.split("/");
-        if (props.config != "test") {
+        if (props.config !== "test") {
            if (Title[1] === "") {
             Title[1] = "home";
             } 
@@ -26,7 +26,7 @@ const Header  = inject(
          return (
         <div className="Header">
             <div className="Page_title">
-                { props.config == "test" ?
+                { props.config === "test" ?
                 <Link to='/home' className="arrowBack">
                     <svg viewBox="0 0 24 24" width="24px" height="24px">
                         <g>
