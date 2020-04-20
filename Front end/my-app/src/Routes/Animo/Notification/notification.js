@@ -5,15 +5,22 @@ import React from 'react';
 
 // internal files and components
 import './Css/notification.scss';
+import Header from '../Components/Header/Header';
+import postsStore from '../../../Stores/ModelStore';
+import { Provider } from 'mobx-react';
 class Notification extends React.Component {
     
     render() 
         {
              return ( 
-            <div >
-            <title>Notification | animo</title>
-                <h2>You have 3 new notifications </h2>
-            </div>
+                 <Provider postsStore={postsStore}>
+
+                    <Header />
+                     <hr style={{ border: '0.5px solid #dddddd' }} />
+                     <title>Notification | animo</title>
+                     <h2>You have 3 new notifications </h2>
+                </Provider>
+
          );
         }
  

@@ -27,6 +27,7 @@
           flex: 1;
   overflow: hidden;
   vertical-align: top;
+  
 }
 .ant-steps-item-container {
   outline: none;
@@ -39,6 +40,7 @@
 .ant-steps-item:last-child > .ant-steps-item-container > .ant-steps-item-tail,
 .ant-steps-item:last-child > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
   display: none;
+  
 }
 .ant-steps-item-icon,
 .ant-steps-item-content {
@@ -67,6 +69,7 @@
   top: -1px;
   color: #1890ff;
   line-height: 1;
+  
 }
 .ant-steps-item-tail {
   position: absolute;
@@ -74,10 +77,12 @@
   left: 0;
   width: 100%;
   padding: 0 10px;
+  
 }
 .ant-steps-rtl .ant-steps-item-tail {
   right: 0;
   left: auto;
+  
 }
 .ant-steps-item-tail::after {
   display: inline-block;

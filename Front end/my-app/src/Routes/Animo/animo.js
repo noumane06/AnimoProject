@@ -11,7 +11,6 @@ import Not_found from '../404notfound/404not_found';
 
 // components import 
 import SideBar from './Components/SideBar/Sidebar';
-import Header from './Components/Header/Header';
 import CreateOffer from './Create_offer/createIndex';
 
 // *****************************
@@ -42,15 +41,13 @@ class AnimoContainer extends React.Component {
 
                     {/* notification route render the notification page  */}
 
-                    <Route path="/notification" component={Notif}>
-                    <div className="Content"> 
+                    <Route path="/notification" >
+                    <div className="Content">
                         <SideBar/>
-                        <Header/>
-                        <hr style={{border : '0.5px solid #dddddd'}}/>
                         <Notif/>
                     </div>
                     </Route>
-                    <Route path="/createoffer" component={Notif}>
+                    <Route path="/createoffer">
                         <CreateOffer/>
                     </Route>
                     <Route path ="*" component={Not_found}/>

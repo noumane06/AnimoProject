@@ -1,12 +1,15 @@
 body
 {
+    $selectWidth : 200px ;
+    $actionHeight : 60px;
     @import './steps.scss';
+    @import './select.scss';
     .header
     {   
         box-sizing: border-box;
         overflow: hidden;
         background-color: #2a2a2a;
-        padding : 29px 50px 20px 50px ;
+        padding : 8px 50px 9px 50px ;
         .logo
         {
             margin-top: 4px;
@@ -35,7 +38,7 @@ body
         .help
         {
             color : #6e6e6e;
-            margin-top: 4px;
+            margin-top: 7px;
             font-family: 'glacial indifference';
             font-weight: bold;
         }
@@ -44,31 +47,67 @@ body
             width: 60%;
         }
     }
+    .creatOffer
+    {
+        animation: fadein 500ms;
+    }
+    @keyframes fadein
+    {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    .ant-steps-item-title
+    {
+        font-weight: bolder;
+    }
+    
     .offerContainer
     {
         padding: 40px 200px;
         font-family: 'glacial indifference';
+        
         .steps-content
         {
             margin-top: 50px;
             width: 100%;
-            height: 300px;
             box-shadow: 0px 0px 2px rgb(209, 208, 208);
             text-decoration: none;
             border-radius: 5px;
-            padding: 30px 80px;
+            padding: 20px 50px;
             border-radius: 15px;
             box-sizing: border-box;
+            margin-bottom: $actionHeight;
+            .transaction
+            {
+                margin-right: calc(#{$selectWidth} * 0.5);
+            }
+            .content-child
+            {
+                padding-top: 10px;
+            }
+            .containerOff
+            {
+                display: flex;
+                flex-wrap: wrap;
+                .row1
+                {
+                    margin-right: 100px;
+                    margin-left: 10px;
+                }
+            }
         }
         .steps-action
         {
             box-sizing: border-box;
+            background-color: #fafafa;
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
+            height: $actionHeight;
+            z-index: 99999;
             border-top: 1px solid rgb(209, 208, 208);
-            padding: 20px 100px;
+            padding: 10px 100px;
             button 
             {
                 border-radius: 15px;
@@ -83,18 +122,22 @@ body
                 border: none;
                 float: right;
                 background-color: #ff7e6a;
+                opacity: 1;
+                transition: 0.5s box-shadow ease-out;
+                transition: 0.3s opacity ease-out;
                 color: #fafafa ;
             }
             .Next:hover
             {
-                box-shadow: 0px 0px 10px #ff7e6a;
-                transition: 0.3s ease-in-out;
+                box-shadow: 0px 0px 5px #ff7e6a;
+                opacity: 0.8;
             }
             .back
             {
                 float: left;
                 background-color: transparent;
                 border: 1px solid rgb(228, 228, 228) ;
+                transition: 0.3s box-shadow ease-out;
                 color: #6e6e6e;
             }
             .back:hover
@@ -104,7 +147,113 @@ body
             }
         }
         
+        label , legend
+        {
+            font-weight: bolder;
+            color: #2a2a2a;
+        }
+        fieldset
+        {
+                .se 
+                {
+                    width: 244px;
+                }
+            legend
+            {
+                padding: 0 15px;
+                font-size: 20px;
+                color: #1890FF;
+            }
+                box-sizing: border-box;
+                margin-top: 10px;
+                border: 1px solid rgb(236, 236, 236);
+                width: 120%;
+                border-radius: 5px;
+                background : none ;
+                padding: 10px 20px ;
+            .line1
+            {
+                overflow: auto;
+                .right
+                {
+                    float: right;
+                    margin-right: 15px;
+                }
+                .left
+                {
+                    margin-top: 20px;
+                    float : left ;
+                }
+            }
+            
+        }
+        .Select
+        {
+            border: 2px solid transparent;
+            background : none ;
+            color: #6e6e6e;
+            box-shadow: 0px 0px 3px rgb(209, 208, 208);
+            border-radius: 5px;
+            width: $selectWidth;
+            padding: 10px 20px ;
+            margin: 10px 0px;
+            font-family: 'Roboto';
+            outline: none;
+            transition: border 0.2s ease-in-out;
+            option 
+            {
+                cursor: pointer;
+            }
+        }
+        
+        .Select:focus
+        {
+            border: 2px solid #1890FF;
+        }
+        input::placeholder
+        {
+            font-weight: 500;
+            color: #b3b3b3;
+        }
+        textarea::placeholder
+        {
+            font-weight: 500;
+            color: #b3b3b3;
+        }
         
     }
-    
+    .SplashContainer
+    {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #2a2a2a;
+        z-index: 9999;
+    }
+    .trans 
+    {
+        animation: fadeout 600ms;
+    }
+    @keyframes fadeout 
+    {
+        from { opacity: 1; }
+        to   { opacity: 0; }
+    }
+    .logo-center-xy {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 50px;
+        animation: rotation 3s infinite linear;
+    }
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
 }
