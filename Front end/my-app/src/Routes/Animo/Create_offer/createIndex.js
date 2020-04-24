@@ -3,7 +3,8 @@
 
 import React from 'react' ;
 import { Steps } from 'antd';
-
+import { storage } from './firebase-config';
+import axios from "axios";
 // internal files and components
 
 import DarkHeader from './Components/Dark_header';
@@ -27,59 +28,182 @@ const steps = [
 const city = [];
 const postType = ["Demande","Offer"];
 const transaction = ["Petsit","Adobt"];
-const species = ["freshwater fish", "cats", "dogs", "birds", "hamsters", "Guinea Pigs", "Rabbits", "Chinchillas","horses","reptiles"];
+const species = [ "cats", "dogs", "birds","freshwater fish", "hamsters", "Guinea Pigs", "Rabbits", "Chinchillas","horses","reptiles"];
 // CreateOffer component *************************
 class CreateOffer extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-                current: 0,
-                PostType : 'Demande',
-                City : 'Casablanca' ,
-                Sector : '' ,
-                TransactionType: '',
-                Title : '',
-                Price : '',
-                Duration :'',
-                Describtion : '',
-                PetName :'',
-                Age:'',
-                Species:'freshwater fish',
-                Race : '',
-                MedicalHistory : ''
-
+          data: {
+            Sector: "",
+            PostType: "Demande",
+            City: "Casablanca",
+            TransactionType: "Petsit",
+            Title: "",
+            Price: "",
+            Duration: "",
+            Describtion: "",
+            PetName: "",
+            Age: "",
+            Species: "freshwater fish",
+            Race: "",
+            MedicalHistory: "",
+            imageName: "",
+            imageData: "none"
+            
+          },
+          targetFiles : [],
+          current: 0,
+          SectorStatus: true,
+          TitleStatus: true,
+          DescribtionStatus: true,
+          PetNameStatus: true,
+          AgeStatus: true,
+          RaceStatus: true,
         };
         this.handleChange = this.handleChange.bind(this);
     }
     
     next() {
-        if (this.state.current === 0) {
-            var e = document.getElementsByName("TransactionType");
-            var s = e[0].selectedIndex;
-            this.setState({ TransactionType: e[0].options[s].text}) ;
+        let checker = false ;
+        if (this.state.current === 0 && this.state.data.Sector ==="") {
+            this.setState({
+                SectorStatus : false 
+            });
+           checker = true ;
         }
-        const current = this.state.current + 1;
-        this.setState({ current });
-        
+        if (this.state.current === 1) {
+            console.log(this.state.data.Sector);
+            if (this.state.data.Title ==="") {
+                this.setState({
+                    TitleStatus: false
+                });
+                
+                checker = true ; 
+            }
+            if (this.state.data.Describtion === "") {
+                this.setState({
+                    DescribtionStatus: false
+                });
+                checker = true; 
+
+            }
+            if (this.state.data.PetName ==="") {
+                this.setState({
+                    PetNameStatus: false
+                });
+                checker = true; 
+
+            }
+            if (this.state.data.Age ==="") {
+                this.setState({
+                    AgeStatus: false
+                });
+                checker = true; 
+
+            }
+            if (this.state.data.Race ==="") {
+                this.setState({
+                    RaceStatus: false
+                });
+                checker = true; 
+            }
+        }
+        if (!checker) {
+            const current = this.state.current + 1;
+            this.setState({ current });
+        }
+    }
+    done()
+    {
+        let currentImageName = "firebase-image-" + Date.now();
+        let imageObj = {};
+        let uploadImage = storage.ref(`images/${currentImageName}`).put(this.state.targetFiles);
+        uploadImage.on(
+          "state_changed",
+          (snapshot) => {},
+          (error) => {
+            alert(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(currentImageName)
+              .getDownloadURL()
+              .then((url) => {
+                  this.setState((prevState) => ({
+                    data: {
+                      ...prevState.data,
+                      imageName: currentImageName,
+                      imageData: url,
+                    },
+                  }));
+                // store image object in the database
+                imageObj = this.state.data ;
+
+                axios.post("http://localhost:9000/posts/", imageObj)
+                  .then((data) => {
+                    alert(data);
+                  })
+                  .catch((err) => {
+                    alert(
+                      "Error while uploading image using firebase storage" + err
+                    );
+                  });
+              });
+          }
+        );
+
     }
 
     prev() {
         const current = this.state.current - 1;
         this.setState({ current });
-    } 
+    }
+
     handleChange(event) {
         let { name , value } = event.target;
-        this.setState({
-                [name] : value 
-            });
+        this.setState(prevState => ({
+            data : {
+                ...prevState.data ,
+                [name] : value
+            }
+        }));
+        if (event.target.className === "Select invalid") {
+          const test = name + "Status";
+
+          this.setState({
+            [test]: true,
+          });
+        }
     }
-   
+    
+    uploadImage(e) {
+        let { name, files } = e.target;
+        const url = URL.createObjectURL(files[0]);
+        console.log(url);
+        
+        this.setState((prevState) => ({
+          data: {
+            ...prevState.data,
+            [name]: url,
+          },
+          targetFiles: files[0]
+        }));
+        
+    }
+    handleLoad(event)
+     {
+         URL.revokeObjectURL(event.target.src);
+     }
     render() {
         let i = 0 ; 
             const { current } = this.state;
             return (
+                
                 <div className="creatOffer">
+                    <title>Create Your Offer | animo</title>
                     <DarkHeader />
                     <div className="offerContainer">
                         <Steps current={current}>
@@ -94,7 +218,7 @@ class CreateOffer extends React.Component {
                                     <div className="row1">
                                         <div className="PostType content-child">
                                             <label>Post Type </label><br />
-                                            <select value={this.state.PostType} className="Select se" name="PostType" onChange={this.handleChange}>
+                                            <select value={this.state.data.PostType} className="Select se" name="PostType" onChange={this.handleChange}>
                                                 {postType.map(item => (
                                                     <option value={item} key={item}>{item}</option>
                                                 ))}
@@ -105,21 +229,20 @@ class CreateOffer extends React.Component {
                                         <div className="transaction content-child">
                                             <label>Transaction Type </label><br />
 
-                                            <select className="Select se" name="TransactionType" value={this.state.TransactionType} onChange={this.handleChange} required>
-                                                {this.state.PostType === 'Demande' && (
-
-                                                    <option value="Buy" key="7570" >Buy</option>
-
-                                                )}
-                                                {this.state.PostType === 'Offer' && (
-                                                    <option value="Sell" key="1524">Sell</option>
-                                                )}
+                                            <select className="Select se" name="TransactionType" value={this.state.data.TransactionType} onChange={this.handleChange} >
                                                 {
                                                     transaction.map(item => (
                                                         <option value={item} key={item} >{item}</option>
                                                     ))
                                                 }
+                                                {this.state.data.PostType === 'Demande' && (
 
+                                                    <option value="Buy" key="7570" >Buy</option>
+
+                                                )}
+                                                {this.state.data.PostType === 'Offer' && (
+                                                    <option value="Sell" key="1524">Sell</option>
+                                                )}
 
                                             </select>
                                         </div>
@@ -127,7 +250,7 @@ class CreateOffer extends React.Component {
                                         {/* city */}
                                         <div className="city content-child">
                                             <label>City </label><br />
-                                            <select className="Select se" name="City" onChange={this.handleChange} value={this.state.City}>
+                                            <select className="Select se" name="City" onChange={this.handleChange} value={this.state.data.City}>
                                                 <option value="casablanca">Casablanca</option>
                                                 <option value="rabat">Rabat</option>
                                                 <option value="settat">Settat</option>
@@ -148,7 +271,13 @@ class CreateOffer extends React.Component {
                                         {/* Sector */}
                                         <div className="sector content-child">
                                             <label>Sector </label><br />
-                                            <input className="Select" name="Sector" type="text" value={this.state.Sector} placeholder="Your adress goes here" onChange={this.handleChange} required />
+                                            <input className={this.state.SectorStatus ? "Select" : "Select invalid"} name="Sector" id="sector" type="text" value={this.state.data.Sector} placeholder="Your adress goes here" onChange={this.handleChange}  /><br/>
+                                            {!this.state.SectorStatus && (
+                                                <span className="errorText">
+                                                    <i className="fa fa-exclamation-circle"></i>
+                                                    Enter your sector !
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
 
@@ -162,27 +291,38 @@ class CreateOffer extends React.Component {
                                         {/* Title */}
                                         <div className="title content-child">
                                             <label>Title </label><br />
-                                            <input name="Title" className="Select" value={this.state.Title} type="text" placeholder="Insert your title" onChange={this.handleChange} required />
+                                            <input name="Title" className={this.state.TitleStatus ? "Select" : "Select invalid"} value={this.state.data.Title} type="text" placeholder="Insert your title" onChange={this.handleChange} /><br />
+                                            {!this.state.TitleStatus && (
+                                                <span className="errorText">
+                                                    <i className="fa fa-exclamation-circle"></i>
+                                                    <span>Enter the title of your publication</span>
+                                                </span>
+                                            )}
                                         </div>
 
                                         {/* Price */}
 
-                                        {this.state.PostType === 'Offer' && this.state.TransactionType === 'Sell' && (
+                                        {this.state.data.PostType === 'Offer' && this.state.data.TransactionType === 'Sell' && (
                                             <div className="price content-child">
                                                 <label>Price </label><br />
-                                                <input name="Price" className="Select" value={this.state.Price} type="number" onChange={this.handleChange} placeholder="Price" required />
+                                                <input name="Price" className="Select"  value={this.state.data.Price} type="number" onChange={this.handleChange} placeholder="Price"  />
                                             </div>
                                         )}
-                                        {this.state.PostType === 'Offer' && this.state.TransactionType === 'Petsit' && (
+                                        {this.state.data.PostType === 'Offer' && this.state.data.TransactionType === 'Petsit' && (
                                             <div className="price content-child">
                                                 <label>Duration </label><br />
-                                                <input name="Duration" className="Select" value={this.state.Duration} type="text"  onChange={this.handleChange} placeholder="How long you're planning to leave your pet ?" required />
+                                                <input name="Duration" className="Select"  value={this.state.data.Duration} type="text"  onChange={this.handleChange} placeholder="How long you're planning to leave your pet ?"  />
                                             </div>
                                         )}
                                         <div className="description content-child">
                                             <label>Description </label><br />
-                                            <textarea name="Describtion" rows="5" value={this.state.Describtion} className="Select" type="text" placeholder="Describe what your intentions" onChange={this.handleChange} style={{resize : "none"}}/>
-
+                                            <textarea name="Describtion" rows="5" value={this.state.data.Describtion} className={this.state.DescribtionStatus ? "Select" : "Select invalid"} type="text" placeholder="Describe what your intentions" onChange={this.handleChange} style={{ resize: "none" }} /><br />
+                                            {!this.state.DescribtionStatus && (
+                                                <span className="errorText">
+                                                    <i className="fa fa-exclamation-circle"></i>
+                                                    <span>You must provide a description</span>
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="row2">
@@ -190,15 +330,33 @@ class CreateOffer extends React.Component {
                                             <legend>Your pet's Info</legend>
                                             <div className="line1">
                                                 <label className="left">Pet name</label>
-                                                <input name="PetName" className="Select right" value={this.state.PetName} type="text" placeholder="What do you call your pet ?" onChange={this.handleChange} required />
+                                                <div className="right">
+                                                    <input name="PetName" className={this.state.PetNameStatus ? "Select" : "Select invalid"} value={this.state.data.PetName} type="text" placeholder="What do you call your pet ?" onChange={this.handleChange} /><br />
+                                                    {!this.state.PetNameStatus && (
+                                                        <span className="errorText">
+                                                            <i className="fa fa-exclamation-circle"></i>
+                                                            <span >Enter your pet name !</span>
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                
                                             </div>
                                             <div className="line1">
                                                 <label className="left">Age</label>
-                                                <input name="Age" className="Select right" value={this.state.Age} type="text" placeholder="Your pet age" onChange={this.handleChange} required />
+                                                <div className="right">
+                                                    <input name="Age" className={this.state.AgeStatus ? "Select" : "Select invalid"} value={this.state.data.Age} type="text" onChange={this.handleChange} placeholder="Your pets age" /><br />
+                                                    {!this.state.AgeStatus && (
+                                                        <span className="errorText">
+                                                            <i className="fa fa-exclamation-circle"></i>
+                                                            <span>Enter your pet's age</span>
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                
                                             </div>
                                             <div className="line1">
                                                 <label className="left">Species</label>
-                                                <select className="Select right se" name="Species" onChange={this.handleChange} value={this.state.Species}>
+                                                <select className="Select right se" name="Species" onChange={this.handleChange} value={this.state.data.Species}>
                                                     {species.map(item => {
                                                         i++;
                                                         return (<option value={item} key={i} >{item}</option>)
@@ -207,14 +365,22 @@ class CreateOffer extends React.Component {
                                             </div>
                                             <div className="line1">
                                                 <label className="left">Race</label>
-                                                <input name="Race" className="Select right" value={this.state.Race} type="text" onChange={this.handleChange} placeholder="What do you call your pet ?" required />
+                                                <div className="right">
+                                                    <input name="Race" className={this.state.RaceStatus ? "Select" : "Select invalid"} value={this.state.data.Race} type="text" onChange={this.handleChange} placeholder="What do you call your pet ?"  /><br/>
+                                                    {!this.state.RaceStatus && (
+                                                        <span className="errorText">
+                                                            <i className="fa fa-exclamation-circle"></i>
+                                                            <span>Enter your pet's race</span>
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                
                                             </div>
                                             <div className="line1">
                                                 <label className="left">Medical History</label>
-                                                <textarea name="MedicalHistory" rows="5" value={this.state.MedicalHistory} className="Select right" onChange={this.handleChange} type="text" placeholder="Leave empty if you don't have acces to it " style={{ resize: "none" }} />
+                                                <textarea name="MedicalHistory" rows="5" value={this.state.data.MedicalHistory} className="Select right" onChange={this.handleChange} type="text" placeholder="Leave empty if you don't have acces to it " style={{ resize: "none" }} />
                                             </div>
-                                            
-                                 
+                                        
                                         </fieldset>
                                     </div>
                                     
@@ -222,8 +388,15 @@ class CreateOffer extends React.Component {
                                 </div>
                             )}
                             {steps[current].title === 'Finishing Up' && (
-                                <div>
-                                    {steps[current].content}
+                                <div className="ImgStep">
+                                    <input type="file" className="upload"  name="imageData" accept="image/*" onChange={(e) => this.uploadImage(e)} />
+
+                                    <div className="ImgContainer">
+                                        
+                                        {this.state.data.imageData !== "none" && (
+                                            <img src={this.state.data.imageData} alt="thumbnail" className="img_upload" onLoad={(e)=> this.handleLoad(e)} />        
+                                        )}
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -249,7 +422,7 @@ class CreateOffer extends React.Component {
                                 </button>
                             )}
                             {current === steps.length - 1 && (
-                                <button className="Next" onClick={() => console.log(this.state)}>
+                                <button className="Next" onClick={() => this.done()}>
                                     Done
                                 </button>
                             )}
@@ -265,6 +438,7 @@ class CreateOffer extends React.Component {
 function Splash(props) {
     return(
         <div className={props.propsclass} style={{opacity : props.opacity}}>
+            <title>Create Your Offer | animo</title>
             <svg className="logo-center-xy" viewBox="0 0 631.96 631.96">
                 <path d="M1180,648.68C1180,821.89,1037.89,964,863.32,964,690.11,964,548,821.89,548,648.68,548,474.11,690.11,332,863.32,332,1037.89,332,1180,474.11,1180,648.68Zm-158.33,0A157.67,157.67,0,0,0,863.32,490.35c-86.6,0-157,70.37-157,158.33,0,86.6,70.37,157,157,157C951.28,805.65,1021.65,735.28,1021.65,648.68Z" transform="translate(-548.02 -332.02)" style={{ fill: "#f2f2f2" }} />
                 <circle cx="95.16" cy="95.16" r="95.16" style={{ fill: "#f2f2f2" }} />

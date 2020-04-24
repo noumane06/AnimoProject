@@ -49,7 +49,7 @@ class signin extends React.Component {
             }
         })
         .catch(err =>{
-            console.log("entred");
+                
                 this.setState({
                     isvalid : false,
                     isLoading : false 
