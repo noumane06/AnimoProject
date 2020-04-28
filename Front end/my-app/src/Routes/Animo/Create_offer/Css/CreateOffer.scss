@@ -68,9 +68,10 @@ body
 
         .steps-content
         {
+            
             margin-top: 50px;
             width: 100%;
-            height: 60vh;
+            height: auto;
             box-shadow: 0px 0px 2px rgb(209, 208, 208);
             text-decoration: none;
             border-radius: 5px;
@@ -78,6 +79,10 @@ body
             border-radius: 15px;
             box-sizing: border-box;
             margin-bottom: $actionHeight;
+            .se 
+            {
+                width: 244px;
+            }
             .errorText
             {
                 color: #D8000C;
@@ -92,6 +97,10 @@ body
                 }
                 
             }
+            .clearfix
+            {
+                overflow: auto;
+            }
             .transaction
             {
                 margin-right: calc(#{$selectWidth} * 0.5);
@@ -99,15 +108,26 @@ body
             .content-child
             {
                 padding-top: 10px;
+                width: $selectWidth + 44px;
             }
             .containerOff
             {
                 display: flex;
                 flex-wrap: wrap;
+                padding-left: $selectWidth - 130px;
+                padding-top: 20px;
+                padding-bottom: 20px;
                 .row1
                 {
                     margin-right: 100px;
-                    margin-left: 10px;
+                }
+                .row2
+                {
+                    width: 430px;
+                }
+                .SectorRow
+                {
+                    width: 244px;
                 }
             }
             .invalid
@@ -129,19 +149,46 @@ body
             .ImgStep
             {
                 width: 100%;
-                height: 100%;
                 .ImgContainer
                 {
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: wrap;
                     margin-top: 30px;
-                    height: 150px;
+                    border: 1px dashed rgb(209, 208, 208);
                     img
                     {
-                        border-radius: 15px;
+                        border-radius: 35px;
+                        box-shadow: 0px 0px 10px rgb(209, 208, 208);
                         transition: .4s all;
+                        margin: 15px;
                         height: 140px;
+                        width: 140px;
                         cursor: pointer;
                         object-fit: cover;
                         z-index: 200;
+                    }
+                    .add_img
+                    {
+                        cursor: pointer;
+                        height: 140px;
+                        width: 140px;
+                        margin: 15px;
+                        border-radius: 35px;
+                        border: none;
+                        border: 2px solid #1890FF;
+                        background-color: #fafafa;
+                        color: #1890FF;
+                        font-weight: bolder;
+                        text-align: center;
+                        font-family: 'glacial indifference';
+                        font-size: 18px;
+                        transition: 0.2s box-shadow ease-in-out;
+                        outline: none;
+                    }
+                    .add_img:hover
+                    {
+                        box-shadow: 0px 0px 10px rgb(209, 208, 208);
                     }
                 }
             }
@@ -181,10 +228,24 @@ body
                 transition: 0.3s opacity ease-out;
                 color: #fafafa ;
             }
+            
             .Next:hover
             {
                 box-shadow: 0px 0px 5px #ff7e6a;
                 opacity: 0.8;
+            }
+            .Next:disabled
+            {
+                cursor: not-allowed;
+                background-color: transparent;
+                border: 1px solid rgb(228, 228, 228) ;
+                transition: 0.3s box-shadow ease-out;
+                color: #6e6e6e;
+            }
+            .Next:disabled:hover
+            {
+                box-shadow: 0px 0px 0px transparent;
+                opacity: 1;
             }
             .back
             {
@@ -207,11 +268,8 @@ body
         }
         fieldset
         {
-            width: 600px;
-                .se 
-                {
-                    width: 244px;
-                }
+
+                
             legend
             {
                 padding: 0 15px;
@@ -221,7 +279,7 @@ body
                 box-sizing: border-box;
                 margin-top: 10px;
                 border: 1px solid rgb(236, 236, 236);
-                width: 120%;
+                width: 100%;
                 border-radius: 5px;
                 background : none ;
                 padding: 10px 20px ;

@@ -10,6 +10,18 @@ import axios from "axios";
 import DarkHeader from './Components/Dark_header';
 import './Css/CreateOffer.scss';
 import { Link } from 'react-router-dom';
+import { Upload, Modal } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import './Css/upload.scss';
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
 // *************************************************************
 
 const { Step } = Steps;
@@ -29,11 +41,15 @@ const city = [];
 const postType = ["Demande","Offer"];
 const transaction = ["Petsit","Adobt"];
 const species = [ "cats", "dogs", "birds","freshwater fish", "hamsters", "Guinea Pigs", "Rabbits", "Chinchillas","horses","reptiles"];
+
+
+
 // CreateOffer component *************************
 class CreateOffer extends React.Component {
 
     constructor(props) {
         super(props);
+        this.inputElement = React.createRef();
         this.state = {
           data: {
             Sector: "",
@@ -49,22 +65,25 @@ class CreateOffer extends React.Component {
             Species: "freshwater fish",
             Race: "",
             MedicalHistory: "",
-            imageName: "",
-            imageData: "none"
+            imageData: []
             
           },
-          targetFiles : [],
+          doneStatus : true ,
           current: 0,
           SectorStatus: true,
           TitleStatus: true,
           DescribtionStatus: true,
+          imageStatus : false,
           PetNameStatus: true,
           AgeStatus: true,
           RaceStatus: true,
+          previewVisible: false,
+          previewImage: '',
+          previewTitle: '',
+          fileList: [],
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    
     next() {
         let checker = false ;
         if (this.state.current === 0 && this.state.data.Sector ==="") {
@@ -110,53 +129,24 @@ class CreateOffer extends React.Component {
                 checker = true; 
             }
         }
-        if (!checker) {
+        if (checker) {
             const current = this.state.current + 1;
             this.setState({ current });
         }
     }
-    done()
-    {
-        let currentImageName = "firebase-image-" + Date.now();
-        let imageObj = {};
-        let uploadImage = storage.ref(`images/${currentImageName}`).put(this.state.targetFiles);
-        uploadImage.on(
-          "state_changed",
-          (snapshot) => {},
-          (error) => {
-            alert(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(currentImageName)
-              .getDownloadURL()
-              .then((url) => {
-                  this.setState((prevState) => ({
-                    data: {
-                      ...prevState.data,
-                      imageName: currentImageName,
-                      imageData: url,
-                    },
-                  }));
-                // store image object in the database
-                imageObj = this.state.data ;
+    
+     done(){
 
-                axios.post("http://localhost:9000/posts/", imageObj)
-                  .then((data) => {
-                    alert(data);
-                  })
-                  .catch((err) => {
-                    alert(
-                      "Error while uploading image using firebase storage" + err
-                    );
-                  });
-              });
-          }
-        );
-
+         axios.post("http://localhost:9000/posts/", this.state.data)
+             .then((data) => {
+                 console.log(data);
+             })
+             .catch((err) => {
+                 console.log(this.state);
+                 console.log("error during upload", err);
+             })
     }
-
+    
     prev() {
         const current = this.state.current - 1;
         this.setState({ current });
@@ -178,26 +168,77 @@ class CreateOffer extends React.Component {
           });
         }
     }
+    click = (e) => {
+        this.inputElement.click();
+    }
     
     uploadImage(e) {
-        let { name, files } = e.target;
-        const url = URL.createObjectURL(files[0]);
-        console.log(url);
-        
-        this.setState((prevState) => ({
-          data: {
-            ...prevState.data,
-            [name]: url,
-          },
-          targetFiles: files[0]
-        }));
+        let {  files } = e.target;
+        console.log(files);
+        for (let i = 0; i < files.length; i++) {
+            console.log("entered")
+            const image = files[i];
+            let currentImageName = "firebase-image-" + Date.now();
+            let uploadImage = storage.ref(`images/${currentImageName}`).put(image);
+
+            uploadImage.on('state_changed',
+                (snapshot) => { },
+                (error) => {
+                    alert(error);
+                },
+                () => {
+                    storage.ref('images').child(currentImageName).getDownloadURL().then(url => {
+                        console.log(url);
+                        this.setState((prevState) => ({
+                            data: {
+                                ...prevState.data,
+                                imageData: [...prevState.data.imageData, url]
+                            },
+                            imageStatus : true 
+                        }));
+
+                        // store image object in the database
+                        if (i === files.length - 1) {
+                            console.log("button")
+                            this.setState((prevState) => ({
+                                ...prevState , 
+                                doneStatus : false 
+                            }));
+                        }
+                    })
+                })
+        }
         
     }
     handleLoad(event)
      {
          URL.revokeObjectURL(event.target.src);
      }
+     // upload stuff 
+    handleCancel = () => this.setState({ previewVisible: false });
+
+    handlePreview = async file => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+
+        this.setState({
+            previewImage: file.url || file.preview,
+            previewVisible: true,
+            previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+        });
+    };
+
+    handleChanges = ({ fileList }) => this.setState({ fileList });
+    // -----------------------------------------------------------------------
     render() {
+        const { previewVisible, previewImage, fileList, previewTitle } = this.state;
+        const uploadButton = (
+            <div>
+                <PlusOutlined />
+                <div className="ant-upload-text">Upload</div>
+            </div>
+        );
         let i = 0 ; 
             const { current } = this.state;
             return (
@@ -267,7 +308,7 @@ class CreateOffer extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div className="row2">
+                                    <div className="SectorRow">
                                         {/* Sector */}
                                         <div className="sector content-child">
                                             <label>Sector </label><br />
@@ -388,14 +429,41 @@ class CreateOffer extends React.Component {
                                 </div>
                             )}
                             {steps[current].title === 'Finishing Up' && (
+                                
                                 <div className="ImgStep">
-                                    <input type="file" className="upload"  name="imageData" accept="image/*" onChange={(e) => this.uploadImage(e)} />
+                                    <h2>Upload Your Images</h2>
+                                    <p>(6 Pictures max)</p>
+                                    {/* <input type="file" className="upload" multiple name="imageData" accept="image/*" ref={input => this.inputElement = input} onChange={(e) => this.uploadImage(e)} style={{display:'none'}}/>
 
                                     <div className="ImgContainer">
                                         
-                                        {this.state.data.imageData !== "none" && (
-                                            <img src={this.state.data.imageData} alt="thumbnail" className="img_upload" onLoad={(e)=> this.handleLoad(e)} />        
-                                        )}
+                                        {this.state.imageStatus && (
+                                            this.state.data.imageData.map(item => (
+                                                <img src={item} alt="thumbnail" className="img_upload" key={item}  />
+                                            ))
+                                        )}<button className="add_img" onClick={this.click}>
+                                            <svg height="48" width="48" viewBox="0 0 24 24"  style={{fill: "#1890FF", stroke: "#1890FF"}}><path d="M9.3 4h5.4l1.647 1.778H19.2c.99 0 1.8.8 1.8 1.778v10.666C21 19.2 20.19 20 19.2 20H4.8c-.99 0-1.8-.8-1.8-1.778V7.556c0-.978.81-1.778 1.8-1.778h2.853L9.3 4zM12 17.333c2.484 0 4.5-1.99 4.5-4.444 0-2.453-2.016-4.445-4.5-4.445s-4.5 1.992-4.5 4.445c0 2.453 2.016 4.444 4.5 4.444zm0-1.777c1.491 0 2.7-1.194 2.7-2.667 0-1.473-1.209-2.667-2.7-2.667s-2.7 1.194-2.7 2.667c0 1.473 1.209 2.667 2.7 2.667z"></path>
+                                            </svg><br />
+                                        Add picture</button>
+                                    </div> */}
+                                    <div className="clearfix">
+                                        <Upload
+                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                            listType="picture-card"
+                                            fileList={fileList}
+                                            onPreview={this.handlePreview}
+                                            onChange={this.handleChanges}
+                                        >
+                                            {fileList.length >= 8 ? null : uploadButton}
+                                        </Upload>
+                                        <Modal
+                                            visible={previewVisible}
+                                            title={previewTitle}
+                                            footer={null}
+                                            onCancel={this.handleCancel}
+                                        >
+                                            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                        </Modal>
                                     </div>
                                 </div>
                             )}
@@ -410,6 +478,7 @@ class CreateOffer extends React.Component {
                                 </Link>
                             )}
                             {current > 0 && (
+                                
                                 <button className="back" onClick={() => this.prev()}>
                                     Back
                                 </button>
@@ -421,11 +490,12 @@ class CreateOffer extends React.Component {
                                     Next
                                 </button>
                             )}
-                            {current === steps.length - 1 && (
-                                <button className="Next" onClick={() => this.done()}>
+                            {current === steps.length - 1  && (
+                                <button className="Next" disabled={this.state.doneStatus}>
                                     Done
                                 </button>
                             )}
+                            
                         </div>
                     </div>
                 </div>
@@ -507,3 +577,4 @@ class Offer extends React.Component {
 // ----------------------------------------------
 
 export default Offer;
+
