@@ -5,6 +5,8 @@ import React from 'react' ;
 import { Steps } from 'antd';
 import { storage } from './firebase-config';
 import axios from "axios";
+import { Spin } from 'antd';
+import Error from './Components/ErrorSvg'
 // internal files and components
 
 import DarkHeader from './Components/Dark_header';
@@ -14,6 +16,8 @@ import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import './Css/upload.scss';
 
+// Preview base64 function 
+
 function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -22,6 +26,28 @@ function getBase64(file) {
         reader.onerror = error => reject(error);
     });
 }
+// --------------------------
+
+// Firebase url upload function 
+
+function firebaseUrl(file) {
+    return new Promise((resolve,reject)=>{
+        let currentImageName = "firebase-image-" + Date.now();
+        let uploadImage = storage.ref(`images/${currentImageName}`).put(file);
+
+        uploadImage.on('state_changed',
+            (snapshot) => { },
+            (error) => {
+                reject(error);
+            },
+            () => {
+                storage.ref('images').child(currentImageName).getDownloadURL().then(url => {
+                    resolve(url);
+                })
+            })
+    })
+}
+// -------------------------------------------------------------
 // *************************************************************
 
 const { Step } = Steps;
@@ -68,12 +94,14 @@ class CreateOffer extends React.Component {
             imageData: []
             
           },
-          doneStatus : true ,
+          err : false ,
+          postDone : false,
+          loading : false ,
+          doneStatus : false ,
           current: 0,
           SectorStatus: true,
           TitleStatus: true,
           DescribtionStatus: true,
-          imageStatus : false,
           PetNameStatus: true,
           AgeStatus: true,
           RaceStatus: true,
@@ -129,21 +157,34 @@ class CreateOffer extends React.Component {
                 checker = true; 
             }
         }
-        if (checker) {
+        if (!checker) {
             const current = this.state.current + 1;
             this.setState({ current });
         }
     }
     
-     done(){
-
+    done = async () => {
+        this.setState({loading  : true , doneStatus : true});
+        for await (let fileList of this.state.fileList){
+            const file = await firebaseUrl(fileList.originFileObj);
+            this.setState(prevState => ({
+                data: {
+                    ...prevState.data,
+                    imageData: [...prevState.data.imageData, file]
+                }
+            }));
+        }
          axios.post("http://localhost:9000/posts/", this.state.data)
              .then((data) => {
                  console.log(data);
+                 this.setState({ postDone: true });
+                 setTimeout(() => {
+                     window.location.href = "/home";
+                 }, 3000);
              })
              .catch((err) => {
-                 console.log(this.state);
                  console.log("error during upload", err);
+                 this.setState({ err : true});
              })
     }
     
@@ -168,52 +209,6 @@ class CreateOffer extends React.Component {
           });
         }
     }
-    click = (e) => {
-        this.inputElement.click();
-    }
-    
-    uploadImage(e) {
-        let {  files } = e.target;
-        console.log(files);
-        for (let i = 0; i < files.length; i++) {
-            console.log("entered")
-            const image = files[i];
-            let currentImageName = "firebase-image-" + Date.now();
-            let uploadImage = storage.ref(`images/${currentImageName}`).put(image);
-
-            uploadImage.on('state_changed',
-                (snapshot) => { },
-                (error) => {
-                    alert(error);
-                },
-                () => {
-                    storage.ref('images').child(currentImageName).getDownloadURL().then(url => {
-                        console.log(url);
-                        this.setState((prevState) => ({
-                            data: {
-                                ...prevState.data,
-                                imageData: [...prevState.data.imageData, url]
-                            },
-                            imageStatus : true 
-                        }));
-
-                        // store image object in the database
-                        if (i === files.length - 1) {
-                            console.log("button")
-                            this.setState((prevState) => ({
-                                ...prevState , 
-                                doneStatus : false 
-                            }));
-                        }
-                    })
-                })
-        }
-        
-    }
-    handleLoad(event)
-     {
-         URL.revokeObjectURL(event.target.src);
-     }
      // upload stuff 
     handleCancel = () => this.setState({ previewVisible: false });
 
@@ -229,7 +224,19 @@ class CreateOffer extends React.Component {
         });
     };
 
-    handleChanges = ({ fileList }) => this.setState({ fileList });
+    handleChanges = ({ fileList }) => {
+        this.setState({ fileList });
+    };
+
+    // tricking the upload that we're using an upload url
+
+    handleaction = ({file , onSuccess}) => {
+        setTimeout(() => {
+            onSuccess("ok");
+        }, 0);
+    }
+    // ----------------------------------------------------------------
+
     // -----------------------------------------------------------------------
     render() {
         const { previewVisible, previewImage, fileList, previewTitle } = this.state;
@@ -428,33 +435,22 @@ class CreateOffer extends React.Component {
                             
                                 </div>
                             )}
-                            {steps[current].title === 'Finishing Up' && (
+                            {steps[current].title === 'Finishing Up' && !this.state.loading && !this.state.err &&  (
                                 
                                 <div className="ImgStep">
                                     <h2>Upload Your Images</h2>
                                     <p>(6 Pictures max)</p>
-                                    {/* <input type="file" className="upload" multiple name="imageData" accept="image/*" ref={input => this.inputElement = input} onChange={(e) => this.uploadImage(e)} style={{display:'none'}}/>
-
-                                    <div className="ImgContainer">
-                                        
-                                        {this.state.imageStatus && (
-                                            this.state.data.imageData.map(item => (
-                                                <img src={item} alt="thumbnail" className="img_upload" key={item}  />
-                                            ))
-                                        )}<button className="add_img" onClick={this.click}>
-                                            <svg height="48" width="48" viewBox="0 0 24 24"  style={{fill: "#1890FF", stroke: "#1890FF"}}><path d="M9.3 4h5.4l1.647 1.778H19.2c.99 0 1.8.8 1.8 1.778v10.666C21 19.2 20.19 20 19.2 20H4.8c-.99 0-1.8-.8-1.8-1.778V7.556c0-.978.81-1.778 1.8-1.778h2.853L9.3 4zM12 17.333c2.484 0 4.5-1.99 4.5-4.444 0-2.453-2.016-4.445-4.5-4.445s-4.5 1.992-4.5 4.445c0 2.453 2.016 4.444 4.5 4.444zm0-1.777c1.491 0 2.7-1.194 2.7-2.667 0-1.473-1.209-2.667-2.7-2.667s-2.7 1.194-2.7 2.667c0 1.473 1.209 2.667 2.7 2.667z"></path>
-                                            </svg><br />
-                                        Add picture</button>
-                                    </div> */}
                                     <div className="clearfix">
                                         <Upload
-                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                            customRequest = {this.handleaction}
                                             listType="picture-card"
                                             fileList={fileList}
                                             onPreview={this.handlePreview}
                                             onChange={this.handleChanges}
+                                            multiple = {true}
+                                            accept="image/*"
                                         >
-                                            {fileList.length >= 8 ? null : uploadButton}
+                                            {fileList.length >= 6 ? null : uploadButton}
                                         </Upload>
                                         <Modal
                                             visible={previewVisible}
@@ -465,6 +461,39 @@ class CreateOffer extends React.Component {
                                             <img alt="example" style={{ width: '100%' }} src={previewImage} />
                                         </Modal>
                                     </div>
+                                    
+                                </div>
+                            )}
+                            {steps[current].title === 'Finishing Up' && this.state.loading && (
+                                    <div>
+                                    {this.state.postDone && !this.state.err && (
+                                        <div className="Loading">
+                                        <h2>Post created successfully</h2>
+                                        <h3>You'll be redirected to the home page soon .</h3>
+                                        <svg className="Spin" viewBox="0 0 367.805 367.805" height="60px" width="60px">
+                                            <g>
+                                                <path style={{ fill: "#3BB54A" }} d="M183.903,0.001c101.566,0,183.902,82.336,183.902,183.902s-82.336,183.902-183.902,183.902   S0.001,285.469,0.001,183.903l0,0C-0.288,82.625,81.579,0.29,182.856,0.001C183.205,0,183.554,0,183.903,0.001z" />
+                                                <polygon style={{ fill: "#fafafa" }} points="285.78,133.225 155.168,263.837 82.025,191.217 111.805,161.96 155.168,204.801    256.001,103.968  " />
+                                            </g>
+
+                                        </svg>
+                                        </div>
+                                        
+                                    )}
+                                    {!this.state.postDone && !this.state.err &&(
+                                        <div className="Loading">
+                                            <h2>Uploading ...</h2>
+                                            <Spin className="Spin" size="large" />
+                                        </div>
+                                    )}
+                                    {!this.state.postDone && this.state.err && (
+                                        <div className="Loading">
+                                            <h2 style={{ color: "#f46275"}}>An error occured durring upload.</h2>
+                                            <h3 style={{ color: "#f46275" }}>Please Try again Later</h3>
+                                            <Error/><br/><br/>
+                                            <a className="Retry" href="/home">Go back home</a>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -491,7 +520,7 @@ class CreateOffer extends React.Component {
                                 </button>
                             )}
                             {current === steps.length - 1  && (
-                                <button className="Next" disabled={this.state.doneStatus}>
+                                <button className="Next" disabled={this.state.fileList.length === 0 || this.state.doneStatus ? true : false} onClick={() => this.done()}>
                                     Done
                                 </button>
                             )}
