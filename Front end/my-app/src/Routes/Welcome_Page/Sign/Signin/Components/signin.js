@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
-//import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 import '../../CSS/account_mobile.css';
 
@@ -59,13 +59,13 @@ class signin extends React.Component {
         })
         e.preventDefault();
     }
-    /*UNSAFE_componentWillMount()
+    UNSAFE_componentWillMount()
     {
         const token = window.localStorage.getItem("Tokens");
         var decoded = jwt.verify(token,'secret',function (err) {
             this.setState({error : err});
         }.bind(this));
-    }*/
+    }
     componentDidMount()
     {   
         var url = new URL(window.location.href);
@@ -75,6 +75,14 @@ class signin extends React.Component {
             this.setState({
                 ref: true,
                 mssg : "Please sign in first !"});
+        }else
+        {
+            if (ref === "expired") {
+                this.setState({
+                    ref: true,
+                    mssg: "Session expired please signin again"
+                });
+            }
         }
         setTimeout(function(){
             this.setState({
@@ -95,11 +103,11 @@ class signin extends React.Component {
                 <div className={this.state.ref ? "sign_alert":"hide_sign"}>{this.state.mssg}</div>
                 {/* Third party sign  */}
                 <div className="third_paties_Container">
-                    <i className="fa fa-facebook-square fa-lg inf"></i>
+                    <i className="fab fa-facebook-f fa-lg inf"></i>
                     <button className='fb_submit' type="submit">Sign in with facebook</button>
                 </div>
                 <div className="third_paties_Container">
-                    <i className="fa fa-google fa-lg ing"></i>
+                    <i className="fab fa-google fa-lg ing"></i>
                     <button className='gl_submit' type="submit">Sign in with google</button>
                 </div>
 

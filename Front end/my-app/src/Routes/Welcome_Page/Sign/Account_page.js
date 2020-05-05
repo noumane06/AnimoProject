@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router,Route,Redirect,Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import signin from './Signin/Components/signin';
 import signup from './Signup/Components/signup';
@@ -8,7 +8,7 @@ import signup from './Signup/Components/signup';
 class Account_page extends React.Component {
     render() { 
         return ( 
-          <Router>
+      
           <div >
             <a href="/">
             <img src={
@@ -18,14 +18,12 @@ class Account_page extends React.Component {
               className="Animo_logo_orange_2" 
               />
             </a>
-            <Switch>
               <Route  path="/account/signin" component={signin} />
               <Redirect exact from='/account/' to="/account/signin" />
               <Route path="/account/signup" component={signup} />
-            </Switch>
 
           </div> 
-          </Router>
+          
             
          );
     }

@@ -1,36 +1,23 @@
 // Modules import 
 
 import React from 'react';
-import {inject , observer} from 'mobx-react'; 
+import { Carousel } from 'antd';
 
 // internal files and components 
-
+import '../../../CSS/carousel.scss'
 // Begin ** 
-const ThumbnailContainer  = inject(
-    'postsStore'
-)(
-    observer(
-        ({postsStore})=>{
-            var post = postsStore.posts ;
-            console.log(post[0].animalsInfo.Name);
+const ThumbnailContainer  =  ({post})=>{
+
             return(
                 <div className="ThumbnailContainer">
-                     <h2 className="Post_type">{post[0].postType}</h2>
-                     <div className="Images_container" >
-                         <div className="Img_Column">
-                            <img src={post[0].img} alt="puppies" width="100%" className="img img1" />
-                            <img src={post[1].img} alt="puppies" width="100%" className="img img2" />
-                         </div>
-                         <div className="Img_Column">
-                            <img src={post[2].img} alt="puppies" width="100%" className="img img3" />
-                            <img src={post[3].img} alt="puppies" width="100%" className="img img4" />
-                         </div>
-
-                     </div>
+                     <h2 className="Post_type">{post.PostType}</h2> 
+                     <Carousel  effect="scrollx" >
+                               {post.imageData !== undefined && (post.imageData.map(img => (
+                                   <img src={img} alt="puppies" width="100%" key={img} className="img" /> 
+                                )))} 
+                    </Carousel>
                 </div>
             );
-        }
-    )
-); 
+}
 
 export default ThumbnailContainer ;

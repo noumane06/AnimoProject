@@ -7,12 +7,12 @@ import InfoBatch from './Components/InfoBatch/InfoBatch';
 import Description from './Components/Description';
 // Begin ** 
 
-const BodyContainer = () =>
+const BodyContainer = ({ post }) =>
 {
             return(
                 <div className="BodyContainer">
-                    <InfoBatch/>
-                    <Description/>
+                    <InfoBatch post={post}/>
+                    <Description post={post}/>
                 </div>
             );
 };

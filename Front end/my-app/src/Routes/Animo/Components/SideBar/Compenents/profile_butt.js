@@ -1,9 +1,15 @@
 import React from 'react';
+import jwt from 'jsonwebtoken';
 
 class Prof extends React.Component {
 
     render() { 
-            const profile_img = "https://img1.looper.com/img/gallery/why-charlie-hunnam-was-never-the-same-after-sons-of-anarchy/intro-1563918329.jpg";
+            
+            const token = window.localStorage.getItem("Tokens");
+            var decoded = jwt.decode(token, "secret", function (userId) {
+                console.log(userId);
+            })
+            const profile_img = decoded.Usrimg;
              return ( 
             
                 <div className="Navlink">

@@ -3,31 +3,30 @@ import PostContainer from './PostContainer/PostContainer';
 import DateComponent from './DateComponent';
 
 export default function Divider(postsStore) {
-        
+
         var rows = [];
         var posts = [];
         let CurrentDate = new Date() ;
         let lastDate = null ;
         var container = postsStore.posts ;
-        
+        console.log(container.length);
         for (let i = 0; i < container.length; i++) {
             let nextDate = null ;
             if (container[i+1] !== undefined) {
-                nextDate = new Date(container[i+1].date);
+                nextDate = new Date(container[i+1].publishDate);
                 nextDate = nextDate.getDate();
             }
 
-            let date = new Date(container[i].date);
+            let date = new Date(container[i].publishDate);
             if (CurrentDate.getDate() === date.getDate() && CurrentDate.getMonth() === date.getMonth() && CurrentDate.getFullYear() === date.getFullYear()) 
             {
                 if (lastDate !== date.getDate()) {
-                    console.log(lastDate);
-                    console.log(date.getDate());
+                    
                     rows.push(<DateComponent className="time" Title="Last 24 hours" key={date} />);
                 }
                 posts.push(container[i]);
                 if (nextDate!== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts} key={container[i].id} />);
+                    rows.push(<PostContainer posts={posts} key={container[i]._id} />);
                     posts = [];
                 } 
             }else
@@ -37,7 +36,7 @@ export default function Divider(postsStore) {
                 }
                 posts.push(container[i]);
                 if (nextDate !== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts} key={container[i].id}/>);
+                    rows.push(<PostContainer posts={posts} key={container[i]._id}/>);
                     posts = [];
                 } 
             }

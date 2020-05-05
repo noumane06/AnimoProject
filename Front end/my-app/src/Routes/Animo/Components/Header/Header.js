@@ -1,5 +1,5 @@
 // Modules import
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {useLocation , Link} from "react-router-dom";
 import {inject , observer} from 'mobx-react'; 
 // Internal files import
@@ -10,17 +10,33 @@ const Header  = inject(
 )(
     observer((props)=>
     {
+        const [post, setImage] = useState({});
         const {postsStore} = props;
-        const title = postsStore.posts[0].title ;
+        useEffect(() => {
+            let id = window.location.href.split("/");
+            const get = postsStore.getPost(id[4]);
+            get.then(res => {
+                setImage(res);
+            }).catch(err => console.log(err));
+        },[]);
+
+        
         let location = useLocation();
         let Title = location.pathname.split("/");
         if (props.config !== "test") {
-           if (Title[1] === "") {
-            Title[1] = "home";
-            } 
-        }else
-        {
-            Title[1] = title ;
+                if (Title[1] === "") {
+                    Title[1] = "home";
+                    } 
+            }else
+            {
+                var title = post.Title;
+                Title[1] = title ;
+            }
+        
+        
+        const handleSignout = () =>{
+           window.localStorage.clear();
+           window.location.replace("/account/signin");
         }
         
          return (
@@ -40,7 +56,13 @@ const Header  = inject(
                         </g>
                     </svg>
                 </Link> : ''}
-                <h2 className="Title">{Title[1].toUpperCase()}</h2>
+                <h2 className="Title">
+                {Title[1]!== undefined &&(
+                    Title[1].toUpperCase()
+                )}</h2>
+            </div>
+                 <div className="singoutContainer">
+                    <button className="signout" onClick={handleSignout} >Sign out</button>
             </div>
             <div className="wrap">
                 <input type="text" className="searchTerm" placeholder="Search animo"/>

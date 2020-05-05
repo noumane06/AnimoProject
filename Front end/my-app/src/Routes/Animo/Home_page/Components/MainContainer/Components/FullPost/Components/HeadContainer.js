@@ -1,26 +1,40 @@
 // Modules import 
 
 import React from 'react';
-import {inject , observer} from 'mobx-react'; 
+
 
 // internal files and components 
 
 // Begin ** 
-const HeadContainer  = inject(
-    'postsStore'
-)(
-    observer(
-        ({postsStore})=>{
-            var post = postsStore.posts[0] ;
+const HeadContainer  = ({post})=>
+        {
+            
+            var date = "";
+            var h ="";
+            var m ="";
+            if (post !== undefined) {
+                date = new Date(post.publishDate);
+                h = date.getHours();
+                m = date.getMinutes()
+            }
+            
+            
             return(
                 <div className="HeadContainer">
                     <div className="Profile">
                                 <span className="dot">
-                                    <img src={post.usrImg} alt="profile"  className="prof" />
+                                <img src={post.Usrimg} alt="profile"  className="prof" />
                                 </span>
                                 <div className="usrInfo">
-                                    <div className="name">{post.usrPost}</div>
-                                    <div className="post_time">17 min ago.</div>
+                                    <div className="name">{post.firstname} {post.lastname}</div>
+                                <div className="post_time">
+                                    <i className="fas fa-clock" style={{ 'margin-right': '3px' }}></i>
+                                    {h}:{m < 10 ? '0' : ''}{m}
+                                </div>
+                                <div className="post_time">
+                                        <i class="fas fa-map-marker-alt" style={{'margin-right' : '6px' }}></i>
+                                        {post.City} | {post.Sector}
+                                 </div>
                                 </div>
                                 
                     </div>
@@ -38,8 +52,6 @@ const HeadContainer  = inject(
                     </div> 
                 </div>
             );
-        }
-    )
-); 
+}
 
 export default HeadContainer ;

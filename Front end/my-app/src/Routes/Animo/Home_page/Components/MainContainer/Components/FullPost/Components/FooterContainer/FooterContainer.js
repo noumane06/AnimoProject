@@ -1,17 +1,13 @@
 // Modules import 
 
 import React from 'react';
-import { inject, observer } from 'mobx-react';
+
 import Rattings from '../../../PostContainer/Components/stars';
 // internal files and components 
 
 // Begin ** 
-const Description = inject(
-    'postsStore'
-)(
-    observer(
-        ({ postsStore }) => {
-            var post = postsStore.posts[0];
+const Description = ({post}) => {
+            
             return (
                 <div className="FooterContainer">
                     <div className="Interaction_buttons">
@@ -37,16 +33,14 @@ const Description = inject(
                     </div>
                     <div className="right">
                         <div className="Rattings">
-                            <Rattings size={post.stars}/> <span className="span">4,8</span>
+                            <Rattings size={4} /> <span className="span">4,8</span>
                         </div>
                         <div className="Price_tag">
-                            MAD {post.price}
+                            {post.Price} Dh 
                         </div>
                     </div>
                 </div>
             );
         }
-    )
-);
 
 export default Description;

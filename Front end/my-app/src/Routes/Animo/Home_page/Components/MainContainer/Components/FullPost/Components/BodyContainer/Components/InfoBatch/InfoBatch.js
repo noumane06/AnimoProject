@@ -6,12 +6,12 @@ import React from 'react';
 import ThumbnailContainer from './Components/ThumbnailContainer';
 import AnimalInfo from './Components/AnimalInfo';
 // Begin ** 
-const InfoBatch = () =>
+const InfoBatch = ({post}) =>
 {
     return(
             <div className="infobatch">
-               <ThumbnailContainer/>
-               <AnimalInfo/>
+               <ThumbnailContainer post={post}/>
+               <AnimalInfo post={post}/>
             </div>
     );
 }

@@ -6,7 +6,8 @@ import { Steps } from 'antd';
 import { storage } from './firebase-config';
 import axios from "axios";
 import { Spin } from 'antd';
-import Error from './Components/ErrorSvg'
+import Error from './Components/ErrorSvg';
+import jwt from 'jsonwebtoken';
 // internal files and components
 
 import DarkHeader from './Components/Dark_header';
@@ -67,7 +68,13 @@ const city = [];
 const postType = ["Demande","Offer"];
 const transaction = ["Petsit","Adobt"];
 const species = [ "cats", "dogs", "birds","freshwater fish", "hamsters", "Guinea Pigs", "Rabbits", "Chinchillas","horses","reptiles"];
-
+const usrid = () =>{
+    const token = window.localStorage.getItem("Tokens");
+    var decoded = jwt.decode(token, "secret", function (userId) {
+        console.log(userId);
+    })
+    return decoded
+}
 
 
 // CreateOffer component *************************
@@ -79,6 +86,10 @@ class CreateOffer extends React.Component {
         this.state = {
           data: {
             Sector: "",
+            UsrId : "",
+            Usrimg: "",
+            firstname: "",
+            lastname: "",
             PostType: "Demande",
             City: "Casablanca",
             TransactionType: "Petsit",
@@ -112,7 +123,22 @@ class CreateOffer extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
+    UNSAFE_componentWillMount() {
+        var decoded = usrid();
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                UsrId: decoded.userId,
+                Usrimg: decoded.Usrimg,
+                firstname: decoded.firstname,
+                lastname: decoded.lastname
+            }
+        }));
+        
+        
+    }
     next() {
+        
         let checker = false ;
         if (this.state.current === 0 && this.state.data.Sector ==="") {
             this.setState({
@@ -121,7 +147,7 @@ class CreateOffer extends React.Component {
            checker = true ;
         }
         if (this.state.current === 1) {
-            console.log(this.state.data.Sector);
+            
             if (this.state.data.Title ==="") {
                 this.setState({
                     TitleStatus: false
@@ -161,12 +187,15 @@ class CreateOffer extends React.Component {
             const current = this.state.current + 1;
             this.setState({ current });
         }
+        console.log(this.state);
     }
     
     done = async () => {
+        const token = window.localStorage.getItem("Tokens");
         this.setState({loading  : true , doneStatus : true});
         for await (let fileList of this.state.fileList){
             const file = await firebaseUrl(fileList.originFileObj);
+
             this.setState(prevState => ({
                 data: {
                     ...prevState.data,
@@ -174,7 +203,9 @@ class CreateOffer extends React.Component {
                 }
             }));
         }
-         axios.post("http://localhost:9000/posts/", this.state.data)
+        axios.post("http://localhost:9000/posts/", this.state.data ,{
+            headers: {'Authorization': `Basic ${token}`}
+            })
              .then((data) => {
                  console.log(data);
                  this.setState({ postDone: true });
