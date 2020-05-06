@@ -1,6 +1,54 @@
 body
 {
     @import './rate.scss';
+    height: 100%;
+    .over
+    {
+        overflow: hidden;
+    }
+    .ImagePreview
+    {
+        position: absolute;
+        z-index: 4000;
+        top: 0; right: 0; bottom: 0; left: 0;
+        height: 110%;
+        width: 100% ;
+        background-color: #2a2a2a57;
+        backdrop-filter: saturate(180%) blur(20px);
+        overflow: hidden;
+        .Close
+        {
+            margin-top: 10px;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 50px;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .Close:hover
+        {
+            transition: background-color 0.2s ease-in-out;
+            background-color: rgba(56, 54, 54, 0.171);
+        }
+        .imageContainer
+        {
+             margin-top: 2%;
+             width: auto;
+             img
+             {
+                 height: 80vh;
+                 object-fit: contain;
+                 border-radius: 20px;
+             }
+        }
+    }
+    .loader
+    {
+        padding-top: 145px - 15px;
+        margin-left: calc(50% - 15px) ;
+        box-sizing: border-box;
+    }
     .FullPostContainer
     {
         margin-top: 55px ;
@@ -114,8 +162,12 @@ body
                      height: 290px;
                      object-fit: cover;
                      border-radius: 15px;
+                     cursor: pointer;
                 }
-            
+            .hidden
+            {
+                display: hidden;
+            }
             
             
         }

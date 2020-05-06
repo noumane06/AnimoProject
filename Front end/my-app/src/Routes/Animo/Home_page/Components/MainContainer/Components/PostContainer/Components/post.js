@@ -6,14 +6,25 @@ import  {Link} from 'react-router-dom';
 import { observer, inject } from 'mobx-react'; 
 import Loader from "react-loader-spinner";
 
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-// internal files and componenets 
 
+// internal files and componenets 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Stars from './stars';
 
 @inject('postsStore')
 @observer
 class Post extends React.Component {
+    constructor()
+    {
+        super();
+        this.state = {
+            loading : true 
+        };
+        this.handLoad = this.handLoad.bind(this);
+    }
+    handLoad(){
+        this.setState({loading : false});
+    }
     render() { 
              const {post} = this.props ;
              const { postsStore } = this.props;
@@ -27,15 +38,6 @@ class Post extends React.Component {
                             <div className="Profile">
                                 <span className="dot">
                                      <img src={post.Usrimg} alt="profile"  className="prof" />
-                                     {/* <Loader
-                                            type="Puff"
-                                            color="#00BFFF"
-                                            height={40}
-                                            width={40}
-                                            timeout={3000} //3 secs
-                                            className="prof"
-                                        /> */}
-                                     
                                 </span>
                                  <div className="name">{post.firstname} {post.lastname}</div>
                                  <div className="post_time">
@@ -45,7 +47,13 @@ class Post extends React.Component {
                         </Skeleton>
                         <Skeleton loading={postsStore.loadingState} active title ={false}  paragraph={{ rows: 7 }}>
                             <div className="Thumbnail_container">
-                                    <img src={post.imageData[0]} alt="puppies" width="100%" className="Thumbnail_img"/>
+                                    <img src={post.imageData[0]} alt="puppies" width="100%" className={!this.state.loading ?"Thumbnail_img" : "hidden"} onLoad={this.handLoad}/>
+                                    {this.state.loading &&(
+                                     <Loader type="ThreeDots" color="#1665D8" height={30} width={30} className="Thumbnail_img loader"
+                                        />
+                                    )}
+
+                                 {/* favorites : TailSpin , ThreeDots */}
                             </div>
                             <h2>{post.Title}</h2>
                             <div className="infos">

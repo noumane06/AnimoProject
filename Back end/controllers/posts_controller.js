@@ -7,17 +7,30 @@ const mongoose = require('mongoose');
 
 exports.post_post = function (req,res,next) {
     console.log(req.file);
-    const post = new Post(
-        {
-            _id : new mongoose.Types.ObjectId(),
-            PostType : req.body.PostType , 
-            categorie : req.body.categorie ,
-            animalCat : req.body.animalCat,
-            race : req.body.race , 
-            city : req.body.city , 
-            announceTitle : req.body.announceTitle , 
-            announceDescription : req.body.announceDescription 
-        });
+    const post = new Post();
+    post._id = new mongoose.Types.ObjectId();
+    post.PostType  = req.body.PostType;
+    post.TransactionType = req.body.TransactionType;
+    post.categorie  = req.body.categorie;
+    post.Race  = req.body.Race;
+    post.Price = req.body.Price;
+    post.Duration = req.body.Duration;
+    post.PetName = req.body.PetName;
+    post.Age = req.body.Age;
+    post.Species = req.body.Species;
+    post.MedicalHistory = req.body.MedicalHistory;
+    post.City  = req.body.City;
+    post.Title  = req.body.Title;
+    post.Describtion  = req.body.Describtion;
+    req.body.imageData.map(image =>{
+        post.imageData.push(image);
+    });
+    post.Sector = req.body.Sector ;
+    post.UsrId = req.body.UsrId ;
+    post.Usrimg = req.body.Usrimg ;
+    post.firstname = req.body.firstname;
+    post.lastname = req.body.lastname;
+
     post.save()
     .then(result => {
         console.log(result);
@@ -37,7 +50,7 @@ exports.post_post = function (req,res,next) {
 exports.post_get_all = function (req, res , next) {
     
     Post.find()
-    .select("announceTitle announceDescription PostType categorie animalCat publishDate")
+    .sort({ publishDate : 'desc'})
     .exec()
     .then(docs => {
         const response = {
@@ -49,7 +62,7 @@ exports.post_get_all = function (req, res , next) {
 };
 
 exports.post_get_byId = function (req , res , next) {
-    const id = req.params.postId ; 
+    const id = req.params.productId ; 
     Post.findById(id)
     .exec()
     .then(doc => 
@@ -109,4 +122,24 @@ exports.post_update_byId = (req ,res ,next) => {
             error : err 
         });
     })
+}
+
+exports.post_getBy_Usrid = (req , res ,next)=>{ 
+    Post.find({ PostType: req.params.UsrId})
+    .exec()
+    .then(result => {
+        if (result) {
+            console.log(result);
+            res.status(200).json({
+                message: "Post Found",
+                result
+            });
+        } else {
+            res.status(404).json({ error: "The user has no posts" });
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({error : err});
+    })
+
 }

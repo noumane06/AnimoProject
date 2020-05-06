@@ -28,11 +28,11 @@ const HeadContainer  = ({post})=>
                                 <div className="usrInfo">
                                     <div className="name">{post.firstname} {post.lastname}</div>
                                 <div className="post_time">
-                                    <i className="fas fa-clock" style={{ 'margin-right': '3px' }}></i>
+                                    <i className="fas fa-clock" style={{ margin: ' 0 3px 0 0' }}></i>
                                     {h}:{m < 10 ? '0' : ''}{m}
                                 </div>
                                 <div className="post_time">
-                                        <i class="fas fa-map-marker-alt" style={{'margin-right' : '6px' }}></i>
+                                        <i className="fas fa-map-marker-alt" style={{margin : ' 0 6px 0 0' }}></i>
                                         {post.City} | {post.Sector}
                                  </div>
                                 </div>

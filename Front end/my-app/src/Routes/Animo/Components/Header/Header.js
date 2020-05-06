@@ -2,21 +2,25 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation , Link} from "react-router-dom";
 import {inject , observer} from 'mobx-react'; 
+import Loader from "react-loader-spinner";
+
 // Internal files import
 import './CSS/header.scss';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const Header  = inject(
     'postsStore'
 )(
     observer((props)=>
     {
         const [post, setImage] = useState({});
+        const [loading , setLoad] = useState(true);
         const {postsStore} = props;
         useEffect(() => {
             let id = window.location.href.split("/");
             const get = postsStore.getPost(id[4]);
             get.then(res => {
                 setImage(res);
+                setLoad(false);
             }).catch(err => console.log(err));
         },[]);
 
@@ -26,6 +30,7 @@ const Header  = inject(
         if (props.config !== "test") {
                 if (Title[1] === "") {
                     Title[1] = "home";
+                    setLoad(false);
                     } 
             }else
             {
@@ -41,6 +46,7 @@ const Header  = inject(
         
          return (
         <div className="Header">
+            <title>{Title[1]} - Animo</title>
             <div className="Page_title">
                 { props.config === "test" ?
                 <Link to='/home' className="arrowBack">
@@ -56,11 +62,16 @@ const Header  = inject(
                         </g>
                     </svg>
                 </Link> : ''}
-                <h2 className="Title">
-                {Title[1]!== undefined &&(
-                    Title[1].toUpperCase()
-                )}</h2>
+                     <h2 className={!loading ? "Title" : "hidden"}>
+                        {Title[1]!== undefined &&(
+                            Title[1].toUpperCase()
+                        )}
+                     </h2>
+                {loading && (
+                    <Loader type="ThreeDots" color="#1665D8" height={30} width={30} className="Title loader"/>
+                )}
             </div>
+            
                  <div className="singoutContainer">
                     <button className="signout" onClick={handleSignout} >Sign out</button>
             </div>

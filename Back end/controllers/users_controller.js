@@ -30,16 +30,16 @@ exports.user_signup = (req,res,next)=>{
                      firstname : req.body.firstname , 
                      lastname : req.body.lastname , 
                      username : req.body.username,
-                     phone : req.body.phone
+                     phone : req.body.phone,
+                     birthDay: req.body.birthDay ,
+                     Usrimg : req.body.Usrimg
                     });
                  user.save()
                 .then(result => {
                     console.log(result);
                     const token = jwt.sign(
                         {
-                            email : result.email , 
-                            userId : result._id ,
-                            username : result.username
+                            userId : result._id 
                         },
                         "secret",
                         {
@@ -60,6 +60,8 @@ exports.user_signup = (req,res,next)=>{
               }
             });
         }
+    }).catch(err =>{
+        res.status(500).json(err);
     })
 };
 exports.user_signin = (req,res,next)=>{
@@ -84,9 +86,10 @@ exports.user_signin = (req,res,next)=>{
                     console.log("we made it")
                     const token = jwt.sign(
                         {
-                            email : userdata[0].email , 
-                            userId : userdata[0]._id ,
-                            username : userdata[0].username
+                            userId : userdata[0]._id,
+                            Usrimg: userdata[0].Usrimg , 
+                            firstname : userdata[0].firstname,
+                            lastname : userdata[0].lastname
                         },
                         "secret",
                         {
@@ -100,9 +103,8 @@ exports.user_signin = (req,res,next)=>{
                 }
                 else
                 {
-                    console.log("Wrong email or password");
                     return res.status(401).json({
-                        message : "Auth failed 1"
+                        message: "Wrong email or password"
                     });
                 }
             });
@@ -128,3 +130,30 @@ exports.user_delete = (req,res,next)=>{
         console.log(err);
     });
 };
+
+exports.user_getbyId = (req,res,next) => {
+    const id = req.params.UsrId ;
+    User.findById(id)
+    .exec()
+    .then(result => {
+        if (result) {
+            res.status(200).json({
+                message: "User Found",
+                result: {
+                    id : result._id,
+                    firstname : result.firstname , 
+                    lastname : result.lastname , 
+                    username : result.username ,
+                    img : result.Usrimg
+                }
+            });
+        } else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
+}

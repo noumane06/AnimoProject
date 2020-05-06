@@ -12,8 +12,6 @@ const bodyParser = require('body-parser');
 
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
-const quoteRoutes = require('./routes/quotes');
-
 // *****************************************
 /* *********** */
 app.use(cors());
@@ -24,7 +22,6 @@ app.use(bodyParser.json());
 // Routes 
 app.use('/posts', postRoutes);
 app.use('/users',userRoutes);
-app.use('/quotes',quoteRoutes);
 
 // Error handling 
 

@@ -1,6 +1,6 @@
 // Modules import 
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 //import jwt from 'jsonwebtoken';
 import { Provider } from 'mobx-react';
 import {Route } from 'react-router-dom';

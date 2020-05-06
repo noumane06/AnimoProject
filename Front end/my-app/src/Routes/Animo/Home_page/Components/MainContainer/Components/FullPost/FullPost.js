@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react'; 
-
+import { Skeleton } from 'antd';
 // internal files and components 
 import './CSS/FullPost.scss';
+import '../../CSS/skeletonStyle.scss'
 import HeadContainer from './Components/HeadContainer';
 import BodyContainer from './Components/BodyContainer/BodyContainer';
 import FooterContainer from './Components/FooterContainer/FooterContainer';
@@ -16,19 +17,25 @@ const FullPost = inject(
     observer(({ postsStore }) =>
         {
         const [post, setImage] = useState({});
+        const [loading , setLoad] = useState(true);
         useEffect(() => {
             let id = window.location.href.split("/")
             const get = postsStore.getPost(id[4]);
             get.then(res => {
                 setImage(res);
+                setLoad(false);
             }).catch(err => console.log(err));
         },[])
         return(
             <div>
                 <div className="FullPostContainer">
-                    <HeadContainer post={post}/>
-                    <BodyContainer post={post}/>
-                    <FooterContainer post={post}/>
+                    <Skeleton loading={loading} active avatar paragraph={{ rows: 0 }}>
+                        <HeadContainer post={post}/>
+                    </Skeleton>
+                    <Skeleton loading={loading} active title={false} height="180px" paragraph={{ rows: 10 }}>
+                        <BodyContainer post={post}/>
+                        <FooterContainer post={post}/>
+                    </Skeleton>
                 </div>
             <div className="ReportContainer">
                     <svg className="report_icon" height="12pt" viewBox="0 0 512 512" width="12pt">

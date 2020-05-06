@@ -1,6 +1,7 @@
 body
 {
     
+    
     .Content
     {
         margin-left: 270px;
@@ -13,6 +14,14 @@ body
         margin-top: 25px;
         font-family: 'Glacial indifference';
         color: #2A2A2A;
+        .hidden
+        {
+            display: none;
+        }
+        .loader
+        {
+            margin-left: 15px ;
+        }
         .Page_title
         {
             float: left;
