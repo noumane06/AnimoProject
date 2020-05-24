@@ -25,6 +25,9 @@ exports.post_post = function (req,res,next) {
     req.body.imageData.map(image =>{
         post.imageData.push(image);
     });
+    req.body.ImageName.map(image => {
+        post.ImageName.push(image);
+    });
     post.Sector = req.body.Sector ;
     post.UsrId = req.body.UsrId ;
     post.Usrimg = req.body.Usrimg ;

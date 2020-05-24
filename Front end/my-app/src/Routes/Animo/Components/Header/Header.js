@@ -46,7 +46,9 @@ const Header  = inject(
         
          return (
         <div className="Header">
-            <title>{Title[1]} - Animo</title>
+                 <title>{Title[1] !== undefined && (
+                     Title[1].toUpperCase()
+                 )} - Animo</title>
             <div className="Page_title">
                 { props.config === "test" ?
                 <Link to='/home' className="arrowBack">

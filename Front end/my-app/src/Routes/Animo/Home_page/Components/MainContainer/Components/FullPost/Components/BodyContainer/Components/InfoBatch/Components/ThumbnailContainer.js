@@ -6,6 +6,7 @@ import { Carousel } from 'antd';
 // internal files and components 
 import '../../../CSS/carousel.scss'
 import { disableBodyScroll , clearAllBodyScrollLocks } from 'body-scroll-lock';
+import ProgressiveImage from '../../../../../../ProgressiveImage/Progressive';
 // Begin ** 
 
 class ThumbnailContainer extends React.Component {
@@ -30,6 +31,9 @@ class ThumbnailContainer extends React.Component {
     }
 
     render() {
+        const imgname = this.props.post.ImageName;
+        let test = this.props.post.imageData[0].split("/");
+        let token = test[7].split("&");
         return(
                 <div>
                         {clearAllBodyScrollLocks()}
@@ -52,9 +56,12 @@ class ThumbnailContainer extends React.Component {
                     <div className="ThumbnailContainer">
                     <h2 className="Post_type">{this.props.post.PostType}</h2> 
                      <Carousel  effect="scrollx" >
-                        {this.props.post.imageData !== undefined && (this.props.post.imageData.map(img => (
-                                   <img src={img} alt="puppies" width="100%" key={img} className="img" onClick={this.handleClick}/> 
-                                )))} 
+                        {this.props.post.imageData !== undefined && (this.props.post.imageData.map((img,index)=>(
+                            <ProgressiveImage className="Thumbnail_img" alt="puppies" width="100%" width="100%" key={img} className="img" onClick={this.handleClick}
+                                overlaySrc={`https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2Fthumbs%2F${imgname[index]}_50x50?alt=media&${token[1]}`}
+                                src={img}
+                            />
+                        )))} 
                     </Carousel>
                     </div>
                     

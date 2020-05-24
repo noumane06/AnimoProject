@@ -19,7 +19,8 @@ const postSchema = mongoose.Schema({
         Title: { type: String, required: true } ,
         Describtion: { type: String, required: false },
         publishDate : {type : Date , default : Date.now },
-        imageData : [String]
+        imageData : [String],
+        ImageName: [String]
     }); 
 
 module.exports = mongoose.model('Post', postSchema);

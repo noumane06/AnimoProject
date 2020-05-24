@@ -10,6 +10,7 @@ import Loader from "react-loader-spinner";
 // internal files and componenets 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Stars from './stars';
+import ProgressiveImage from '../../ProgressiveImage/Progressive';
 
 @inject('postsStore')
 @observer
@@ -18,7 +19,7 @@ class Post extends React.Component {
     {
         super();
         this.state = {
-            loading : true 
+            loading : false 
         };
         this.handLoad = this.handLoad.bind(this);
     }
@@ -30,7 +31,10 @@ class Post extends React.Component {
              const { postsStore } = this.props;
              const date = new Date(post.publishDate);
              const h = date.getHours() ;
-             const m = date.getMinutes()
+             const m = date.getMinutes();
+             const imgname = post.ImageName[0];
+             let test = post.imageData[0].split("/");
+             let token = test[7].split("&");
              return (
                  <Link to={`/home/${post._id}`} className="LinkContainer">
                     <div className="Post" > 
@@ -47,11 +51,15 @@ class Post extends React.Component {
                         </Skeleton>
                         <Skeleton loading={postsStore.loadingState} active title ={false}  paragraph={{ rows: 7 }}>
                             <div className="Thumbnail_container">
-                                    <img src={post.imageData[0]} alt="puppies" width="100%" className={!this.state.loading ?"Thumbnail_img" : "hidden"} onLoad={this.handLoad}/>
-                                    {this.state.loading &&(
+                                    {/* <img src={post.imageData[0]} alt="puppies" width="100%" className={!this.state.loading ?"Thumbnail_img" : "hidden"} onLoad={this.handLoad}/> */}
+                                    <ProgressiveImage className="Thumbnail_img" alt="puppies" width="100%" 
+                                     overlaySrc={`https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2Fthumbs%2F${imgname}_50x50?alt=media&${token[1]}`}
+                                     src={post.imageData[0]}
+                                     />
+                                    {/* {this.state.loading &&(
                                      <Loader type="ThreeDots" color="#1665D8" height={30} width={30} className="Thumbnail_img loader"
                                         />
-                                    )}
+                                    )} */}
 
                                  {/* favorites : TailSpin , ThreeDots */}
                             </div>

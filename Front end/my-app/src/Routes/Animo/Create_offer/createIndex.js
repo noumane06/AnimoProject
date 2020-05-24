@@ -43,7 +43,8 @@ function firebaseUrl(file) {
             },
             () => {
                 storage.ref('images').child(currentImageName).getDownloadURL().then(url => {
-                    resolve(url);
+                    const data = [url, currentImageName]
+                    resolve(data);
                 })
             })
     })
@@ -71,7 +72,6 @@ const species = [ "cats", "dogs", "birds","freshwater fish", "hamsters", "Guinea
 const usrid = () =>{
     const token = window.localStorage.getItem("Tokens");
     var decoded = jwt.decode(token, "secret", function (userId) {
-        console.log(userId);
     })
     return decoded
 }
@@ -102,7 +102,8 @@ class CreateOffer extends React.Component {
             Species: "freshwater fish",
             Race: "",
             MedicalHistory: "",
-            imageData: []
+            imageData: [],
+            ImageName : []
             
           },
           err : false ,
@@ -187,19 +188,20 @@ class CreateOffer extends React.Component {
             const current = this.state.current + 1;
             this.setState({ current });
         }
-        console.log(this.state);
     }
     
     done = async () => {
         const token = window.localStorage.getItem("Tokens");
         this.setState({loading  : true , doneStatus : true});
         for await (let fileList of this.state.fileList){
-            const file = await firebaseUrl(fileList.originFileObj);
+            var file = [];
+            file = await firebaseUrl(fileList.originFileObj);
 
             this.setState(prevState => ({
                 data: {
                     ...prevState.data,
-                    imageData: [...prevState.data.imageData, file]
+                    imageData: [...prevState.data.imageData, file[0]],
+                    ImageName: [...prevState.data.ImageName, file[1]]
                 }
             }));
         }
@@ -217,6 +219,7 @@ class CreateOffer extends React.Component {
                  console.log("error during upload", err);
                  this.setState({ err : true});
              })
+
     }
     
     prev() {

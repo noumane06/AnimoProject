@@ -1,0 +1,13 @@
+body
+{
+    
+    .prog_img
+    {
+        filter: blur(2px);
+        transition: opacity ease-in 1000ms;
+    }
+    .none
+    {
+        display: none;;
+    }
+}
