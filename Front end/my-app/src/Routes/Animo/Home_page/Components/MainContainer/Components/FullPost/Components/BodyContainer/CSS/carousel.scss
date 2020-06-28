@@ -10,6 +10,10 @@
 .ant-carousel .slick-slider h3 {
   color: #fff;
 }*/
+.none
+{
+  display: none ;
+}
 
 .ant-carousel {
   
@@ -26,6 +30,12 @@
   list-style: none;
   -webkit-font-feature-settings: 'tnum';
           font-feature-settings: 'tnum';
+  .prog_img
+  {
+          filter: blur(15px);
+          transition: opacity ease-in 1000ms;
+          
+  }
 }
 .ant-carousel .slick-slider {
   position: relative;

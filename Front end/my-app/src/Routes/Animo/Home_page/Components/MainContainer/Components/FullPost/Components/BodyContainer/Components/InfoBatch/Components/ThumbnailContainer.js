@@ -17,7 +17,8 @@ class ThumbnailContainer extends React.Component {
         this.state = 
         {
             test : false,
-            img : ""
+            img : "",
+            highResImageLoaded : false 
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -31,7 +32,6 @@ class ThumbnailContainer extends React.Component {
     }
 
     render() {
-        const imgname = this.props.post.ImageName;
         let test = this.props.post.imageData[0].split("/");
         let token = test[7].split("&");
         return(
@@ -56,12 +56,26 @@ class ThumbnailContainer extends React.Component {
                     <div className="ThumbnailContainer">
                     <h2 className="Post_type">{this.props.post.PostType}</h2> 
                      <Carousel  effect="scrollx" >
-                        {this.props.post.imageData !== undefined && (this.props.post.imageData.map((img,index)=>(
-                            <ProgressiveImage className="Thumbnail_img" alt="puppies" width="100%" width="100%" key={img} className="img" onClick={this.handleClick}
-                                overlaySrc={`https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2Fthumbs%2F${imgname[index]}_50x50?alt=media&${token[1]}`}
+                        {!this.state.highResImageLoaded &&(
+                            this.props.post.ImageName.map(imgname => (
+                                    <img
+                                        className="img prog_img"
+                                        src={`https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2Fthumbs%2F${imgname}_50x50?alt=media&${token[1]}`}
+                                    />     
+                                
+                            )))
+                        }
+                         {this.props.post.imageData !== undefined && (this.props.post.imageData.map((img)=>(
+                            <img
+                                onLoad={() => {
+                                    this.setState({ highResImageLoaded: true });
+                                }}
                                 src={img}
+                                className={!this.state.highResImageLoaded ? "none" : "img"}
+                                onClick={this.handleClick}
                             />
-                        )))} 
+                            
+                        )))}
                     </Carousel>
                     </div>
                     
