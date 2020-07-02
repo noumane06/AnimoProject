@@ -11,10 +11,11 @@
   {
     .AccountContainer
     { 
-      position: absolute;
-      left: 3%;
-      width: 90%;
-      top: 10%;
+      display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 8%;
+        width: 90%;
       padding: 5px;
       margin-bottom: 20px;
       .sign_alert
@@ -295,10 +296,28 @@
   }
   .Animo_logo_orange_2
     {
-      position: absolute ;
-      left: 37.5%;
-      top: 10px;
-      z-index: initial;
-      width: 25%;
+          margin-top: 30px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 25%;
     }
+    .verifContainer {
+          overflow: auto;
+          margin-left: auto;
+          margin-right: auto;
+          width: 35%;
+          div
+          {
+           float: left;
+           padding: 4px 0;
+          }
+          .card2
+          {
+            font-family: 'glacial indifference';
+            font-weight: bolder;
+            float: right;
+            color: rgb(39, 165, 155);
+          }
+        }
 }
