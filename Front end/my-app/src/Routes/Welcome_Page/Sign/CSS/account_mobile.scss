@@ -118,7 +118,7 @@
           top: 28px;
           left: 5%;
         }
-      h1 
+      h1 , h2
         {
           font-family: 'Glacial indifference';
           color: #2a2929;
@@ -130,7 +130,7 @@
         {
           font-family: 'Publica Play';
           text-align: center;
-          color: gray;
+          color: rgb(133, 133, 133);
           
         }
         .inputs
@@ -225,6 +225,7 @@
           margin: 0%;
           padding: 0%;
           visibility: hidden;
+          display: none;
           p
           { 
             

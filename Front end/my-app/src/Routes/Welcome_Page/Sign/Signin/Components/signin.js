@@ -3,7 +3,7 @@ import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
-import '../../CSS/account_mobile.css';
+import '../../CSS/account_mobile.scss';
 
 class signin extends React.Component {
     constructor(props)

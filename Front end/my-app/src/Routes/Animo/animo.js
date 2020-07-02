@@ -2,7 +2,7 @@
 // Modules import 
 
 import React from 'react';
-import {Route  , BrowserRouter ,Switch } from 'react-router-dom';
+import {Route  , BrowserRouter ,Switch, Redirect } from 'react-router-dom';
 
 // routes  import
 import Home from './Home_page/Home_page';
@@ -26,10 +26,7 @@ class AnimoContainer extends React.Component {
                   
                   {/* default route render the home page  */}
                     <Route default exact path="/">
-                    <div className="Content"> 
-                        <SideBar/>
-                        <Home/>
-                    </div>
+                      <Redirect to="/home" />
                     </Route>
                     {/* home route render the home page */}
                     <Route default  path="/home">

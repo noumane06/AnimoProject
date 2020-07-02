@@ -143,7 +143,7 @@
           width: 100%;
           color: gray;
         }
-        h1 
+        h1 , h2
         {
           font-family: 'Glacial indifference';
           color: #2a2929;
@@ -174,6 +174,7 @@
           margin: 0%;
           padding: 0%;
           visibility: hidden;
+          display: none;
           p
           { 
             
@@ -231,6 +232,7 @@
         {
           
           text-decoration: none ;
+          text-align: center;
           color: white ; 
           font-family: 'Glacial Indifference';
           font-weight: bolder ;
@@ -289,6 +291,29 @@
           border: 1px solid #D8000C;
           background-color: #FFBABA !important ;
         }
+        
+        .verifContainer {
+          overflow: auto;
+          
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+          div
+          {
+           float: left;
+           padding: 4px 0;
+          }
+          .card2
+          {
+            font-family: 'glacial indifference';
+            font-weight: bolder;
+            float: right;
+            color: rgb(85, 165, 161);
+            text-shadow: 2px 2px 5px rgb(80, 227, 220);
+          }
+        }
+          
+        
         
      }  
 
