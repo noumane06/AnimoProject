@@ -12,9 +12,11 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 8%;
+        margin-top: 5%;
         width: 40vw;
-        
+        margin-bottom: 1%;
+        overflow-x: hidden;
+        transition: height 500ms ease;
 
        .sign_alert
        {
@@ -210,7 +212,7 @@
           font-family: 'Glacial indifference';
           color: #2a2929;
           font-weight: bolder ;   
-    
+          
         }
         .descr
         {
@@ -310,21 +312,97 @@
             color: rgb(39, 165, 155);
           }
         }
+        
+        /* CSSTransition classes  */
+        .menu {
+          width: 40vw;
+          overflow: hidden;
+        }
+        .menu-primary-enter {
+          position: absolute;
+          transform: translateX(-110%);
           
-        
-        
+        }
+        .menu-primary-enter-active {
+          transform: translateX(0%);
+          transition: all 500ms ease;
+          opacity: 1;
+        }
+        .menu-primary-exit {
+          position: absolute;
+        }
+        .menu-primary-exit-active {
+          opacity: 0;
+          transform: translateX(-110%);
+          transition: all 500ms ease;
+        }
+
+        // secondary 
+        .menu-secondary-enter {
+          transform: translateX(110%);
+          opacity: 1;
+        }
+        .menu-secondary-enter-active {
+          transform: translateX(0%);
+          transition: all 500ms ease;
+        }
+        .menu-secondary-exit {
+
+        }
+        .menu-secondary-exit-active {
+          opacity: 0;
+          transform: translateX(110%);
+          transition: all 500ms ease;
+        }
+        .ButtonsContainer
+        {
+          text-align: left;
+          .nextBut
+          {
+            text-align: justify;
+            width: 40%;
+            float: right;
+          }
+          .leftBut
+          {
+            width: 20%;
+            font-family: 'Glacial Indifference';
+            font-weight: bolder ;
+            background-color: transparent ;
+            padding: 0.8em 1em ;
+            border-radius: 15px ;
+            transition: all 0.2s ;
+            color: #2a2a2a;
+            border: none ;
+            float: left;
+            outline: none;
+            cursor: pointer;
+          }
+          .leftBut:hover
+          {
+            transition: all 500ms ease;
+            background-color: #ececec ;
+          }
+        }
      }  
 
 
     }
     
     .Animo_logo_orange_2
-      {
+    {
           margin-top: 30px;
           display: block;
           margin-left: auto;
           margin-right: auto;
           width: 15%;
-       }
+          cursor: pointer;
+    }
+
+    #recaptcha
+    {
+      margin-left: auto;
+      margin-right: auto;
+    }
 }
 

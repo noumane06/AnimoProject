@@ -9,6 +9,7 @@ import {NavLink } from 'react-router-dom';
 import Lottie from 'react-lottie' ;
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import {CSSTransition} from 'react-transition-group';
 import firebase from '../../../../Animo/Create_offer/firebase-config'
 require('firebase/auth')
 
@@ -32,11 +33,11 @@ class signup extends React.Component {
           isLoading: false,
           error: null,
           current: 0,
-          emailState: true,
-          passwordState: true,
-          firstnameState: true,
-          lastnameState: true,
-          usernameState: true
+          emailState: false,
+          passwordState: false,
+          firstnameState: false,
+          lastnameState: false,
+          usernameState: false
         };
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
@@ -115,11 +116,18 @@ class signup extends React.Component {
         }
        
     }
+    back()
+    {
+      var current = this.state.current;
+        current = this.state.current - 1;
+      this.setState({ current });
+    }
     nextWithTimeOut = ()=>{
         setTimeout(() => {
           var current = this.state.current + 1;
           this.setState({ current: current });
         }, 5000);
+        
     }
 
     // -------------------------------------------------------------
@@ -187,8 +195,9 @@ class signup extends React.Component {
 
         return (
           <div className="AccountContainer">
-            {this.state.current === 0 && (
-              <div>
+            {/* {this.state.current === 0 && ( */}
+            <CSSTransition in={this.state.current === 0} unmountOnExit timeout={500} classNames="menu-primary">
+              <div className="menu">
                 <title>Sign up | Animo</title>
                 <h1>Sign up</h1>
                 <div className="third_paties_Container">
@@ -242,7 +251,7 @@ class signup extends React.Component {
                   </div>
                   <label>username : </label>
                   <div className="inputs">
-                    <i className="fa fa-user icon"></i>
+                    <i className="fa fa-id-card icon"></i>
                     <input
                       className="field "
                       onChange={this.handlechange}
@@ -306,9 +315,12 @@ class signup extends React.Component {
                   </div>
                 </form>
               </div>
-            )}
-            {this.state.current === 1 && (
-              <div>
+            </CSSTransition>
+            {/* )} */}
+            {/* {this.state.current === 1 && ( */}
+              <CSSTransition in={this.state.current === 1} unmountOnExit timeout={500} classNames="menu-secondary">
+              <div className="menu">
+                
                 <title>Verify phone number | Animo</title>
                 <Lottie
                   options={defaultphoneOptions}
@@ -318,16 +330,22 @@ class signup extends React.Component {
 
                 {/* Enter the phone number segment */}
                 {!this.state.captchaState && (
-                  <h2>
-                    Please enter a valid phone number , we will send a
-                    verification code .{" "}
+                  <div>
+                    <h2 style={{ textAlign: "justify" }}>
+                      Verify your phone number
                   </h2>
+                    <p style={{ fontFamily : "glacial indifference" }}>
+                      For your security, animo wants to make sure it’s really you. animo will send a text message with a 6-digit verification code. Standard rates apply
+                    </p>
+                  </div>
+                  
                 )}
                 {!this.state.captchaState && (
                   <div>
-                    <label>Phone number : </label>
+                    <label style={{ color:  "#FF7E6A"}}>Phone number : </label>
                     <div className="inputs">
-                      <i className="fa fa-phone icon"></i>
+                    
+                      <i className="fa fa-mobile icon"></i>
                       <input
                         className="field "
                         onChange={this.handlechange}
@@ -337,24 +355,35 @@ class signup extends React.Component {
                       />
                       <br />
                     </div>
+                      <div className="submitContainer ButtonsContainer">
+                        <button
+                          className="leftBut"
+                          onClick={() => this.back()}>
+                          Back
+                        </button>
+                        <div className="nextBut">
+                          <button
+                            className="Submitbutton"
+                            style={{ float: "right" }}
+                            onClick={this.handlePhoneClick}
+                            disabled={!this.state.isvalid}
+                          >
+                            Next
+                          </button>
+                          <br />
+                        </div>
+                      </div>
+
+                      
+                  
+                    
                   </div>
                 )}
-                {!this.state.captchaState && (
-                  <div className="submitContainer">
-                    <button
-                      className="Submitbutton"
-                      style={{ textAlign: "center" }}
-                      onClick={this.handlePhoneClick}
-                      disabled={!this.state.isvalid}
-                    >
-                      Add number
-                    </button>
-                    <br />
-                  </div>
-                )}
+                
                 {/* ---------------------------------------------------------------------- */}
 
                 {/*  Captcha verification segment*/}
+                
 
                 {this.state.captchaState && !this.state.submitState && (
                   <h2>Verify the captcha first</h2>
@@ -415,7 +444,9 @@ class signup extends React.Component {
                   </div>
                 )}
               </div>
-            )}
+              </CSSTransition>
+
+            {/* )} */}
             {this.state.current === 2 && (
               <div>
                 <title>Verify Email address | Animo</title>
