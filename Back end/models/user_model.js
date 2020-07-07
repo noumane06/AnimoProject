@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
                 required : true 
         },
         birthDay: { type: Date, required: true } ,
-        Usrimg: { type: String, required: false }
+        Usrimg: { type: String, required: false },
+        gender : {type : String , required : true}
     }); 
 
 module.exports = mongoose.model('User', userSchema);

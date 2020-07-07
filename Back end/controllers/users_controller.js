@@ -6,6 +6,25 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // ******************************
+exports.user_verifMail = (req, res , nxt) => {
+    User.find({ email: req.body.email })
+        .exec()
+        .then(result => {
+            if (result.length >=1) {
+                res.status(409).json({
+                    error: "Email already exist"
+                }); 
+            }else
+            {
+                res.status(200).json({
+                    message : "Valid Email",
+                }); 
+            }
+        })
+        .catch(err =>{
+            res.status(500).json(err);
+        })
+};
 exports.user_signup = (req,res,next)=>{
     User.find({email : req.body.email})
     .exec()
@@ -23,6 +42,15 @@ exports.user_signup = (req,res,next)=>{
                  });
                  
                 }else{
+                    var img = "" ;
+                    if (req.body.Usrimg === ""  ||req.body.Usrimg === undefined) {
+                        { req.body.gender === "male" ? img = "https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fman.svg?alt=media&token=9cc204e7-e9b3-4a5d-970a-1242a04f90de"
+                            : img ="https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fwoman.svg?alt=media&token=58d24c71-6b1e-4f61-a25a-fc22d43ec1e3"}
+                    } else {
+                        img = req.body.Usrimg
+                    }
+                    console.log(img);
+                    console.log(req.body.Usrimg);
                  const user = new User({
                      _id : new mongoose.Types.ObjectId(),
                      email : req.body.email , 
@@ -31,15 +59,19 @@ exports.user_signup = (req,res,next)=>{
                      lastname : req.body.lastname , 
                      username : req.body.username,
                      phone : req.body.phone,
-                     birthDay: req.body.birthDay ,
-                     Usrimg : req.body.Usrimg
+                     birthDay: "1997-06-17T00:00:00.000+00:00" ,
+                     Usrimg:  img,
+                     gender : req.body.gender
                     });
                  user.save()
                 .then(result => {
                     console.log(result);
                     const token = jwt.sign(
                         {
-                            userId : result._id 
+                            userId: result._id,
+                            Usrimg: result.Usrimg,
+                            firstname: result.firstname,
+                            lastname: result.lastname
                         },
                         "secret",
                         {
@@ -64,7 +96,7 @@ exports.user_signup = (req,res,next)=>{
         res.status(500).json(err);
     })
 };
-exports.user_signin = (req,res,next)=>{
+exports. user_signin = (req,res,next)=>{
     User.find({email : req.body.email})
     .exec()
     .then(userdata =>{
