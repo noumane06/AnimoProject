@@ -49,7 +49,13 @@ const Header  = inject(
                  <title>{Title[1] !== undefined && (
                      Title[1].toUpperCase()
                  )} - Animo</title>
+                 {!navigator.onLine && (
+                     <div className="offline">
+                         Your offline
+                     </div>
+                 )}
             <div className="Page_title">
+                
                 { props.config === "test" ?
                 <Link to='/home' className="arrowBack">
                     <svg viewBox="0 0 24 24" width="24px" height="24px">

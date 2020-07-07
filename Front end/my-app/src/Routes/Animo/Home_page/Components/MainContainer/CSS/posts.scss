@@ -80,7 +80,8 @@ body
                 transition: .4s all;
                 height: 140px;
                 cursor: pointer;
-                object-fit: cover;
+                object-fit : fill;
+                object-position: cover;
             }
             .loader
             {

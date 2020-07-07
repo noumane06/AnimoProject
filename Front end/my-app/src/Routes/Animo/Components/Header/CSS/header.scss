@@ -14,6 +14,20 @@ body
         margin-top: 25px;
         font-family: 'Glacial indifference';
         color: #2A2A2A;
+        .offline
+        {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: rgb(160, 0, 0);
+            color: white;
+            font-weight: bolder;
+            text-align: center;
+            z-index: 100;
+            font-size: 12px;
+            padding: 2px ;
+        }
         .hidden
         {
             display: none;
@@ -25,7 +39,7 @@ body
         .Page_title
         {
             float: left;
-           
+            
             .Title
             {
                 float : right ;

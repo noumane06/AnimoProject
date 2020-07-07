@@ -17,10 +17,13 @@ class Account_page extends React.Component {
               className="Animo_logo_orange_2" 
               onClick={()=>{window.location.replace("/")}}
               />
-           
-              <Route  path="/account/signin" component={signin} />
-              <Redirect exact from='/account/' to="/account/signin" />
+              <Switch>
               <Route path="/account/signup" component={signup} />
+              <Route path="/account/signin" component={signin} />
+              <Redirect exact from='/account' to="/account/signin" />
+              </Switch>
+              
+              
 
           </div> 
           

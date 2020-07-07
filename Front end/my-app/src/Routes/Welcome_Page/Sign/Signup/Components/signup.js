@@ -2,6 +2,7 @@
 import animationData from './mailAnim.json';
 import animationphoneData from './phoneAnim.json';
 import verifiedAnimation from './verified.json';
+import Captcha from './captcha';
 import '../../CSS/account_mobile.scss';
 // Modules
 import React from 'react';
@@ -19,8 +20,8 @@ class signup extends React.Component {
     {
         super(props);
         this.state = {
-          numberVerified: false,
-          submitState: false,
+          swtich: false,
+          submitState: true,
           captchaState: false,
           codeverif: "",
           email: "",
@@ -28,60 +29,70 @@ class signup extends React.Component {
           firstname: "",
           lastname: "",
           username: "",
-          phone: null,
+          phone: "",
+          gender : "",
           isvalid: true,
           isLoading: false,
           error: null,
           current: 0,
-          emailState: false,
-          passwordState: false,
-          firstnameState: false,
-          lastnameState: false,
-          usernameState: false
+          emailState: true,
+          passwordState: true,
+          firstnameState: true,
+          lastnameState: true,
+          usernameState: true,
+          phoneState : true ,
+          genderState : true 
         };
         this.handlechange = this.handlechange.bind(this);
         this.handlesubmit = this.handlesubmit.bind(this);
+        this.handlePhone = this.handlePhone.bind(this);
+        this.lastSubmit = this.lastSubmit.bind(this);
+        this.handler = this.handler.bind(this)
+        
     }
     handlePhoneClick = ()=>{
-       
-        this.setState({ captchaState: true });
-        firebase.auth().languageCode = 'en';
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
-            'size': 'normal',
-            'callback': function (response) {
-                console.log(response);
-                
-            },
-            'expired-callback': function () {
-                console.log("expired");
-            }
-        });
-        var phoneNumber = this.state.phone;
-        var appVerifier = window.recaptchaVerifier;
-        let currentComponent = this;
-        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-            .then(function (confirmationResult) {
-                
-                // SMS sent. Prompt user to type the code from the message, then sign the
-                // user in with confirmationResult.confirm(code).
-                window.confirmationResult = confirmationResult;
-                currentComponent.setState({ submitState: true });
-            }).catch(function (error) {
-                // Error; SMS not sent
-                console.error(error);
-            });
+       if (this.state.phoneState && this.state.captchaState) {
+         this.setState({ phoneState : false , isLoading : true})
+         var phoneNumber = this.state.phone;
+         var appVerifier = window.recaptchaVerifier;
+         let currentComponent = this;
+         firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+           .then(function (confirmationResult) {
+             currentComponent.setState({ swtich: true , phoneState : true , isLoading : false });
+             // SMS sent. Prompt user to type the code from the message, then sign the
+             // user in with confirmationResult.confirm(code).
+             currentComponent.next();
+             window.confirmationResult = confirmationResult;
+             //currentComponent.setState({ submitState: true });
+           }).catch(function (error) {
+             // Error; SMS not sent
+             currentComponent.setState({ isvalid: false, isLoading: false , captchaState : false});
+             console.error(error);
+           });
+       }
         
+    }
+    handler(bool) {
+    this.setState({
+      captchaState: bool
+    })
     }
     
 
     handleVerif = () =>{
+      
+        this.setState({isLoading : true});
         var code = this.state.codeverif ;
         let comp = this ;
         window.confirmationResult.confirm(code).then((result)=>{
-            comp.setState({numberVerified : true});
+            comp.setState({isLoading : false});
+            var current = this.state.current + 1;
+            comp.setState({ current });
         }).catch((e)=>{
             console.log(e);
+            comp.setState({submitState : false , codeverif : ''});
         })
+        
     }
 
     UNSAFE_componentWillMount()
@@ -93,75 +104,124 @@ class signup extends React.Component {
     }
     handlechange(e)
     {
+        this.setState({submitState : false});
         var state = e.target.id + "State";
+        var value = false ; 
+        if (e.target.id === "codeverif" && e.target.value ===6) {
+          value = true ;
+        }
         this.setState({
             [e.target.id] : e.target.value ,
             isvalid : true ,
-            [state] : true 
+            [state] : true , 
+            isLoading : value ,
+            submitState : true
         });
-      
     }
     // ------------------------------------------------------
-
+    
     next()
     {
-        if (this.state.emailState && this.state.passwordState && this.state.firstnameState && this.state.lastnameState 
-            &&this.state.usernameState) {
+        
             var current = this.state.current;
             if (this.state.current !== 2) {
             current = this.state.current + 1;
             }
 
             this.setState({ current });
-        }
+          this.setState({ isvalid: true, isLoading: false})
+        
        
+    }
+    handlePhone(e)
+    {
+      var value = false  ;
+      if(e.target.value.length >= 13 )
+      {
+        value = true ;
+      }
+      this.setState({
+        phone: e.target.value,
+        isvalid: true,
+        phoneState: value
+      });
     }
     back()
     {
       var current = this.state.current;
-        current = this.state.current - 1;
+      current = this.state.current - 1;
       this.setState({ current });
     }
-    nextWithTimeOut = ()=>{
+    /*nextWithTimeOut = ()=>{
         setTimeout(() => {
           var current = this.state.current + 1;
           this.setState({ current: current });
         }, 5000);
         
-    }
+    }*/
 
     // -------------------------------------------------------------
 
     handlesubmit(e)
     {
-        this.setState({isLoading : true});
-        axios.post("/users/signup/",this.state)
-        .then(response =>{
-            if(response.status === 200)
-            {
-                const authToken = response.data.token ; 
-                window.localStorage.setItem("Tokens", authToken);
-                window.location.replace("/profile_conf");
-            }else
-            {
-                console.log("entred");
-                this.setState({
-                    isvalid : false ,
-                    isLoading : false
-                });
-               console.log(response);
-            }
+      e.preventDefault();
+      this.setState({isLoading : true});
+      axios.post("/users/signup/verifMail", this.state)
+        .then(response => {
+          if (response.status === 200) {
+            
+          } else {
+            
+            this.setState({
+              isvalid: false,
+              isLoading: false
+            });
+            
+          }
         })
-        .catch(err =>{
-            console.log("entred");
-                this.setState({
-                    isvalid : false ,
-                    isLoading : false
-                });
-            console.log(err); 
+        .catch(err => {
+          
+          this.setState({
+            isvalid: false,
+            isLoading: false
+          });
+        })
+      if (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(this.state.email) === false ) {
+        this.setState({ emailState: false, isLoading: false })
+      }else{
+        if (this.state.isvalid) {
+          this.next();
+          console.log(this.state);
+        }
+      }
+    }
+    lastSubmit()
+    {
+      this.setState({ isLoading: true });
+      axios.post("/users/signup/", this.state)
+        .then(response => {
+          if (response.status === 200) {
+            const authToken = response.data.token;
+            window.localStorage.setItem("Tokens", authToken);
+            window.location.replace("/home");
+          } else {
+            
+            this.setState({
+              isvalid: false,
+              isLoading: false
+            });
+            console.log(response);
+          }
+        })
+        .catch(err => {
+          
+          this.setState({
+            isvalid: false,
+            isLoading: false
+          });
+          console.log(err);
 
         })
-        e.preventDefault();
     }
     render() { 
         if (this.state.error === null) {
@@ -192,6 +252,7 @@ class signup extends React.Component {
                     preserveAspectRatio: "xMidYMid",
                 },
             };
+            
 
         return (
           <div className="AccountContainer">
@@ -222,91 +283,101 @@ class signup extends React.Component {
                     <i className="fa fa-user icon"></i>
                     <input
                       className="field "
+                      placeholder="Ex : mohammed"
                       onChange={this.handlechange}
                       required
                       type="text"
+                      value={this.state.firstname}
                       id="firstname"
                     />
                     <br />
                   </div>
-                  <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>invalid first name</p>
-                  </div>
+                  
                   <label>Last name : </label>
                   <div className="inputs">
                     <i className="fa fa-user icon"></i>
                     <input
+                      placeholder="Ex : bencharqroun"
                       className="field "
                       onChange={this.handlechange}
+                      value={this.state.lastname}
                       required
                       type="text"
                       id="lastname"
                     />
                     <br />
                   </div>
-                  <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>invalid last name</p>
-                  </div>
+                  
                   <label>username : </label>
                   <div className="inputs">
                     <i className="fa fa-id-card icon"></i>
                     <input
+                      placeholder="Ex : mohammed006"
                       className="field "
                       onChange={this.handlechange}
+                      value={this.state.username}
                       required
                       type="text"
                       id="username"
                     />
                     <br />
                   </div>
-                  <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>invalid username</p>
-                  </div>
+                  
                   <label>Email : </label>
                   <div className="inputs">
                     <i className="fa fa-envelope icon"></i>
                     <input
                       className="field "
                       onChange={this.handlechange}
+                      placeholder="Enter a valid email , you'll be ask to verify it later"
+                      value={this.state.email}
                       required
-                      type="text"
+                      type="email"
                       id="email"
                     />
                     <br />
                   </div>
                   <div className={this.state.isvalid ? "val" : "inv_msg"}>
                     <i className="fa fa-close"></i>
-                    <p>invalid email</p>
+                    <p>email already exist</p>
                   </div>
-
+                  <div className={this.state.emailState ? "val" : "inv_msg"}>
+                    <i className="fa fa-close"></i>
+                    <p>You have entered an invalid email address!</p>
+                  </div>
                   <label>Password : </label>
                   <div className="inputs">
                     <i className="fa fa-lock icon"></i>
                     <input
                       className="field "
                       onChange={this.handlechange}
+                      value={this.state.password}
                       required
                       type="password"
                       id="password"
                     />
                     <br />
                   </div>
-                  <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>invalid password</p>
+                  <div className="gender">
+                      <label>Gender : </label>
+                      <div className="radio one">
+                        <input type="radio" id="gender" name="gender" value="male" onChange={this.handlechange} checked={this.state.gender === "male"}/>
+                        <label style={{fontWeight : "normal"}}>Male</label>
+                      </div>
+                      <div className="radio two">
+                      <input type="radio" id="gender" value="female" onChange={this.handlechange} checked={this.state.gender === "female"}/>
+                      <label style={{ fontWeight: "normal" }}>Female</label>
+                      </div>
                   </div>
-
+                      
                   <div className="submitContainer">
                     <button
-                      className="Submitbutton"
+                      type="submit"
+                      className={this.state.isLoading  ? "loading" : "Submitbutton"}
+                      disabled={this.state.isLoading}
                       style={{ textAlign: "center" }}
-                      value="Sign up"
-                      onClick={() => this.next()}
                     >
-                      Sign up
+                      {this.state.isLoading ? "Loading..." : "Sign Up"}
                     </button>
                     <br />
                     <span className="descr">Already have an account ?</span>
@@ -318,7 +389,7 @@ class signup extends React.Component {
             </CSSTransition>
             {/* )} */}
             {/* {this.state.current === 1 && ( */}
-              <CSSTransition in={this.state.current === 1} unmountOnExit timeout={500} classNames="menu-secondary">
+            <CSSTransition in={this.state.current === 1} unmountOnExit timeout={500} classNames={!this.state.swtich ? "menu-third" : "menu-secondary"}>
               <div className="menu">
                 
                 <title>Verify phone number | Animo</title>
@@ -329,33 +400,31 @@ class signup extends React.Component {
                 />
 
                 {/* Enter the phone number segment */}
-                {!this.state.captchaState && (
-                  <div>
+                    
                     <h2 style={{ textAlign: "justify" }}>
                       Verify your phone number
-                  </h2>
+                    </h2>
                     <p style={{ fontFamily : "glacial indifference" }}>
                       For your security, animo wants to make sure it’s really you. animo will send a text message with a 6-digit verification code. Standard rates apply
                     </p>
-                  </div>
-                  
-                )}
-                {!this.state.captchaState && (
-                  <div>
                     <label style={{ color:  "#FF7E6A"}}>Phone number : </label>
                     <div className="inputs">
-                    
                       <i className="fa fa-mobile icon"></i>
                       <input
-                        className="field "
-                        onChange={this.handlechange}
-                        required
+                        className={this.state.isvalid ? "field" : "field err"}
+                        onChange={this.handlePhone}
+                        value={this.state.phone}
                         type="tel"
                         id="phone"
                       />
                       <br />
+                    <div className={this.state.isvalid ? "val" : "inv_msg"}>
+                      <i className="fa fa-close"></i>
+                      <p>Invalid phone number</p>
                     </div>
-                      <div className="submitContainer ButtonsContainer">
+                    </div>
+                    <Captcha handler={this.handler}/>
+                    <div className="submitContainer ButtonsContainer">
                         <button
                           className="leftBut"
                           onClick={() => this.back()}>
@@ -363,112 +432,83 @@ class signup extends React.Component {
                         </button>
                         <div className="nextBut">
                           <button
-                            className="Submitbutton"
+                            className={!this.state.captchaState || !this.state.phoneState ? "loading" : "Submitbutton"}
                             style={{ float: "right" }}
                             onClick={this.handlePhoneClick}
-                            disabled={!this.state.isvalid}
                           >
-                            Next
+                            {this.state.isLoading ? "loading" : "Next"}
                           </button>
                           <br />
                         </div>
-                      </div>
-
-                      
-                  
-                    
+                    </div>
                   </div>
-                )}
-                
+                </CSSTransition>
                 {/* ---------------------------------------------------------------------- */}
-
-                {/*  Captcha verification segment*/}
-                
-
-                {this.state.captchaState && !this.state.submitState && (
-                  <h2>Verify the captcha first</h2>
-                )}
-                <div
-                  id="recaptcha"
-                  className={this.state.submitState ? "val" : "normale"}
-                ></div>
-
-                {/* -------------------------------------------------------  */}
-
                 {/* Enter verification code segment */}
-                {this.state.submitState && !this.state.numberVerified && (
-                  <h2>
-                    Please type the verification code sent to {this.state.phone}
-                  </h2>
-                )}
-                {this.state.submitState && !this.state.numberVerified && (
-                  <div className="inputs">
-                    <i className="fa fa-phone icon"></i>
-                    <input
-                      className="field "
-                      onChange={this.handlechange}
-                      required
-                      type="tel"
-                      id="codeverif"
-                      placeholder="Provide the code we sent you"
-                    />
-                    <br />
+            <CSSTransition in={this.state.current === 2} unmountOnExit timeout={500} classNames={this.state.isLoading ? "menu-third" : "menu-secondary"}>
+                  <div className="menu">
+                    <h2>
+                      Please type the verification code sent to {this.state.phone}
+                    </h2>
+                    <div className="inputs">
+                      <i className="fa fa-phone icon"></i>
+                      <input
+                        className={this.state.submitState ? "field" : "field err"}
+                        onChange={this.handlechange}
+                        required
+                        type="tel"
+                        id="codeverif"
+                        placeholder="Provide the code we sent you"
+                        maxLength='6'
+                      />
+                      <br />
+                      <div className={this.state.submitState ? "val" : "inv_msg"}>
+                      <i className="fa fa-exclamation-triangle icon"></i>
+                        <p>Invalid code</p>
+                      </div>
+                    </div>
+                    <div className="submitContainer">
+                      <button
+                        
+                        style={{ textAlign: "center" }}
+                        onClick={this.handleVerif}
+                        className={this.state.isLoading || this.state.codeverif.length < 6? "loading" : "Submitbutton"}
+                        >
+                        {this.state.isLoading   ? "loading" : "Verify"}
+                        
+                      </button>
+                      <br />
+                    </div>
                   </div>
-                )}
-
-                {this.state.submitState && !this.state.numberVerified && (
-                  <div className="submitContainer">
-                    <button
-                      className="Submitbutton"
-                      style={{ textAlign: "center" }}
-                      onClick={this.handleVerif}
-                      disabled={!this.state.isvalid}
-                    >
-                      Verify
-                    </button>
-                    <br />
-                  </div>
-                )}
-
-                {/* ------------------------------------------------------------------- */}
-                {this.state.numberVerified && (
-                  <div className="verifContainer">
-                    <Lottie
-                      options={verifOptions}
-                      height={50}
-                      width={50}
-                      className="card1"
-                    />
-                    <h3 className="card2">Number verified </h3>
-                    {this.nextWithTimeOut()}
-                  </div>
-                )}
-              </div>
-              </CSSTransition>
-
-            {/* )} */}
-            {this.state.current === 2 && (
-              <div>
-                <title>Verify Email address | Animo</title>
-                <Lottie options={defaultOptions} height={300} width={300} />
-                <h2>We've sent a code verification to your email address </h2>
-                <div className="inputs">
-                  <i className="fa fa-envelope icon"></i>
-                  <input className="field " required type="tel" id="phone" />
-                  <br />
-                </div>
+                </CSSTransition>
+                {/* ---------------------------------------------------------------------- */}
+               
+            <CSSTransition in={this.state.current === 3} unmountOnExit timeout={500} classNames="menu-secondary">
+              <div className="menu">
+                <title>Number verified !</title>
+                <Lottie
+                  options={verifOptions}
+                  height={300}
+                  width={300}
+                />
+                <h1>Thank you for your registration </h1>
+                <p style={{ fontFamily: "glacial indifference" , textAlign : "center" }}>
+                Your number have been verified , you can use it to sign in and for password recovery . <br/>
+                You can now enter animo , Enjoy !
+                </p>
                 <div className="submitContainer">
-                  <input
-                    className="Submitbutton"
-                    type="button"
+                  <button
+                    type="submit"
+                    className={this.state.isLoading ? "loading" : "Submitbutton"}
                     style={{ textAlign: "center" }}
-                    value="Verify"
-                    onClick={() => this.next()}
-                  ></input>
+                    onClick={this.lastSubmit}
+                  >
+                    {this.state.isLoading ? "loading" : "Proceed"}
+                  </button>
                   <br />
                 </div>
               </div>
-            )}
+            </CSSTransition>
           </div>
         );
         }

@@ -14,10 +14,7 @@
         margin-right: auto;
         margin-top: 5%;
         width: 40vw;
-        margin-bottom: 1%;
         overflow-x: hidden;
-        transition: height 500ms ease;
-
        .sign_alert
        {
         font-family: 'Glacial Indifference';
@@ -260,7 +257,7 @@
           border: none ;
           width: 60%;
           pointer-events: none;
-          cursor: disabled;
+          //cursor: disabled;
           outline: none;
         }
         .submitContainer
@@ -268,6 +265,9 @@
           margin-top: 3%;
           margin-left: 0%;
           text-align: center;
+          p {
+            font-family: 'Glacial Indifference';
+          }
         }
         .Submitbutton:hover
         {
@@ -293,7 +293,16 @@
           border: 1px solid #D8000C;
           background-color: #FFBABA !important ;
         }
-        
+        .err 
+        {
+          border: 2px solid #D8000C;
+        }
+        .err:focus{
+          border: 1px solid #D8000C;
+        }
+        .err:hover{
+          border: 1px solid #D8000C;
+        }
         .verifContainer {
           overflow: auto;
           margin-left: auto;
@@ -312,11 +321,24 @@
             color: rgb(39, 165, 155);
           }
         }
-        
+        .gender
+        {
+          padding-top: 5%;
+          padding-bottom: 5%;
+          display: flex;
+          flex-wrap: wrap;
+          .radio
+          {
+            margin-left: 20px;
+          }
+        }
         /* CSSTransition classes  */
         .menu {
           width: 40vw;
-          overflow: hidden;
+          position: absolute;
+          margin-bottom: 5%;
+          overflow-x: hidden;
+          transition: height 500ms ease;
         }
         .menu-primary-enter {
           position: absolute;
@@ -351,9 +373,27 @@
         }
         .menu-secondary-exit-active {
           opacity: 0;
-          transform: translateX(110%);
+          transform: translateX(-110%);
           transition: all 500ms ease;
         }
+        // -----------------------------------------
+        // third
+          .menu-third-enter {
+            transform: translateX(110%);
+            opacity: 1;
+          }
+          .menu-third-enter-active {
+            transform: translateX(0%);
+            transition: all 500ms ease;
+          }
+          .menu-third-exit {
+
+          }
+          .menu-third-exit-active {
+            opacity: 0;
+            transform: translateX(110%);
+            transition: all 500ms ease;
+          }
         .ButtonsContainer
         {
           text-align: left;
@@ -398,11 +438,13 @@
           width: 15%;
           cursor: pointer;
     }
+    .text-center {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-    #recaptcha
-    {
-      margin-left: auto;
-      margin-right: auto;
+    #recaptcha {
+        display: inline-block;
     }
 }
 
