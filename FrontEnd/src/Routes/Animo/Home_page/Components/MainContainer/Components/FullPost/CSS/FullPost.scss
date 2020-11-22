@@ -1,0 +1,355 @@
+body
+{
+    @import './rate.scss';
+    height: 100%;
+    .over
+    {
+        overflow: hidden;
+    }
+    .ImagePreview
+    {
+        position: absolute;
+        z-index: 4000;
+        top: 0; right: 0; bottom: 0; left: 0;
+        height: 110%;
+        width: 100% ;
+        background-color: #2a2a2a57;
+        backdrop-filter: saturate(180%) blur(20px);
+        overflow: hidden;
+        .Close
+        {
+            margin-top: 10px;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 50px;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .Close:hover
+        {
+            transition: background-color 0.2s ease-in-out;
+            background-color: rgba(56, 54, 54, 0.171);
+        }
+        .imageContainer
+        {
+             margin-top: 2%;
+             width: auto;
+             img
+             {
+                 height: 80vh;
+                 object-fit: contain;
+                 border-radius: 20px;
+             }
+        }
+    }
+    .loader
+    {
+        padding-top: 145px - 15px;
+        margin-left: calc(50% - 15px) ;
+        box-sizing: border-box;
+    }
+    .FullPostContainer
+    {
+        margin-top: 55px ;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 6px rgb(209, 208, 208);
+        border-radius: 10px;
+        padding: 30px 50px;
+        height: auto;
+        overflow: hidden;
+        .HeadContainer
+        {
+            overflow: auto;
+            font-family: 'Glacial indifference'; 
+            .Profile
+            {
+                float: left;
+                margin-bottom: 15px;
+                .dot {
+                    float: left;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                    margin-left: 5px;
+                    margin-top: 2px;
+                    padding: 0;
+                    cursor: pointer;
+                }
+                .prof
+                {
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset ;
+                    width: 35px;
+                    height: 35px;
+                }
+                .usrInfo
+                {
+                    float: right;
+                   .name{font-weight: bolder;cursor: pointer;color: #2a2929;}
+                    .post_time
+                    {
+                        font-weight: 500;
+                        font-size: 14px;
+                        color: #2d6a4f;
+                    } 
+                    .likes
+                    {
+                        font-weight: 500;
+                        font-size: 14px;
+                        color: rgb(226, 38, 77);
+                    }
+                }
+                 
+            }
+            .PhoneNumber
+            {
+                font-family: 'Roboto';
+                font-weight: bolder;
+                float : right ;
+                overflow: hidden;
+                border-radius: 15px;
+                text-align: center;
+                padding: 10px 15px;
+                transition: width 0.3s;
+                background-color: 0px 0px 5px rgb(209, 208, 208);
+                border: 2px solid #457b9d;
+                cursor: pointer;
+                .phone_text
+                {
+                    color: #457b9d;
+                    float: right;
+                    text-align: center;
+                    font-weight: bolder;
+                    
+                }
+                .phone_ico
+                {
+                    float: left;
+                    margin-right: 15px;
+                    color: #2a2a2a;
+                }
+            }
+            
+        }
+        
+        .ThumbnailContainer
+        {
+            float: left;
+            width: 50%;
+            .Post_type
+            {
+                font-family: 'Glacial indifference';
+                margin: 0;
+                font-size: 25px;
+                font-weight: bolder ;
+                color: #1665D8;
+                padding: 4px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+           
+                  
+                .img
+                {
+                     height: 290px;
+                     object-fit: cover;
+                     border-radius: 15px;
+                     cursor: pointer;
+                }
+            .hidden
+            {
+                display: hidden;
+            }
+            
+            
+        }
+        .AnimalInfo
+        {
+            float: right;
+            width: 45%;
+            font-family: 'Glacial indifference';
+            .InfosContainer
+            {   
+                margin-top: 20px;
+                box-sizing: border-box;
+                padding: 30px 20px;
+                border: 0.5px solid #ddddddb5;
+                border-radius: 15px;
+                
+                .Heading
+                {
+                    float: left;
+                    font-weight: bolder;
+                    color : #457b9d;
+                    width: 30%;
+                }
+                .property
+                {
+                    float: right;
+                    width: 150px;
+                    padding-right: 20px;
+                    
+                }
+                .row
+                {
+                    overflow: auto;
+                    padding: 5px 5px;
+                }
+            }   
+        }
+        .DescriptionContainer
+        {
+            float: left;
+            width: 100%;
+            font-family: 'Glacial indifference';
+            margin-top: 35px;
+            padding-top: 5px;
+            border-top: 1px dashed #dddddd;
+            .Description
+            {
+                font-family: 'Roboto';
+                color : #686867;
+                font-size: 15px;
+            }
+            
+        }
+        .title
+            {
+                font-weight: bolder;
+                color: #2a2a2a;
+            }
+        .FooterContainer
+        {
+            margin-top: 40px;
+            float: left;
+            width: 100%;
+            overflow: auto;
+            font-family: 'Glacial indifference';
+            .Interaction_buttons
+            {
+                float: left;
+                color: #2a2a2a;
+                font-weight: bolder;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                svg
+                {
+                    padding-right: 10px;
+                }
+                .Save
+                {
+                    float: left;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    padding-right: 20px;
+                    padding-left: 10px;
+                    transition: background-color 200ms ease-in-out;
+                    border-radius: 10px;
+                    label 
+                    {
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                    .active
+                    {
+                        font-family: 'Glacial indifference';
+                        font-weight: bold;
+                        color: rgb(226, 38, 77);
+                    }
+                }
+                .Share
+                {
+                    float: right;
+                    margin-left: 30px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    font-size: 15px;
+                    cursor: pointer;
+                    label 
+                    {
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                }
+                .Save:hover
+                {
+                    background-color: #e2264d1a;
+                }
+                .Share:hover
+                {
+                     background-color: #ebebeb6c;
+                }
+            }
+            .right
+            {
+                float: right;
+                overflow: hidden;
+                
+                .Price_tag
+                {
+                    float: right;
+                    font-family: 'Roboto';
+                    font-weight: 1000;
+                    font-size: 20px;
+                    color: #1665D8;
+                    text-shadow: 0px 0px 6px rgb(209, 208, 208);
+                    cursor: pointer;
+                    padding: 10px;
+                }
+                .Adoption_Tag
+                {
+                    float: right;
+                    font-family: 'Roboto';
+                    font-weight: 1000;
+                    font-size: 20px;
+                    color: #ee6c4d;
+                    text-shadow: 0px 0px 6px rgba(255, 141, 141, 0.604);
+                    cursor: pointer;
+                    padding: 10px;
+                }
+                .Petsit_Tag
+                {
+                    float: right;
+                    font-family: 'Roboto';
+                    font-weight: 1000;
+                    font-size: 20px;
+                    color: #e09f3e;
+                    text-shadow: 0px 0px 6px #f8c4759a;
+                    cursor: pointer;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+    .ReportContainer
+    {
+        float: right;
+        padding: 15px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        font-family: 'glacial indifference';
+        font-weight: bolder;
+        cursor: pointer;
+        .report_icon
+        {
+            float: left;
+            margin-right: 5px;
+        }
+        .span
+        {
+            float: right;
+            color : #D02120;
+            font-size: 15px;
+        }
+    }
+    .ReportContainer:hover
+    {
+ background-color: #ebebeb6c;
+    }
+}
