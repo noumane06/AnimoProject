@@ -50,11 +50,11 @@ exports.post_post = function (req,res,next) {
    
 };
 
-exports.post_get_all = function (req, res , next) {
+exports.post_get_all = async function (req, res , next) {
     console.log(req.query.page);
     const page = req.query.page !== undefined ? req.query.page  : 1;
     const resPerPage = 5 ;
-    
+    const count = await Post.countDocuments({});
     Post.find()
     .sort({ publishDate : 'desc'})
     //.exec()
@@ -62,7 +62,7 @@ exports.post_get_all = function (req, res , next) {
     .limit(resPerPage)
     .then(docs => {
         const response = {
-            count : docs.length , 
+            count : count , 
             posts : docs 
         }; 
         res.status(200).json(response);

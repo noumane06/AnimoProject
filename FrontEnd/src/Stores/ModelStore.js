@@ -5,6 +5,7 @@ import axios from "axios";
  {
     
       @observable posts =[];
+      @observable count = 0 ;
       @observable loading = true ;
       @action
       storingtoStores =  ()=>{
@@ -18,6 +19,7 @@ import axios from "axios";
               'Authorization': `Basic ${token}`
             }
           }).then(res => {
+            this.count = res.data.count ;
             this.posts = res.data.posts;
             resolve(this.posts);
           }).then(() => this.loading = false)
@@ -49,6 +51,10 @@ import axios from "axios";
           });
          })
       }
+      @computed get
+      Allpostcount (){
+        return this.count ;
+      };
       @computed get
       loadingState (){
         return this.loading ;

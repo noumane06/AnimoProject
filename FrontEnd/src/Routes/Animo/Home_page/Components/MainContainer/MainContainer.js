@@ -68,21 +68,28 @@ const MainContainer = inject(
             marginBottom: 50,
           }}
         >
-          {/* <Spin size="large" style={{ padding : 15}}/><br/> */}
-          <button className="LoadMore" onClick={handlClick}>
-            {!postsStore.loadingState && (
-                <>
-                    <span>Charger plus</span>
-                </>
-            )}
-            
-            {postsStore.loadingState && page !== 1 && (
-                <>
-                    <Lottie options={defaultOptions} height={40} width={40} />
-                    <span style={{color : "rgb(4, 106, 208)",fontWeight : "bolder"}}>Chargement</span>
-                </>
-            )}
-          </button>
+          {postsStore.howmanyposts !== postsStore.Allpostcount &&(
+              <button className="LoadMore" onClick={handlClick}>
+                {!postsStore.loadingState && (
+                    <>
+                        <span>Charger plus</span>
+                    </>
+                )}
+                
+                {postsStore.loadingState && page !== 1 && (
+                    <>
+                        <Lottie options={defaultOptions} height={40} width={40} />
+                        <span style={{color : "rgb(4, 106, 208)",fontWeight : "bolder"}}>Chargement</span>
+                    </>
+                )}
+              </button>
+          )}
+          {postsStore.howmanyposts === postsStore.Allpostcount && page !== 1 && (
+            <div className="Nomoredata">
+              <span>Plus de publications à vous afficher. ({postsStore.Allpostcount} résultat affiché) </span>
+            </div>
+              
+          )}
         </div>
       </div>
     );

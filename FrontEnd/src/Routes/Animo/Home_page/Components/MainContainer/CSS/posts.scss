@@ -1,6 +1,21 @@
 body
 {
     @import './skeletonStyle.scss';
+    .Nomoredata
+    {
+        border: none;
+        font-family: 'Roboto';
+        border-radius: 10px;
+        font-weight: bolder;
+        color: #bababa;
+        height: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        outline: none;
+        display : flex ;
+        align-items: center;
+        justify-content: center;
+    }
     .LoadMore
     {
         border: none;
