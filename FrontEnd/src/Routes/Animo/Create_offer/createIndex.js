@@ -9,6 +9,7 @@ import Error from './Components/ErrorSvg';
 import Cities from './Data/Cities';
 import DarkHeader from './Components/Dark_header';
 import { storage } from './firebase-config';
+import Splash from '../../../Components/Splash';
 // ----------------------------------------------
 
 // Modules import
@@ -21,7 +22,6 @@ import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import jwt from 'jsonwebtoken';
 
 
 // Css files
@@ -83,12 +83,7 @@ const city = [];
 const postType = ["Demande","Offre"];
 const transaction = ["Garde d'animaux","Adoption"];
 const species = [ "Chats", "Chiens", "Oiseaux","Poisson d'eau douce", "Hamsters", "Lapins", "Chinchillas","Les chevaux","reptiles"];
-const usrid = () =>{
-    const token = window.localStorage.getItem("Tokens");
-    var decoded = jwt.decode(token, "secret", function (userId) {
-    })
-    return decoded
-}
+
 
 
 // CreateOffer component *************************
@@ -101,9 +96,6 @@ class CreateOffer extends React.Component {
           data: {
             Sector: "",
             UsrId : "",
-            Usrimg: "",
-            firstname: "",
-            lastname: "",
             PostType: "Demande",
             City: "Casablanca",
             TransactionType: "Petsit",
@@ -140,18 +132,6 @@ class CreateOffer extends React.Component {
     }
     UNSAFE_componentWillMount() {
         postsStore.storingtoStores();
-        var decoded = usrid();
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                UsrId: decoded.userId,
-                Usrimg: decoded.Usrimg,
-                firstname: decoded.firstname,
-                lastname: decoded.lastname
-            }
-        }));
-        
-        
     }
     next() {
         
@@ -210,7 +190,6 @@ class CreateOffer extends React.Component {
     }
     
     done = async () => {
-        const token = window.localStorage.getItem("Tokens");
         this.setState({loading  : true , doneStatus : true});
         if (this.state.data.PostType === 'Offer' || this.state.data.PostType === 'Offre' ) {
             
@@ -228,9 +207,7 @@ class CreateOffer extends React.Component {
             }
         }
         
-        axios.post("http://localhost:9000/posts/", this.state.data ,{
-            headers: {'Authorization': `Basic ${token}`}
-            })
+        axios.post("http://localhost:9000/posts/", this.state.data ,{withCredentials : true})
              .then((data) => {
                  console.log(data);
                  this.setState({ postDone: true });
@@ -308,7 +285,6 @@ class CreateOffer extends React.Component {
             return (
                 
                 <div className="creatOffer">
-                    <title>Créez votre offre | animo</title>
                     <DarkHeader />
                     <div className="offerContainer">
                         <Steps current={current}>
@@ -471,19 +447,6 @@ class CreateOffer extends React.Component {
 // end of creatOfferComponent ******************** 
 // Splash Component
 
-function Splash(props) {
-    return(
-        <div className={props.propsclass} style={{opacity : props.opacity}}>
-            <title>Créez votre offre | animo</title>
-            <svg className="logo-center-xy" viewBox="0 0 631.96 631.96">
-                <path d="M1180,648.68C1180,821.89,1037.89,964,863.32,964,690.11,964,548,821.89,548,648.68,548,474.11,690.11,332,863.32,332,1037.89,332,1180,474.11,1180,648.68Zm-158.33,0A157.67,157.67,0,0,0,863.32,490.35c-86.6,0-157,70.37-157,158.33,0,86.6,70.37,157,157,157C951.28,805.65,1021.65,735.28,1021.65,648.68Z" transform="translate(-548.02 -332.02)" style={{ fill: "#f2f2f2" }} />
-                <circle cx="95.16" cy="95.16" r="95.16" style={{ fill: "#f2f2f2" }} />
-                <circle cx="536.8" cy="95.16" r="95.16" style={{ fill: "#f2f2f2" }} />
-            </svg>
-        </div>  
-    );
-}
-
 // end of splaash of Component ******************
 
 // -----------------------------------------------------------------
@@ -514,10 +477,11 @@ class Offer extends React.Component {
         if (!this.state.loading) {
             theChild = <CreateOffer/>
         } else {
-            theChild = <Splash  propsclass={this.state.className}/>
+            theChild = <Splash  propsclass={this.state.className} route="create"/>
         }
         return ( 
             <div>
+                <title>Créez votre offre | animo</title>
                 {theChild}
             </div>
          );

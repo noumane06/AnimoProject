@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavLink  } from 'react-router-dom';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 
 import '../../CSS/account_mobile.scss';
 
@@ -14,8 +13,7 @@ class signin extends React.Component {
             password : "",
             isvalid : true, 
             isLoading : false,
-            ref : false ,
-            mssg : "",
+            returnTo : "" ,
             error : null 
         };
         this.handlechange = this.handlechange.bind(this);
@@ -35,9 +33,12 @@ class signin extends React.Component {
         .then(response =>{
             if(response.status === 200)
             {
-                const authToken = response.data.token ; 
-                window.localStorage.setItem("Tokens", authToken);
-                window.location.replace("/home");
+                if (this.state.returnTo !== "") {
+                    window.location.assign(this.state.returnTo);
+                }else
+                {
+                    window.location.replace("/home");
+                }
             }else
             {
                 
@@ -59,48 +60,29 @@ class signin extends React.Component {
         })
         e.preventDefault();
     }
-    UNSAFE_componentWillMount()
-    {
-        const token = window.localStorage.getItem("Tokens");
-        var decoded = jwt.verify(token,'secret',function (err) {
-            this.setState({error : err});
-        }.bind(this));
-    }
     componentDidMount()
-    {   
-        var url = new URL(window.location.href);
-        var ref = url.searchParams.get("ref");
-        console.log(ref);
-        if (ref === "sign_first") {
+    {
+        const params = window.location.search.split("=")[1];
+        if (params !== undefined && params !== "") {
             this.setState({
-                ref: true,
-                mssg : "Please sign in first !"});
-        }else
-        {
-            if (ref === "expired") {
-                this.setState({
-                    ref: true,
-                    mssg: "Session expired please signin again"
-                });
-            }
+                returnTo : params 
+            });
         }
-        setTimeout(function(){
-            this.setState({
-                ref: false,
-                mssg : ""});
-       }.bind(this),5000);      
     }
+    
     render() { 
-        if (this.state.error == null) {
-            window.location.replace("/home");
-        }else
-        {
            return ( 
+               <>
+               <img src={
+                                     require('../../../../../res/Logo/animo iluustration icon.svg')}
+                                     alt="animo's logo orange version"
+                                     className="Animo_logo_orange_2" 
+                                     onClick={()=>{window.location.replace("/")}}
+                                />
             <div className="AccountContainer">
              <title>Sign in | Animo</title>
 
                 <h1>Sign in</h1>
-                <div className={this.state.ref ? "sign_alert":"hide_sign"}>{this.state.mssg}</div>
                 {/* Third party sign  */}
                 <div className="third_paties_Container">
                     <i className="fab fa-facebook-f fa-lg inf"></i>
@@ -144,8 +126,8 @@ class signin extends React.Component {
 
                 </form>
             </div>
+                </>
          ); 
-        } 
     }
 }
  

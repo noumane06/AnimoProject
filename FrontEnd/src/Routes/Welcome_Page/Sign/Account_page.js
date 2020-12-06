@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, N, Switch, Redirect } from 'react-router-dom';
+import { Route,Switch, Redirect } from 'react-router-dom';
 
-import signin from './Signin/Components/signin';
-import signup from './Signup/Components/signup';
+import signin from './Signin/SignInRoute';
+import signup from './Signup/SignUpRoute';
 
 
 class Account_page extends React.Component {
@@ -11,12 +11,6 @@ class Account_page extends React.Component {
       
           <div >
             
-            <img src={
-              require('../../../res/Logo/animo iluustration icon.svg')}
-              alt="animo's logo orange version"
-              className="Animo_logo_orange_2" 
-              onClick={()=>{window.location.replace("/")}}
-              />
               <Switch>
               <Route path="/account/signup" component={signup} />
               <Route path="/account/signin" component={signin} />

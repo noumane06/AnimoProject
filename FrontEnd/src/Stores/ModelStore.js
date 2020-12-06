@@ -13,12 +13,7 @@ import axios from "axios";
           this.loading = true ;
           const page = 1 ;
           const url = "/posts?page="+ page;
-          const token = window.localStorage.getItem("Tokens");
-          axios.get(url, {
-            headers: {
-              'Authorization': `Basic ${token}`
-            }
-          }).then(res => {
+          axios.get(url,{withCredentials : true}).then(res => {
             this.count = res.data.count ;
             this.posts = res.data.posts;
             resolve(this.posts);
@@ -35,12 +30,7 @@ import axios from "axios";
           this.loading = true ;
           const page = pageGiven  === undefined ? 1 : pageGiven ;
           const url = "/posts?page="+ page;
-          const token = window.localStorage.getItem("Tokens");
-          axios.get(url, {
-            headers: {
-              'Authorization': `Basic ${token}`
-            }
-          }).then(res => {
+          axios.get(url, {withCredentials : true}).then(res => {
             res.data.posts.forEach(element => {
                 this.posts.push(element);
             });

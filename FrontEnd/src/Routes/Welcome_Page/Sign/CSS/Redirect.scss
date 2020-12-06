@@ -1,0 +1,53 @@
+body
+{
+    .RedirectContainer
+    {
+        font-family: 'Glacial Indifference';
+        margin-top: 5%;
+        .AnimationPart
+        {
+            width: 40%;
+            left: 0;
+            background-image: url('../../../../res/Background-illust/artwork.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .TextPart
+        {
+            width: 60%;
+            right: -90px;
+            display: flex;
+            flex-direction: column;
+            h1 
+            {
+                color: #251e36;
+            }
+            p
+            {
+                color: #394966;
+            }
+            .text
+            {
+                margin-top: 10%;
+            }
+            .Animo_logo_redirect
+            {
+                margin-top: 15%;
+                width: 20%;
+                cursor: pointer;
+            }
+        }
+        .split {
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+    }
+    
+    
+}

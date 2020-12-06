@@ -69,18 +69,21 @@ exports.user_signup = (req,res,next)=>{
                     const token = jwt.sign(
                         {
                             userId: result._id,
-                            Usrimg: result.Usrimg,
-                            firstname: result.firstname,
-                            lastname: result.lastname
                         },
-                        "secret",
+                        process.env.COOKIES_KEY,
                         {
                             expiresIn : "7d"
                         }
                     );
+                    res.cookie('auth',token,{
+                        httpOnly: true ,
+                        secure : process.env.COOKIES_SECURE !== 'false',
+                        sameSite : 'strict',
+                        maxAge : 1000*60*60*24*7 ,
+                        path : '/'
+                    });
                     res.status(200).json({
-                        message : "User created succefully",
-                        token : token 
+                        message : "User created succefully"
                     });
                 })
                 .catch(err => {
@@ -96,7 +99,7 @@ exports.user_signup = (req,res,next)=>{
         res.status(500).json(err);
     })
 };
-exports. user_signin = (req,res,next)=>{
+exports. user_signin = (req,res)=>{
     User.find({email : req.body.email})
     .exec()
     .then(userdata =>{
@@ -118,19 +121,22 @@ exports. user_signin = (req,res,next)=>{
                     console.log("we made it")
                     const token = jwt.sign(
                         {
-                            userId : userdata[0]._id,
-                            Usrimg: userdata[0].Usrimg , 
-                            firstname : userdata[0].firstname,
-                            lastname : userdata[0].lastname
+                            userId : userdata[0]._id
                         },
-                        "secret",
+                        process.env.COOKIES_KEY,
                         {
                             expiresIn : "7d"
                         }
                     );
+                    res.cookie('auth',token,{
+                        httpOnly: true ,
+                        secure : process.env.COOKIES_SECURE !== 'false',
+                        sameSite : 'strict',
+                        maxAge : 1000*60*60*24*7 ,
+                        path : '/'
+                    })
                     return res.status(200).json({
-                        message : "Welcome Back " + userdata[0].username,
-                        token : token
+                        message : "Loggedin"
                     });   
                 }
                 else
@@ -144,7 +150,7 @@ exports. user_signin = (req,res,next)=>{
     })
 };
 
-exports.user_delete = (req,res,next)=>{
+exports.user_delete = (req,res)=>{
     const id = req.params.userId ; 
     User.deleteOne({_id : id})
     .exec()
@@ -187,5 +193,38 @@ exports.user_getbyId = (req,res,next) => {
     })
     .catch(err => {
         res.status(400).json(err);
+    })
+}
+
+exports.User_Myprofile = (req , res) =>{
+    const id = req.AuthID.userId ;
+    User.findById(id)
+    .exec()
+    .then(result => {
+        if (result) {
+            res.status(200).json({
+                message: "User Found",
+                result: {
+                    id : result._id,
+                    firstname : result.firstname , 
+                    lastname : result.lastname , 
+                    username : result.username ,
+                    img : result.Usrimg
+                }
+            });
+        } else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
+}
+
+exports.Checking_User = (req,res,next)=>{
+    res.status(200).json({
+        message : "Valid cookie"
     })
 }

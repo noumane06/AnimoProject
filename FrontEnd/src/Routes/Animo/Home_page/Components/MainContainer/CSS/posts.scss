@@ -100,6 +100,15 @@ body
                 width: 35px;
                 height: 35px;
             }
+            .circle
+            {
+                background-color: #555;
+            }
+            .hide
+            {
+               //display : none;
+               background-color: #555;
+            }
             font-family: 'Glacial indifference';
             .name{font-weight: bolder;cursor: pointer;color: #2a2929;}
             .post_time

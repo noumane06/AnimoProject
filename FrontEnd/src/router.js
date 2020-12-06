@@ -1,40 +1,30 @@
-// modules imports
+// Modules import 
+
 import React from 'react';
-import 'mobx-react-lite/batchingForReactDom'
-// Internal files and components imports
-
+import {Route  , BrowserRouter ,Switch } from 'react-router-dom';
+// components import 
+import Account_page from './Routes/Welcome_Page/Sign/Account_page';
+import Landing_page from './Routes/Welcome_Page/Landing/Landing_page';
 import AnimoContainer from './Routes/Animo/animo';
-import WelcomeRouter from './Routes/Welcome_Page/Welcome_router';
-import jwt from 'jsonwebtoken';
-
 // *****************************
 
-class Main_router extends React.Component {
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            id : 2 
-        };
-    }
-    UNSAFE_componentWillMount() {
-        const token = window.localStorage.getItem("Tokens");
-        var decoded = jwt.verify(token, 'secret', function (err) {
-            if(!err){
-                this.setState({ id: 1 });
-            }
-        }.bind(this));
-    }
+const Main_router = () => {
+       
+      return (
+        <BrowserRouter>
+          <Switch>
+            {/* Landing page when not signed in */}
+            <Route exact path="/Landing" component={Landing_page} />
+            {/* SignIn / up*/}
+            <Route path="/account" component={Account_page} />
+            {/* home route render the home page */}
+            <Route default path="/">
+              <AnimoContainer />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      );
+};
 
-  render() { 
-    return (
-        <div>
-        {
-            this.state.id === 1 ? <AnimoContainer/> : <WelcomeRouter/>
-        }
-        </div>
-      )
-  }
-}
 
 export default Main_router ;

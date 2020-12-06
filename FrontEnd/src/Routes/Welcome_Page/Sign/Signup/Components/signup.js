@@ -1,7 +1,7 @@
 // Files and css
-import animationData from './mailAnim.json';
-import animationphoneData from './phoneAnim.json';
-import verifiedAnimation from './verified.json';
+import animationData from '../animations/mailAnim.json';
+import animationphoneData from '../animations/phoneAnim.json';
+import verifiedAnimation from '../animations/verified.json';
 import Captcha from './captcha';
 import '../../CSS/account_mobile.scss';
 // Modules
@@ -9,7 +9,6 @@ import React from 'react';
 import {NavLink } from 'react-router-dom';
 import Lottie from 'react-lottie' ;
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 import {CSSTransition} from 'react-transition-group';
 import firebase from '../../../../Animo/Create_offer/firebase-config'
 require('firebase/auth')
@@ -97,10 +96,11 @@ class signup extends React.Component {
 
     UNSAFE_componentWillMount()
     {
-        const token = window.localStorage.getItem("Tokens");
-        var decoded = jwt.verify(token,'secret',function (err) {
-            this.setState({error : err});
-        }.bind(this));
+      axios
+      .get("/users/checkCoockie", { withCredentials: true })
+      .then((res) => {
+      })
+      .catch((err) => {console.log(err); this.setState({error : err});});
     }
     handlechange(e)
     {
@@ -201,8 +201,6 @@ class signup extends React.Component {
       axios.post("/users/signup/", this.state)
         .then(response => {
           if (response.status === 200) {
-            const authToken = response.data.token;
-            window.localStorage.setItem("Tokens", authToken);
             window.location.replace("/home");
           } else {
             
@@ -224,10 +222,6 @@ class signup extends React.Component {
         })
     }
     render() { 
-        if (this.state.error === null) {
-            window.location.replace("/home");
-        }else
-        {
             const defaultOptions = {
                 loop: true,
                 autoplay: true,
@@ -255,7 +249,14 @@ class signup extends React.Component {
             
 
         return (
-          <div className="AccountContainer">
+          <>
+            <img src={
+                 require('../../../../../res/Logo/animo iluustration icon.svg')}
+                 alt="animo's logo orange version"
+                 className="Animo_logo_orange_2" 
+                 onClick={()=>{window.location.replace("/")}}
+            />
+            <div className="AccountContainer">
             {/* {this.state.current === 0 && ( */}
             <CSSTransition in={this.state.current === 0} unmountOnExit timeout={500} classNames="menu-primary">
               <div className="menu">
@@ -510,8 +511,9 @@ class signup extends React.Component {
               </div>
             </CSSTransition>
           </div>
+          </>
+          
         );
-        }
     }
 }
  

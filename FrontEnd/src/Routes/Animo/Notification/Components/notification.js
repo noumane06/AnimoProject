@@ -2,9 +2,9 @@
 import React from 'react';
 
 // internal files and components
-import './Css/notification.scss';
-import Header from '../Components/Header/Header';
-import postsStore from '../../../Stores/ModelStore';
+import '../Css/notification.scss';
+import Header from '../../Components/Header/Header';
+import postsStore from '../../../../Stores/ModelStore';
 import { Provider } from 'mobx-react';
 class Notification extends React.Component {
     

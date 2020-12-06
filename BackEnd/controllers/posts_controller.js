@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 
 // *********************
 
-exports.post_post = function (req,res,next) {
-    console.log(req.file);
+exports.post_post = function (req,res) {
+    const usrId = req.AuthID.userId ;
     const post = new Post();
     post._id = new mongoose.Types.ObjectId();
     post.PostType  = req.body.PostType;
@@ -29,10 +29,7 @@ exports.post_post = function (req,res,next) {
         post.ImageName.push(image);
     });
     post.Sector = req.body.Sector ;
-    post.UsrId = req.body.UsrId ;
-    post.Usrimg = req.body.Usrimg ;
-    post.firstname = req.body.firstname;
-    post.lastname = req.body.lastname;
+    post.UsrId = usrId ;
 
     post.save()
     .then(result => {
@@ -50,14 +47,12 @@ exports.post_post = function (req,res,next) {
    
 };
 
-exports.post_get_all = async function (req, res , next) {
-    console.log(req.query.page);
+exports.post_get_all = async function (req, res ) {
     const page = req.query.page !== undefined ? req.query.page  : 1;
     const resPerPage = 5 ;
     const count = await Post.countDocuments({});
     Post.find()
     .sort({ publishDate : 'desc'})
-    //.exec()
     .skip((resPerPage * page) - resPerPage)
     .limit(resPerPage)
     .then(docs => {
@@ -71,6 +66,7 @@ exports.post_get_all = async function (req, res , next) {
         res.status(500).json({error : "no can do amigos"});
     });
 };
+
 
 exports.post_get_byId = function (req , res , next) {
     const id = req.params.productId ; 

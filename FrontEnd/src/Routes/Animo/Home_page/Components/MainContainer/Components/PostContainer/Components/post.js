@@ -1,7 +1,8 @@
 // Modules import 
 
-import React, { useState, useEffect } from 'react';
-import { Skeleton } from 'antd';  
+import React, { useState, useEffect , Suspense } from 'react';
+import axios from "axios";
+import {Skeleton} from "antd";
 import  {Link} from 'react-router-dom'; 
 import { observer, inject } from 'mobx-react'; 
 import moment from 'moment';
@@ -18,11 +19,19 @@ const Post = inject(
         
         const [PostType, setPostType] = useState("");
         const [isFull , setFulltext] = useState(post.Describtion.length < 150);
+        const [usrInfo , setUserInfo] = useState({});
+        const [imgLoading , setImgLoading] = useState(true);
         let value ="";
         if (post.Describtion.length > 150) {
             value = "...en voir plus" ;
         }
         useEffect(()=>{
+
+            const Url = "/users/userid="+post.UsrId;
+            axios.get(Url,{withCredentials : true}).then(res=>{
+                setUserInfo(res.data.result);
+            }).catch(err=>console.log(err));
+
             if (post.TransactionType === "Petsit") {
                 const string = ( post.PostType === "Offer" || post.PostType === "Offre" ) ? "Offre de garde d'animaux " : "Demande de garde d'animaux"
                 setPostType(string)
@@ -37,12 +46,13 @@ const Post = inject(
             if (post.TransactionType === "Buy") {
                 setPostType( "Demande d'achat");
             }
+            
+    
         },[]);
         var date = Date.now();
         if (post.publishDate !== undefined) {
             date = new Date(post.publishDate);  
         }
-        
         const stringDate = moment(date).format("HH:mm");
         const imgname = post.ImageName[0];
         let test = null;
@@ -51,20 +61,42 @@ const Post = inject(
            test = post.imageData[0].split("/"); 
            token = test[7].split("&");
         }
+        const handleLoading = ()=>{
+            setImgLoading(false)
+        }
                      return (
                  <div  className="LinkContainer">
                     <div className="Post" > 
-                         
+                                
+                            {/* <Skeleton  loading={imgLoading} active avatar paragraph={{ rows: 0 }}>
+                            </Skeleton>
                             <div className="Profile">
-                                <span className="dot">
-                                     <img src={post.Usrimg} alt="profile"  className="prof" />
+                                <span className={imgLoading ? "dot hide" : "dot"}>
+                                <img src={usrInfo.img} alt="profile"  className={imgLoading ? "prof hide" : "prof"} onLoad={handleLoading}/>
                                 </span>
-                                 <div className="name">{post.firstname} {post.lastname}</div>
-                                 <div className="post_time">
+                                {!imgLoading &&(
+                                    <>
+                                    <div className="name">{usrInfo.firstname} {usrInfo.lastname}</div>
+                                    <div className="post_time">
                                      <i className="fas fa-clock" style={{ marginRight: '3px' }}></i>
                                      {stringDate}</div>
+                                    </>
+                                )}
+                                 
+                            </div> */}
+                            
+                            <div className="Profile">
+                                <span className={imgLoading ? "dot hide" : "dot"}>
+                                <img src={usrInfo.img} alt="profile"  className={imgLoading ? "prof hide" : "prof"} onLoad={handleLoading}/>
+                                </span>
+                                    <>
+                                    <div className="name">{usrInfo.firstname} {usrInfo.lastname}</div>
+                                    <div className="post_time">
+                                     <i className="fas fa-clock" style={{ marginRight: '3px' }}></i>
+                                     {stringDate}</div>
+                                    </>
+                                 
                             </div>
-                        
                         
                         <hr style={{border : '0.5px solid rgb(221 221 221 / 35%)' }}/>
                         {( post.PostType === "Offer" || post.PostType === "Offre" ) && (

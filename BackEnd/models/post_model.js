@@ -1,10 +1,7 @@
 const mongoose = require("mongoose") ; 
 const postSchema = mongoose.Schema({
         _id : mongoose.Schema.Types.ObjectId ,
-        UsrId :  { type : String , required : true},
-        Usrimg: { type: String, required: true },
-        firstname: { type: String, required: true },
-        lastname: { type: String, required: true },
+        UsrId :  { type : String , required : true},    
         PostType : {type : String , required : true} , 
         TransactionType: { type: String, required: true },
         Race: { type: String, required: false }, 
