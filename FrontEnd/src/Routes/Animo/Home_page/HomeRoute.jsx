@@ -5,17 +5,15 @@ import React from 'react';
 
 // Components -----------------
 
-import SideBar from '../Components/SideBar/Sidebar';
 import Home from './Components/MainContainer/Components/Home_page';
 
 
 // Render ---
-const HomeRoute = ()=>{
+const HomeRoute = ({userId})=>{
 
     return(
             <div  className="Content" >
-                <SideBar/>
-                <Home/>
+                <Home userId={userId}/>
             </div>    
     );
     

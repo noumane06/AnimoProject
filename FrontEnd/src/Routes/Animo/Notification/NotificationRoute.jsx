@@ -14,7 +14,6 @@ const HomeRoute = ()=>{
 
     return(
             <div  className="Content" >
-                <SideBar/>
                 <Notification/>
             </div>    
     );

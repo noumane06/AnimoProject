@@ -36,7 +36,16 @@ const SignUpRoute = ()=>{
     }, []);
     return(
             <div>
-                {signedIn === "false" &&(<SignUp/>)}
+                {signedIn === "false" &&(
+                    <div className="RedirectContainer">
+                        <div className="split TextPart signin">
+                            <SignUp/>
+                        </div>
+                        <div className="split AnimationPart">
+                                
+                        </div>
+                    </div>
+                )}
                 {signedIn === "true" &&(
                     <div>
                         <title>Nous saluons le retour! - Animo</title>

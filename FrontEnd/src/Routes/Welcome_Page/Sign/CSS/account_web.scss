@@ -9,12 +9,9 @@
       height: 100%;
       .AccountContainer
       {
-        display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 5%;
         width: 40vw;
-        overflow-x: hidden;
        .sign_alert
        {
         font-family: 'Glacial Indifference';
@@ -335,7 +332,6 @@
         /* CSSTransition classes  */
         .menu {
           width: 40vw;
-          position: absolute;
           margin-bottom: 5%;
           overflow-x: hidden;
           transition: height 500ms ease;

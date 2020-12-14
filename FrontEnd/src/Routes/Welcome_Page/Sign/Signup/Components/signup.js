@@ -2,15 +2,16 @@
 import animationData from '../animations/mailAnim.json';
 import animationphoneData from '../animations/phoneAnim.json';
 import verifiedAnimation from '../animations/verified.json';
-import Captcha from './captcha';
 import '../../CSS/account_mobile.scss';
 // Modules
 import React from 'react';
-import {NavLink } from 'react-router-dom';
-import Lottie from 'react-lottie' ;
 import axios from 'axios';
 import {CSSTransition} from 'react-transition-group';
-import firebase from '../../../../Animo/Create_offer/firebase-config'
+import firebase from '../../../../Animo/Create_offer/firebase-config';
+import Screen1 from './Screen1';
+import Screen2 from './Screen2';
+import Screen3 from './Screen3';
+import Screen4 from './Screen4';
 require('firebase/auth')
 
 
@@ -30,7 +31,7 @@ class signup extends React.Component {
           username: "",
           phone: "",
           gender : "",
-          isvalid: true,
+          isValid: true,
           isLoading: false,
           error: null,
           current: 0,
@@ -65,7 +66,7 @@ class signup extends React.Component {
              //currentComponent.setState({ submitState: true });
            }).catch(function (error) {
              // Error; SMS not sent
-             currentComponent.setState({ isvalid: false, isLoading: false , captchaState : false});
+             currentComponent.setState({ isValid: false, isLoading: false , captchaState : false});
              console.error(error);
            });
        }
@@ -100,7 +101,9 @@ class signup extends React.Component {
       .get("/users/checkCoockie", { withCredentials: true })
       .then((res) => {
       })
-      .catch((err) => {console.log(err); this.setState({error : err});});
+      .catch((err) => {console.log(err); 
+       // this.setState({error : err});
+      });
     }
     handlechange(e)
     {
@@ -112,7 +115,7 @@ class signup extends React.Component {
         }
         this.setState({
             [e.target.id] : e.target.value ,
-            isvalid : true ,
+            isValid : true ,
             [state] : true , 
             isLoading : value ,
             submitState : true
@@ -129,7 +132,7 @@ class signup extends React.Component {
             }
 
             this.setState({ current });
-          this.setState({ isvalid: true, isLoading: false})
+          this.setState({ isValid: true, isLoading: false})
         
        
     }
@@ -142,7 +145,7 @@ class signup extends React.Component {
       }
       this.setState({
         phone: e.target.value,
-        isvalid: true,
+        isValid: true,
         phoneState: value
       });
     }
@@ -168,32 +171,28 @@ class signup extends React.Component {
       this.setState({isLoading : true});
       axios.post("/users/signup/verifMail", this.state)
         .then(response => {
+          console.log(response);
           if (response.status === 200) {
             
           } else {
             
             this.setState({
-              isvalid: false,
+              isValid: false,
               isLoading: false
             });
             
           }
         })
         .catch(err => {
-          
-          this.setState({
-            isvalid: false,
-            isLoading: false
-          });
+          this.setState({ emailState: false, isLoading: false,isValid: false },console.log(this.state));
+
         })
-      if (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(this.state.email) === false ) {
-        this.setState({ emailState: false, isLoading: false })
-      }else{
-        if (this.state.isvalid) {
-          this.next();
-          console.log(this.state);
+        
+        if (this.state.isValid) {
+          //this.next();
+          
         }
-      }
+
     }
     lastSubmit()
     {
@@ -205,7 +204,7 @@ class signup extends React.Component {
           } else {
             
             this.setState({
-              isvalid: false,
+              isValid: false,
               isLoading: false
             });
             console.log(response);
@@ -214,7 +213,7 @@ class signup extends React.Component {
         .catch(err => {
           
           this.setState({
-            isvalid: false,
+            isValid: false,
             isLoading: false
           });
           console.log(err);
@@ -250,269 +249,55 @@ class signup extends React.Component {
 
         return (
           <>
-            <img src={
-                 require('../../../../../res/Logo/animo iluustration icon.svg')}
-                 alt="animo's logo orange version"
-                 className="Animo_logo_orange_2" 
-                 onClick={()=>{window.location.replace("/")}}
+            <img
+              src={require("../../../../../res/Logo/animo iluustration icon.svg")}
+              alt="animo's logo orange version"
+              className="Animo_logo_orange_2"
+              onClick={() => {
+                window.location.replace("/");
+              }}
             />
             <div className="AccountContainer">
-            {/* {this.state.current === 0 && ( */}
-            <CSSTransition in={this.state.current === 0} unmountOnExit timeout={500} classNames="menu-primary">
-              <div className="menu">
-                <title>Sign up | Animo</title>
-                <h1>Sign up</h1>
-                <div className="third_paties_Container">
-                  <i className="fab fa-facebook-f iconf fa-lg"></i>
-                  <button className="fb_submit" type="submit">
-                    Sign up with facebook
-                  </button>
-                </div>
-                <div className="third_paties_Container">
-                  <i className="fab fa-google icong fa-lg"></i>
-                  <button className="gl_submit" type="submit">
-                    Sign up with google
-                  </button>
-                </div>
-                <br />
-
-                <p className="span">Or use your email</p>
-
-                <form onSubmit={this.handlesubmit} method="post">
-                  <label>First name : </label>
-                  <div className="inputs">
-                    <i className="fa fa-user icon"></i>
-                    <input
-                      className="field "
-                      placeholder="Ex : mohammed"
-                      onChange={this.handlechange}
-                      required
-                      type="text"
-                      value={this.state.firstname}
-                      id="firstname"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>Last name : </label>
-                  <div className="inputs">
-                    <i className="fa fa-user icon"></i>
-                    <input
-                      placeholder="Ex : bencharqroun"
-                      className="field "
-                      onChange={this.handlechange}
-                      value={this.state.lastname}
-                      required
-                      type="text"
-                      id="lastname"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>username : </label>
-                  <div className="inputs">
-                    <i className="fa fa-id-card icon"></i>
-                    <input
-                      placeholder="Ex : mohammed006"
-                      className="field "
-                      onChange={this.handlechange}
-                      value={this.state.username}
-                      required
-                      type="text"
-                      id="username"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>Email : </label>
-                  <div className="inputs">
-                    <i className="fa fa-envelope icon"></i>
-                    <input
-                      className="field "
-                      onChange={this.handlechange}
-                      placeholder="Enter a valid email , you'll be ask to verify it later"
-                      value={this.state.email}
-                      required
-                      type="email"
-                      id="email"
-                    />
-                    <br />
-                  </div>
-                  <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>email already exist</p>
-                  </div>
-                  <div className={this.state.emailState ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>You have entered an invalid email address!</p>
-                  </div>
-                  <label>Password : </label>
-                  <div className="inputs">
-                    <i className="fa fa-lock icon"></i>
-                    <input
-                      className="field "
-                      onChange={this.handlechange}
-                      value={this.state.password}
-                      required
-                      type="password"
-                      id="password"
-                    />
-                    <br />
-                  </div>
-                  <div className="gender">
-                      <label>Gender : </label>
-                      <div className="radio one">
-                        <input type="radio" id="gender" name="gender" value="male" onChange={this.handlechange} checked={this.state.gender === "male"}/>
-                        <label style={{fontWeight : "normal"}}>Male</label>
-                      </div>
-                      <div className="radio two">
-                      <input type="radio" id="gender" value="female" onChange={this.handlechange} checked={this.state.gender === "female"}/>
-                      <label style={{ fontWeight: "normal" }}>Female</label>
-                      </div>
-                  </div>
-                      
-                  <div className="submitContainer">
-                    <button
-                      type="submit"
-                      className={this.state.isLoading  ? "loading" : "Submitbutton"}
-                      disabled={this.state.isLoading}
-                      style={{ textAlign: "center" }}
-                    >
-                      {this.state.isLoading ? "Loading..." : "Sign Up"}
-                    </button>
-                    <br />
-                    <span className="descr">Already have an account ?</span>
-                    <br />
-                    <NavLink to="/account/signin">Sign in now</NavLink>
-                  </div>
-                </form>
-              </div>
-            </CSSTransition>
-            {/* )} */}
-            {/* {this.state.current === 1 && ( */}
-            <CSSTransition in={this.state.current === 1} unmountOnExit timeout={500} classNames={!this.state.swtich ? "menu-third" : "menu-secondary"}>
-              <div className="menu">
-                
-                <title>Verify phone number | Animo</title>
-                <Lottie
-                  options={defaultphoneOptions}
-                  height={300}
-                  width={300}
+              {/* {this.state.current === 0 && ( */}
+              <CSSTransition in={this.state.current === 0} unmountOnExit timeout={500} classNames="menu-primary">
+                <Screen1
+                  handlechange={this.handlechange}
+                  handlesubmit={this.handlesubmit}
+                  state={this.state}
                 />
-
-                {/* Enter the phone number segment */}
-                    
-                    <h2 style={{ textAlign: "justify" }}>
-                      Verify your phone number
-                    </h2>
-                    <p style={{ fontFamily : "glacial indifference" }}>
-                      For your security, animo wants to make sure it’s really you. animo will send a text message with a 6-digit verification code. Standard rates apply
-                    </p>
-                    <label style={{ color:  "#FF7E6A"}}>Phone number : </label>
-                    <div className="inputs">
-                      <i className="fa fa-mobile icon"></i>
-                      <input
-                        className={this.state.isvalid ? "field" : "field err"}
-                        onChange={this.handlePhone}
-                        value={this.state.phone}
-                        type="tel"
-                        id="phone"
-                      />
-                      <br />
-                    <div className={this.state.isvalid ? "val" : "inv_msg"}>
-                      <i className="fa fa-close"></i>
-                      <p>Invalid phone number</p>
-                    </div>
-                    </div>
-                    <Captcha handler={this.handler}/>
-                    <div className="submitContainer ButtonsContainer">
-                        <button
-                          className="leftBut"
-                          onClick={() => this.back()}>
-                          Back
-                        </button>
-                        <div className="nextBut">
-                          <button
-                            className={!this.state.captchaState || !this.state.phoneState ? "loading" : "Submitbutton"}
-                            style={{ float: "right" }}
-                            onClick={this.handlePhoneClick}
-                          >
-                            {this.state.isLoading ? "loading" : "Next"}
-                          </button>
-                          <br />
-                        </div>
-                    </div>
-                  </div>
-                </CSSTransition>
-                {/* ---------------------------------------------------------------------- */}
-                {/* Enter verification code segment */}
-            <CSSTransition in={this.state.current === 2} unmountOnExit timeout={500} classNames={this.state.isLoading ? "menu-third" : "menu-secondary"}>
-                  <div className="menu">
-                    <h2>
-                      Please type the verification code sent to {this.state.phone}
-                    </h2>
-                    <div className="inputs">
-                      <i className="fa fa-phone icon"></i>
-                      <input
-                        className={this.state.submitState ? "field" : "field err"}
-                        onChange={this.handlechange}
-                        required
-                        type="tel"
-                        id="codeverif"
-                        placeholder="Provide the code we sent you"
-                        maxLength='6'
-                      />
-                      <br />
-                      <div className={this.state.submitState ? "val" : "inv_msg"}>
-                      <i className="fa fa-exclamation-triangle icon"></i>
-                        <p>Invalid code</p>
-                      </div>
-                    </div>
-                    <div className="submitContainer">
-                      <button
-                        
-                        style={{ textAlign: "center" }}
-                        onClick={this.handleVerif}
-                        className={this.state.isLoading || this.state.codeverif.length < 6? "loading" : "Submitbutton"}
-                        >
-                        {this.state.isLoading   ? "loading" : "Verify"}
-                        
-                      </button>
-                      <br />
-                    </div>
-                  </div>
-                </CSSTransition>
-                {/* ---------------------------------------------------------------------- */}
-               
-            <CSSTransition in={this.state.current === 3} unmountOnExit timeout={500} classNames="menu-secondary">
-              <div className="menu">
-                <title>Number verified !</title>
-                <Lottie
-                  options={verifOptions}
-                  height={300}
-                  width={300}
+              </CSSTransition>
+              {/* )} */}
+              {/* {this.state.current === 1 && ( */}
+              <CSSTransition in={this.state.current === 1} unmountOnExit timeout={500}
+                classNames={
+                  !this.state.swtich ? "menu-third" : "menu-secondary"
+                }
+              >
+                <Screen2
+                  state={this.state}
+                  handlePhone={this.handlePhone}
+                  handlePhoneClick={this.handlePhoneClick}
+                  handler={this.handler}
+                  defaultphoneOptions={defaultphoneOptions}
+                  back={this.back}
                 />
-                <h1>Thank you for your registration </h1>
-                <p style={{ fontFamily: "glacial indifference" , textAlign : "center" }}>
-                Your number have been verified , you can use it to sign in and for password recovery . <br/>
-                You can now enter animo , Enjoy !
-                </p>
-                <div className="submitContainer">
-                  <button
-                    type="submit"
-                    className={this.state.isLoading ? "loading" : "Submitbutton"}
-                    style={{ textAlign: "center" }}
-                    onClick={this.lastSubmit}
-                  >
-                    {this.state.isLoading ? "loading" : "Proceed"}
-                  </button>
-                  <br />
-                </div>
-              </div>
-            </CSSTransition>
-          </div>
+              </CSSTransition>
+              {/* ---------------------------------------------------------------------- */}
+              {/* Enter verification code segment */}
+              <CSSTransition in={this.state.current === 2} unmountOnExit timeout={500}
+                classNames={
+                  this.state.isLoading ? "menu-third" : "menu-secondary"
+                }
+              >
+                <Screen3 state={this.state} handleVerif={this.handleVerif} handlechange={this.handlechange} />
+              </CSSTransition>
+              {/* ---------------------------------------------------------------------- */}
+
+              <CSSTransition in={this.state.current === 3} unmountOnExit timeout={500} classNames="menu-secondary">
+                <Screen4 state={this.state} verifOptions={verifOptions} lastSubmit={this.lastSubmit} />
+              </CSSTransition>
+            </div>
           </>
-          
         );
     }
 }

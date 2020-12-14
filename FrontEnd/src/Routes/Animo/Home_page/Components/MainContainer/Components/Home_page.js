@@ -10,20 +10,19 @@ import MainContainer from "../MainContainer";
 import FullPost from "./FullPost/FullPost";
 import Header from "../../../../Components/Header/Header";
 
-const Account_page = () => {
+const Account_page = ({userId}) => {
 
   const str = "Acceuil";
     return (
       <Provider postsStore={postsStore}>
         {/* Render the maincontainer of the home page */}
         <Route exact path="/home">
-          <Header route={str} />
-          <MainContainer />
+          <Header Title="Acceuil" />
+          <MainContainer userId={userId} />
         </Route>
         {/* Render a fullpost page (onclick) */}
         <Route exact path="/home/:postId">
-          <Header config="test" />
-          <FullPost />
+          <FullPost userId={userId} />
         </Route>
       </Provider>
     );

@@ -35,12 +35,21 @@ const SignInRoute = ()=>{
     }, []);
     return(
             <div>
-                {signedIn === "false" &&(<SignIn/>)}
+                {signedIn === "false" &&(
+                    <div className="RedirectContainer">
+                        <div className="split TextPart signin">
+                            <SignIn/>
+                        </div>
+                        <div className="split AnimationPart">
+                                
+                        </div>
+                    </div>
+                )}
                 {signedIn === "true" &&(
                     <div>
                        <title>Nous saluons le retour! - Animo</title>
                         <div className="RedirectContainer" >
-                            <div className="split TextPart">
+                            <div className="split TextPart red">
                                 <img src={
                                      require('../../../../res/Logo/animo iluustration icon.svg')}
                                      alt="animo's logo orange version"

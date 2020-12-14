@@ -150,3 +150,57 @@ exports.post_getBy_Usrid = (req , res ,next)=>{
     })
 
 }
+
+
+exports.Post_Like  = (req ,res ) =>{
+    const id = req.query.userid ; 
+    Post.updateOne({_id : id},{likes : req.body.likes})
+    .then(result=>{
+        res.status(200).json(
+            {
+                message : "Updated succefully",
+                data : result
+            }
+        )
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
+// exports.deletePost = (req,res) =>{
+//     Post.deleteMany({Age : "1 month",Species:"cats"})
+//     .then(res=>{res.status(200).json({
+//         message : "deleted",
+//         data : res
+//     })})
+//     .catch(err => {
+//         res.status(404).json({
+//             error : err
+//         })
+//     })
+// }
+
+// exports.ChangeAll = (req , res)=>{
+//     Post.updateMany({},{likes :[""]})
+//     .then(data =>{
+//      res.status(200).json(
+//          {
+//              message : "Updated succesfully",
+//              data : data
+//          }
+//      )
+//     })
+//     .catch(err =>{
+//      console.log(err);
+//      res.status(404).json({
+//          message : "The user is not here :/ , below more infos",
+//          error : err
+//      })
+//      })
+//  }
+ 

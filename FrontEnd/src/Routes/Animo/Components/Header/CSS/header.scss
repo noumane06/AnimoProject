@@ -10,7 +10,6 @@ body
     .Header 
     {
         position: relative;
-        //margin-bottom: 15px;
         margin-top: 25px;
         font-family: 'Glacial indifference';
         color: #2A2A2A;
@@ -53,13 +52,13 @@ body
                 .signout
                 {
                     text-decoration: none ;
-                    color: white ; 
+                    color: #5B5C5F ; 
                     font-family: 'Glacial Indifference';
                     font-weight: bolder ;
-                    background-color: #FF4123 ;
-                    box-shadow: 0px 0px 3px rgb(209, 208, 208);
+                    background-color: transparent ;
+                    //box-shadow: 0px 0px 3px rgb(209, 208, 208);
                     padding: 0.8em 2em ;
-                    border-radius: 15px ;
+                    border-radius: 10px ;
                     transition: background-color 0.2s ease-in-out ;
                     border: none ;
                     width: 100%;
@@ -68,7 +67,7 @@ body
                 }
                 .signout:hover
                 {
-                    background-color: #2a2929 ;
+                    background-color: #5b5c5f0e ;
                     outline: none;
                 }
             }

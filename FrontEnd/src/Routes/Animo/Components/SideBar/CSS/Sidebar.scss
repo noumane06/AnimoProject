@@ -139,29 +139,51 @@
     {
       #createOffer
       {
-        text-decoration: none ;
-        color: white ; 
+        color: #fafafa ; 
         padding: 10px 25px;
-        margin-top: 135px;
-        background-color: #25D366 ;
-        border-radius: 5px ;
+        margin-top: 80px;
+        background-color: #FF634B ;
+        border-radius: 10px ;
         transition: all 0.2s ;
-        
         border: none ;
         cursor: pointer;
         outline: none;
         width: 80%;
         font-family: 'Glacial Indifference';
         text-decoration: none;
-        font-size: 16px;
+        font-size: 15px;
         display: flex;
-        font-weight: bolder;
+        justify-content: center;
         box-sizing: border-box;
       }
       #createOffer:hover
       {
-        background-color: rgb(37, 179, 89) ;
-        box-shadow: 0px 0px 6px #25D366;
+        box-shadow: 0px 0px 16px #ff634bdc ;
+      }
+    }
+    .footer
+    {
+      position: absolute;
+      bottom: 0;
+      font-size: 11px;
+      font-family: 'Glacial indifference';
+      color: #58595c;
+      display: flex;
+      padding-bottom: 5px;
+      flex-direction: column;
+      padding-right: 40px;
+      div 
+      {
+        
+        a 
+        {
+          padding: 0px 2px 0px 0px;
+          cursor : pointer ;
+        }
+        a:hover 
+        {
+          text-decoration: underline;
+        }
       }
     }
     

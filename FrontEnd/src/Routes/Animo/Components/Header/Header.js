@@ -1,6 +1,7 @@
 // Modules import
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
+import axios from 'axios';
 import {inject , observer} from 'mobx-react'; 
 
 // Internal files import
@@ -9,30 +10,14 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const Header  = inject(
     'postsStore'
 )(
-    observer((props)=>
+    observer(({Title , publication})=>
     {
-        const [post, setImage] = useState({});
-        const {postsStore} = props;
-        useEffect(() => {
-            let id = window.location.href.split("/");
-            const get = postsStore.getPost(id[4]);
-            get.then(res => {
-                setImage(res);
-            }).catch(err => console.log(err));
-        },[]);
-        var Title = "" ;
-        if (props.config !== "test") {
-                Title = props.route ;
-            }else
-            {
-                var title = post.Title;
-                Title = title ;
-            }
-        
         
         const handleSignout = () =>{
-           window.localStorage.clear();
-           window.location.replace("/account/signin");
+            const Url = "/users/signout";
+            axios.get(Url,{withCredentials : true}).then(res=>{
+                window.location.assign("/account/signin");
+            }).catch(err=>console.log(err));
         }
         
          return (
@@ -41,7 +26,7 @@ const Header  = inject(
                  
             <div className="Page_title">
                 
-                { props.config === "test" ?
+                { publication ?
                 <Link to='/home' className="arrowBack">
                     <svg viewBox="0 0 24 24" width="24px" height="24px">
                         <g>
@@ -56,24 +41,25 @@ const Header  = inject(
                     </svg>
                 </Link> : ''}
                      
-                        {props.config !== "test" &&(
-                            <h2 className="Title">{props.route}</h2>
+                        {!publication &&(
+                            <h2 className="Title">{Title}</h2>
                         )}
-                        {props.config === "test" &&(
+                        {publication &&(
                             <h2 className="Title">Publication</h2>
                         )}
                      
             </div>
             <div className="rightPart">
+                <div className="singoutContainer">
+                    <button className="signout" onClick={handleSignout} >Se déconnecter</button>
+                 </div>
                 <div className="wrap">
                     <input type="text" className="searchTerm" placeholder="Search animo"/>
                         <button type="submit" className="searchButton">
                             <i className="fa fa-search"></i>
                         </button>
                 </div>
-                <div className="singoutContainer">
-                    <button className="signout" onClick={handleSignout} >Sign out</button>
-                 </div>
+               
             </div>
                 
         </div>  

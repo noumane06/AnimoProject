@@ -1,20 +1,8 @@
-import React , {useEffect , useState} from 'react';
-import axios from "axios";
+import React from 'react';
 
-const Prof = ()=>{
+const Prof = ({imgLoading,usrInfo,handleLoading})=>{
         
-            const [usrInfo , setUserInfo] = useState({});
-            const [imgLoading , setImgLoading] = useState(true);
             
-            useEffect(()=>{
-                const Url = "/users/Myprofile";
-                axios.get(Url,{withCredentials : true}).then(res=>{
-                    setUserInfo(res.data.result);
-                }).catch(err=>console.log(err));
-            },[])
-            const handleLoading = ()=>{
-                setImgLoading(false)
-            }
              return ( 
             
                 <div className="Navlink">
@@ -28,7 +16,7 @@ const Prof = ()=>{
                         height="25px" viewBox="0 0 20 24" 
                         onLoad={handleLoading}
                         />
-                    <div className="prof_icon" style={imgLoading ?{width : 25 , height : 25 , backgroundColor : "grey"} : {display : "none"}}></div>
+                    <div className="prof_icon" style={imgLoading ?{width : 25 , height : 25 , backgroundColor : "#8080802e"} : {display : "none"}}></div>
                 </div>
 
                 <div className="legend">

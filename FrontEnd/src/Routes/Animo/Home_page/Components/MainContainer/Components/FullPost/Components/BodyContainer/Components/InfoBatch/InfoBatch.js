@@ -8,14 +8,15 @@ import AnimalInfo from './Components/AnimalInfo';
 // Begin ** 
 const InfoBatch = ({post}) =>
 {
-    return(
-            <div className="infobatch">
-               <ThumbnailContainer post={post}/>
-               {( post.PostType === "Offer" || post.PostType === "Offre" ) &&(
-                   <AnimalInfo post={post}/> 
-               )}
-              
-            </div>
+    return (
+      <div className="infobatch">
+        
+            <ThumbnailContainer post={post} />
+            {(post.PostType === "Offer" || post.PostType === "Offre") && (
+              <AnimalInfo post={post} />
+            )}
+          
+      </div>
     );
 }
 

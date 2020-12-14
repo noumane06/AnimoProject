@@ -11,7 +11,7 @@ class signin extends React.Component {
         this.state = {
             email : "",
             password : "",
-            isvalid : true, 
+            isValid : true, 
             isLoading : false,
             returnTo : "" ,
             error : null 
@@ -23,7 +23,7 @@ class signin extends React.Component {
     {
         this.setState({
             [e.target.id] : e.target.value ,
-            isvalid : true 
+            isValid : true 
         });
     }
     handlesubmit(e)
@@ -43,7 +43,7 @@ class signin extends React.Component {
             {
                 
                 this.setState({
-                    isvalid : false ,
+                    isValid : false ,
                     isLoading : false
                 });
                
@@ -52,7 +52,7 @@ class signin extends React.Component {
         .catch(err =>{
                 
                 this.setState({
-                    isvalid : false,
+                    isValid : false,
                     isLoading : false 
                 });
             console.log(err); 
@@ -102,18 +102,18 @@ class signin extends React.Component {
                     <label>Email address : </label>
                     <div className="inputs">
                          <i className="fa fa-user icon"></i>
-                        <input className={this.state.isvalid ? 'field' : 'field invalid' } type="email" id="email" onChange={this.handlechange} required/><br/>
+                        <input className={this.state.isValid ? 'field' : 'field invalid' } type="email" id="email" onChange={this.handlechange} required/><br/>
                     </div>
-                    <div className={this.state.isvalid ? 'val' : 'inv_msg' } >
+                    <div className={this.state.isValid ? 'val' : 'inv_msg' } >
                         <i className="fa fa-close"></i>
                         <p>Wrong email</p>
                     </div>
                     <label>Password : </label>
                     <div className="inputs">
                          <i className="fa fa-lock icon"></i>
-                         <input className={this.state.isvalid ? 'field' : 'field invalid' } type="password" id="password" onChange={this.handlechange} required/><br/>
+                         <input className={this.state.isValid ? 'field' : 'field invalid' } type="password" id="password" onChange={this.handlechange} required/><br/>
                     </div>
-                    <div className={this.state.isvalid ? 'val' : 'inv_msg' } >
+                    <div className={this.state.isValid ? 'val' : 'inv_msg' } >
                     <i className="fa fa-close"></i>
                         <p>Wrong password</p>
                     </div>
@@ -121,7 +121,7 @@ class signin extends React.Component {
                     <div className="submitContainer">
                         <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading..." : "Sign in"}></input><br/>  
                         <span className="descr">Don't have an account </span><br/>
-                        <NavLink to="/account/signup">Sign up now</NavLink>
+                        <a href="/account/signup">Sign up now</a>
                     </div>
 
                 </form>

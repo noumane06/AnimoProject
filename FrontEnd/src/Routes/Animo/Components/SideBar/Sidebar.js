@@ -1,9 +1,8 @@
 // Modules import 
 
-import React from 'react';
+import React , {useEffect , useState} from 'react';
 import {NavLink} from "react-router-dom";
-
-// import jwt from 'jsonwebtoken';
+import axios from "axios";
 
 // internal files and components
 import Home from './Compenents/home_butt';
@@ -17,7 +16,18 @@ import './CSS/Sidebar.scss';
 
 
 function Side_bar() {
+            const [usrInfo , setUserInfo] = useState({});
+            const [imgLoading , setImgLoading] = useState(true);
             
+            useEffect(()=>{
+                const Url = "/users/Myprofile";
+                axios.get(Url,{withCredentials : true}).then(res=>{
+                    setUserInfo(res.data.result);
+                }).catch(err=>console.log(err));
+            },[])
+            const handleLoading = ()=>{
+                setImgLoading(false)
+            }
              return ( 
             
             <div className="SideNav">
@@ -38,19 +48,29 @@ function Side_bar() {
                   
                     <NavLink to='/explore' activeClassName="active" ><Explore/></NavLink>
               
-                    <NavLink to='/profile' activeClassName="active"  ><Profile/></NavLink>
+                    <NavLink to='/profile' activeClassName="active"  ><Profile imgLoading={imgLoading} usrInfo={usrInfo} handleLoading={handleLoading} /></NavLink>
 
                     <NavLink to='/settings' activeClassName="active" ><Settings/></NavLink>
 
                     <div className="CreateOffers">
                         <a id='createOffer' href='/createoffer'>
-                             Create offer
+                        Créer offre
                         </a>
                     </div>
                 </div>
                 
             {/* ------------ End of nav container  : -------------------------------------- */}
-                
+                <footer className="footer">
+                    
+                    <div>
+                        <a>Propos</a>·
+                        <a>Contact</a>·
+                        <a>FAQ</a>·
+                        <a>Conditions generales</a>·
+                        <a>Confidentialité</a><br/>
+                        <strong>Animo © 2020 · Production de <a href="https://web.facebook.com/noumane.agouzil/" target="_blank">Noumane Agouzil</a> </strong>
+                    </div>
+                </footer>
             </div>
             
          );   

@@ -407,11 +407,9 @@ class CreateOffer extends React.Component {
                         <div className="steps-action">
 
                             {current === 0 && (
-                                <Link to="/">
-                                    <button className="back">
+                                    <button className="back" onClick={()=> window.location.assign("/home")}>
                                     Annuler
                                     </button>
-                                </Link>
                             )}
                             {current > 0 && (
                                 

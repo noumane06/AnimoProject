@@ -6,7 +6,7 @@ import React from 'react';
 // internal files and components 
 
 // Begin ** 
-const HeadContainer  = ({post})=>
+const HeadContainer  = ({post , likes})=>
         {
             
             var date = "";
@@ -20,7 +20,9 @@ const HeadContainer  = ({post})=>
             
             
             return (
-              <div className="HeadContainer">
+              <>
+              {post !==undefined&&(
+                <div className="HeadContainer">
                 <div className="Profile">
                   <span className="dot">
                     <img src={post.Usrimg} alt="profile" className="prof" />
@@ -37,13 +39,7 @@ const HeadContainer  = ({post})=>
                       ></i>
                       {post.City} | {post.Sector}
                     </div>
-                    <div className="likes">
-                      <i
-                        className="fas fa-heart"
-                        style={{ margin: " 0 6px 0 0" }}
-                      ></i>
-                      200 J'aime
-                    </div>
+                    
                   </div>
                 </div>
                 <div className="PhoneNumber">
@@ -62,6 +58,8 @@ const HeadContainer  = ({post})=>
                   <span className="phone_text">0632126386</span>
                 </div>
               </div>
+              )}
+              </>
             );
 }
 

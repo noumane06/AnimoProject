@@ -9,17 +9,19 @@ import CreateOffer from './Create_offer/createIndex';
 import Notification from './Notification/NotificationRoute';
 import Home from './Home_page/HomeRoute';
 import Splash from '../../Components/Splash';
-
+import SideBar from './Components/SideBar/Sidebar';
 // *****************************
 
 const AnimoContainer = ()=> {
 
     const [loading, setLoading] = useState(true);
+    const [userId,setUserId] = useState("");
     const [className , setClassName] = useState("SplashContainer");
     useEffect(() => {
         axios
         .get("/users/checkCoockie", { withCredentials: true })
-        .then(() => {
+        .then((res) => {
+            setUserId(res.data.userId);
             setClassName("SplashContainer trans");
             setTimeout(() => {
                 setLoading(false);
@@ -43,10 +45,13 @@ const AnimoContainer = ()=> {
             <Splash propsclass={className} />
             )}
             {!loading &&(
-                <Switch>
+                <>
+                    {window.location.pathname !== "/createoffer" &&(<SideBar/>)}
+                    <Switch>
                     <Redirect exact from='/' to="/home" />
+                    
                     <Route  path="/home">
-                        <Home/>
+                        <Home userId={userId}/>
                     </Route>
                     {/* notification route render the notification page  */}
 
@@ -62,6 +67,8 @@ const AnimoContainer = ()=> {
                     {/* <Route default exact path="/" component={Home}/> */}
                     
                   </Switch>
+                </>
+                
             )}
             </>
             

@@ -3,22 +3,36 @@
 import React from 'react';
 import {useState } from 'react';
 import Likebutton from './LikeButtons';
-
+import axios from 'axios';
 // internal files and components 
 
 // Begin ** 
-const Description = ({post}) => {
+const Description = ({post , userId}) => {
 
-            const [checkbox,setCheck] = useState(false);
+            const [checkbox,setCheck] = useState(post!==undefined ? post.likes.includes(userId) : false);
+            var likes = post!==undefined ? post.likes : [""] ;
             const handleLike = async ()=>{
+                
+                if (!checkbox) {
+                   await likes.push(userId);
+                }else
+                {
+                   await likes.splice(likes.indexOf(userId),1);
+                }
                 setCheck(!checkbox);
+                const Url = '/posts/likes?userid='+post._id;
+                axios.post(Url,{"likes":likes},{withCredentials : true})
+                .then(res=>{})
+                .catch(err => alert(err));
             }
-            console.log(post);
+
+            //console.log(post);
             return (    
+             
                 <div className="FooterContainer">
                     <div className="Interaction_buttons">
                         <div className="Save">
-                            <Likebutton checkbox={checkbox} handleLike={handleLike} /><label htmlFor="checkbox" className={checkbox ? "active" : ""}>J'aime</label>
+                            <Likebutton checkbox={checkbox} handleLike={handleLike} /><label htmlFor="checkbox" className={checkbox ? "active" : ""} style={{paddingBottom : "2px"}}>{post.likes.length - 1}</label>
                         </div>
                         <div className="Share">
                             <svg className="bookmark_Icon" viewBox="0 0 512 512" width="15px" height="15px">
@@ -46,7 +60,9 @@ const Description = ({post}) => {
                         )}
                         
                     </div>
+                    
                 </div>
+                
             );
         }
 

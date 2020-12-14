@@ -13,10 +13,17 @@ body
             background-repeat: no-repeat;
             background-size: cover;
         }
+        .signin
+        {
+            right: 0;
+        }
+        .red
+        {
+            right: -90px;
+        }
         .TextPart
         {
             width: 60%;
-            right: -90px;
             display: flex;
             flex-direction: column;
             h1 

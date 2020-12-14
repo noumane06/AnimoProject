@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // ******************************
+
+// Verifying if email exist when signup -----------
 exports.user_verifMail = (req, res , nxt) => {
     User.find({ email: req.body.email })
         .exec()
@@ -25,6 +27,8 @@ exports.user_verifMail = (req, res , nxt) => {
             res.status(500).json(err);
         })
 };
+
+//  Signup ----------------------
 exports.user_signup = (req,res,next)=>{
     User.find({email : req.body.email})
     .exec()
@@ -99,6 +103,8 @@ exports.user_signup = (req,res,next)=>{
         res.status(500).json(err);
     })
 };
+
+//  Sign in -------------------
 exports. user_signin = (req,res)=>{
     User.find({email : req.body.email})
     .exec()
@@ -150,6 +156,7 @@ exports. user_signin = (req,res)=>{
     })
 };
 
+
 exports.user_delete = (req,res)=>{
     const id = req.params.userId ; 
     User.deleteOne({_id : id})
@@ -168,6 +175,8 @@ exports.user_delete = (req,res)=>{
         console.log(err);
     });
 };
+
+// Search the users by id and return basic infos -----------
 
 exports.user_getbyId = (req,res,next) => {
     const id = req.params.UsrId ;
@@ -196,6 +205,8 @@ exports.user_getbyId = (req,res,next) => {
     })
 }
 
+// Return the user own  profile --------------
+
 exports.User_Myprofile = (req , res) =>{
     const id = req.AuthID.userId ;
     User.findById(id)
@@ -223,8 +234,34 @@ exports.User_Myprofile = (req , res) =>{
     })
 }
 
+// Logging out handler ----------------
+exports.user_signout = (req,res) =>{
+    const id = req.AuthID.userId ;
+    User.find({_id : id})
+    .then(resp =>{
+        res.cookie('auth',"",{
+            httpOnly: true ,
+            secure : process.env.COOKIES_SECURE !== 'false',
+            sameSite : 'strict',
+            maxAge : 0 ,
+            path : '/'
+        })
+        return res.status(200).json({message : "You're Logged Out"});
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
+// Checking if user is logged in -----------------------------
+
 exports.Checking_User = (req,res,next)=>{
     res.status(200).json({
-        message : "Valid cookie"
+        message : "Valid cookie",
+        userId : req.AuthID.userId 
     })
 }

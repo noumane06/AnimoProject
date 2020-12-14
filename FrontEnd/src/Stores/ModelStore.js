@@ -54,11 +54,7 @@ import axios from "axios";
       {
         return this.posts.length ;
       }
-   async getPost(id) {
-    //  const prom = await this.storingtoStores() ;
-     const post = await this.posts.find(element => element._id === id);
-     return post ;
-   }
+   
  }
  const store = new postsStore();
  export default store ;

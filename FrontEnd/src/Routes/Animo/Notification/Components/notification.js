@@ -13,12 +13,10 @@ class Notification extends React.Component {
             const str="Notifications"
              return ( 
                  <Provider postsStore={postsStore}>
-
-                    <Header route={str}/>
+                    <Header Title={str}/>
                      <title>Notifications | animo</title>
                      <h2>You have 3 new notifications </h2>
                 </Provider>
-
          );
         }
  
