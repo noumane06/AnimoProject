@@ -5,7 +5,7 @@ import axios from 'axios';
 import Lottie from 'react-lottie' ;
 
 // Components -----------------
-import SignUp from './Components/signup';
+import SignUp from './signup';
 import animationData from './animations/redirect.json';
 import '../CSS/Redirect.scss';
 // Render ---

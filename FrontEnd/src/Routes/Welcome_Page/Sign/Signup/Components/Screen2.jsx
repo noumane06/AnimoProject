@@ -1,56 +1,82 @@
 import React from 'react';
 import Captcha from './captcha';
 import Lottie from 'react-lottie' ;
-const Screen2 = ({defaultphoneOptions,state,handlePhone,handlePhoneClick,handler,back}) => {
+import animationphoneData from '../animations/phoneAnim.json';
+import animationData from '../animations/animation.json';
+const Screen2 = ({formik,handler,back,Loading}) => {
+
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      rendererSettings: {
+          preserveAspectRatio: "xMidYMid",
+      },
+    };
+
+    const defaultphoneOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationphoneData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid",
+        },
+    };
+
     return (
       <div className="menu">
-        <title>Verify phone number | Animo</title>
+        <title>Vérifier le numéro de téléphone | Animo</title>
         <Lottie options={defaultphoneOptions} height={300} width={300} />
 
         {/* Enter the phone number segment */}
 
-        <h2 style={{ textAlign: "justify" }}>Verify your phone number</h2>
+        <h2 style={{ textAlign: "justify" }}>Vérifiez votre numéro de téléphone</h2>
         <p style={{ fontFamily: "glacial indifference" }}>
-          For your security, animo wants to make sure it’s really you. animo
-          will send a text message with a 6-digit verification code. Standard
-          rates apply
+        Pour votre sécurité, animo veut s’assurer qu’il s’agit bien de vous.
+        animo enverra un message texte avec un code de vérification à 6 chiffres.
+        Les tarifs standards s'appliquent
         </p>
-        <label style={{ color: "#FF7E6A" }}>Phone number : </label>
-        <div className="inputs">
-          <i className="fa fa-mobile icon"></i>
-          <input
-            className={state.isValid ? "field" : "field err"}
-            onChange={handlePhone}
-            value={state.phone}
-            type="tel"
-            id="phone"
-          />
-          <br />
-          <div className={state.isValid ? "val" : "inv_msg"}>
-            <i className="fa fa-close"></i>
-            <p>Invalid phone number</p>
-          </div>
-        </div>
-        <Captcha handler={handler} />
-        <div className="submitContainer ButtonsContainer">
-          <button className="leftBut" onClick={() => back()}>
-            Back
-          </button>
-          <div className="nextBut">
-            <button
-              className={
-                !state.captchaState || !state.phoneState
-                  ? "loading"
-                  : "Submitbutton"
-              }
-              style={{ float: "right" }}
-              onClick={handlePhoneClick}
-            >
-              {state.isLoading ? "loading" : "Next"}
-            </button>
+        <form onSubmit={formik.handleSubmit} method="post">
+          <label style={{ color: "#FF7E6A",fontWeight:"bolder" }}>Numéro de téléphone : </label>
+          <div className="inputs">
+            <br/>
+            <input
+              className={formik.touched.phone &&  formik.errors.phone ? 'field invalid' : 'field' }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.phone}
+              name="phone"
+              type="text"
+              id="phone"
+            />
             <br />
+            {formik.errors.phone ? <div className="inv_msg">{formik.errors.phone}</div> : null}
           </div>
-        </div>
+          <Captcha handler={handler} />
+          {formik.errors.captchaState ? <div className="inv_msg" style={{textAlign : 'center'}}>{formik.errors.captchaState}</div> : null}
+          <div className="submitContainer ButtonsContainer">
+            <button className="leftBut" onClick={() => back()}>
+              Precedent
+            </button>
+            <div style={{width : '20%'}}>
+              {Loading &&(
+                <button className="nextBut nextLoad" type="submit" style={{ float: "right" }} disabled>
+                  <Lottie options={defaultOptions} height={40} width={40} />
+                </button>
+              )}
+              {!Loading &&(
+                <button
+                className="nextBut"
+                type="submit"
+              >
+                Suivant
+              </button>
+              )}
+              
+              <br />
+            </div>
+          </div>
+        </form>
       </div>
     );
 }

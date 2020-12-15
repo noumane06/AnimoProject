@@ -1,43 +1,72 @@
+
 import React from 'react';
-const Screen3 = ({state,handleVerif,handlechange}) => {
+import animationData from '../animations/animation.json';
+import Lottie from 'react-lottie' ;
+
+const Screen3 = ({formik,data,back,Loading}) => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+        preserveAspectRatio: "xMidYMid",
+    },
+  };
     return (
-                <div className="menu">
-                  <h2>
-                    Please type the verification code sent to {state.phone}
-                  </h2>
-                  <div className="inputs">
-                    <i className="fa fa-phone icon"></i>
-                    <input
-                      className={state.submitState ? "field" : "field err"}
-                      onChange={handlechange}
-                      required
-                      type="tel"
-                      id="codeverif"
-                      placeholder="Provide the code we sent you"
-                      maxLength="6"
-                    />
-                    <br />
-                    <div className={state.submitState ? "val" : "inv_msg"}>
-                      <i className="fa fa-exclamation-triangle icon"></i>
-                      <p>Invalid code</p>
-                    </div>
-                  </div>
-                  <div className="submitContainer">
-                    <button
-                      style={{ textAlign: "center" }}
-                      onClick={handleVerif}
-                      className={
-                        state.isLoading || state.codeverif.length < 6
-                          ? "loading"
-                          : "Submitbutton"
-                      }
-                    >
-                      {state.isLoading ? "loading" : "Verify"}
-                    </button>
-                    <br />
-                  </div>
-                </div>
-      );
+      <div className="menu" style={{marginTop : '45px'}}>
+        
+        <h2 style={{textAlign:'left',color:'#195e83'}}>Code envoyé</h2>
+        <p>
+          Veuillez saisir le code de vérification envoyé à {data.values.phone}
+        </p>
+        <form onSubmit={formik.handleSubmit} method="post">
+          <div className="inputs">
+            <input
+              className={
+                formik.touched.codeverif && formik.errors.codeverif
+                  ? "field invalid"
+                  : "field"
+              }
+              onChange={formik.handleChange}
+              value={formik.values.codeverif}
+              name="codeverif"
+              type="text"
+              id="codeverif"
+              placeholder="Code de verification"
+              maxLength="6"
+            />
+            <br />
+            {formik.touched.codeverif && formik.errors.codeverif ? (
+              <div className="inv_msg">{formik.errors.codeverif}</div>
+            ) : null}
+          </div>
+          <div className="submitContainer ButtonsContainer">
+            <button className="leftBut" onClick={() => back()}>
+              Precedent
+            </button>
+            <div style={{ width: "20%" }}>
+              {Loading && (
+                <button
+                  className="nextBut nextLoad"
+                  type="submit"
+                  style={{ float: "right" }}
+                  disabled
+                >
+                  <Lottie options={defaultOptions} height={40} width={40} />
+                </button>
+              )}
+              {!Loading && (
+                <button className="nextBut" type="submit">
+                  Suivant
+                </button>
+              )}
+
+              <br />
+            </div>
+          </div>
+        </form>
+      </div>
+    );
 }
  
 export default Screen3;

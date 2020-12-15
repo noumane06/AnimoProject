@@ -105,7 +105,6 @@ class signin extends React.Component {
                         <input className={this.state.isValid ? 'field' : 'field invalid' } type="email" id="email" onChange={this.handlechange} required/><br/>
                     </div>
                     <div className={this.state.isValid ? 'val' : 'inv_msg' } >
-                        <i className="fa fa-close"></i>
                         <p>Wrong email</p>
                     </div>
                     <label>Password : </label>
@@ -114,7 +113,6 @@ class signin extends React.Component {
                          <input className={this.state.isValid ? 'field' : 'field invalid' } type="password" id="password" onChange={this.handlechange} required/><br/>
                     </div>
                     <div className={this.state.isValid ? 'val' : 'inv_msg' } >
-                    <i className="fa fa-close"></i>
                         <p>Wrong password</p>
                     </div>
                 

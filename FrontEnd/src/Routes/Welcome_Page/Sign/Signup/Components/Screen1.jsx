@@ -1,135 +1,123 @@
 import React from 'react' ;
-const Screen1 = ({handlesubmit,handlechange,state})=>{
-
+import Lottie from 'react-lottie';
+import animationData from '../animations/animation.json';
+const Screen1 = ({formik , Loading })=>{
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid",
+        },
+    };
     return(
-        <div className="menu">
-                <title>Sign up | Animo</title>
-                <h1>Sign up</h1>
-                <div className="third_paties_Container">
-                  <i className="fab fa-facebook-f iconf fa-lg"></i>
-                  <button className="fb_submit" type="submit">
-                    Sign up with facebook
-                  </button>
-                </div>
-                <div className="third_paties_Container">
-                  <i className="fab fa-google icong fa-lg"></i>
-                  <button className="gl_submit" type="submit">
-                    Sign up with google
-                  </button>
-                </div>
-                <br />
+      <div className="menu">
+      
+      <div className="third_paties_Container">
+        <i className="fab fa-facebook-f iconf fa-lg"></i>
+        <button className="fb_submit" type="submit">
+        Inscrivez-vous avec Facebook
+        </button>
+      </div>
+      <div className="third_paties_Container">
+        <i className="fab fa-google icong fa-lg"></i>
+        <button className="gl_submit" type="submit">
+        Inscrivez-vous avec google
+        </button>
+      </div>
+      <br />
 
-                <p className="span">Or use your email</p>
+      <hr class="divider"></hr>
 
-                <form onSubmit={handlesubmit} method="post">
-                  <label>First name : </label>
-                  <div className="inputs">
-                    <i className="fa fa-user icon"></i>
-                    <input
-                      className="field "
-                      placeholder="Ex : mohammed"
-                      onChange={handlechange}
-                      required
-                      type="text"
-                      value={state.firstname}
-                      id="firstname"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>Last name : </label>
-                  <div className="inputs">
-                    <i className="fa fa-user icon"></i>
-                    <input
-                      placeholder="Ex : bencharqroun"
-                      className="field "
-                      onChange={handlechange}
-                      value={state.lastname}
-                      required
-                      type="text"
-                      id="lastname"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>username : </label>
-                  <div className="inputs">
-                    <i className="fa fa-id-card icon"></i>
-                    <input
-                      placeholder="Ex : mohammed006"
-                      className="field "
-                      onChange={handlechange}
-                      value={state.username}
-                      required
-                      type="text"
-                      id="username"
-                    />
-                    <br />
-                  </div>
-                  
-                  <label>Email : </label>
-                  <div className="inputs">
-                    <i className="fa fa-envelope icon"></i>
-                    <input
-                      className="field "
-                      onChange={handlechange}
-                      placeholder="Enter a valid email , you'll be ask to verify it later"
-                      value={state.email}
-                      required
-                      type="email"
-                      id="email"
-                    />
-                    <br />
-                  </div>
-                  <div className={state.isValid ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>email already exist</p>
-                  </div>
-                  <div className={state.emailState ? "val" : "inv_msg"}>
-                    <i className="fa fa-close"></i>
-                    <p>You have entered an invalid email address!</p>
-                  </div>
-                  <label>Password : </label>
-                  <div className="inputs">
-                    <i className="fa fa-lock icon"></i>
-                    <input
-                      className="field "
-                      onChange={handlechange}
-                      value={state.password}
-                      required
-                      type="password"
-                      id="password"
-                    />
-                    <br />
-                  </div>
-                  <div className="gender">
-                      <label>Gender : </label>
-                      <div className="radio one">
-                        <input type="radio" id="gender" name="gender" value="male" onChange={handlechange} checked={state.gender === "male"}/>
-                        <label style={{fontWeight : "normal"}}>Male</label>
-                      </div>
-                      <div className="radio two">
-                      <input type="radio" id="gender" value="female" onChange={handlechange} checked={state.gender === "female"}/>
-                      <label style={{ fontWeight: "normal" }}>Female</label>
-                      </div>
-                  </div>
-                      
-                  <div className="submitContainer">
-                    <button
-                      type="submit"
-                      className={state.isLoading  ? "loading" : "Submitbutton"}
-                      disabled={state.isLoading}
-                      style={{ textAlign: "center" }}
-                    >
-                      {state.isLoading ? "Loading..." : "Sign Up"}
-                    </button>
-                    <br />
-                    <span className="descr">Already have an account ?</span>
-                    <br />
-                    <a href="/account/signin">Sign in now</a>
-                  </div>
-                </form>
-              </div>
+      <form onSubmit={formik.handleSubmit} method="post">
+        
+        <div className="doubleContainer">
+          <div className="Nom">
+            <input
+              placeholder="Votre nom"
+              className={formik.touched.firstname && formik.errors.firstname ? 'field invalid' : 'field' }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text"
+              value={formik.values.firstname}
+              id="firstname"
+            />
+            {formik.touched.firstname && formik.errors.firstname ? <div className="inv_msg">{formik.errors.firstname}</div> : null}
+          </div>
+          <div className="Prenom">
+            <input
+              placeholder="Votre prenom"
+              className={formik.touched.lastname && formik.errors.lastname ? 'field invalid' : 'field' }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.lastname}
+              type="text"
+              id="lastname"
+            />
+            {formik.touched.lastname && formik.errors.lastname ? <div className="inv_msg">{formik.errors.lastname}</div> : null}
+          </div>
+        </div>
+        <div className="inputs">
+          <input
+            placeholder="Votre email"
+            className={formik.touched.email &&  formik.errors.email ? 'field invalid' : 'field' }
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+          <br />
+        </div>
+        {formik.touched.email && formik.errors.email ? <div className="inv_msg">{formik.errors.email}</div> : null}
+        <div className="inputs">
+          <input
+            className={formik.touched.password &&  formik.errors.password ? 'field invalid' : 'field' }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            required
+            type="password"
+            id="password"
+            placeholder="Mot de passe"
+          />
+        </div>
+        {formik.touched.password && formik.errors.password ? <div className="inv_msg">{formik.errors.password}</div> : null}
+        <div className="gender">
+            <label style={{fontWeight : 'bolder'}}>Sexe : </label>
+            <div className="radio one">
+              <input type="radio" id="gender" name="gender" value="male" onChange={formik.handleChange} checked={formik.values.gender === "male"}/>
+              <label style={{fontWeight : "normal"}}>Homme</label>
+            </div>
+            <div className="radio two">
+            <input type="radio" id="gender" value="female" onChange={formik.handleChange} checked={formik.values.gender === "female"}/>
+            <label style={{ fontWeight: "normal" }}>Femme</label>
+            </div>
+        </div>
+        <div className="submitContainer">
+          {Loading &&(
+            <button className="loading" type="submit" disabled>
+              <Lottie options={defaultOptions} height={40} width={40} />
+            </button>
+          )}
+          {!Loading &&(
+            <button
+              type="submit"
+              className="Submitbutton"
+              style={{ textAlign: "center" }}
+            >
+              S'inscrire
+            </button>
+          )}
+          
+          <br />
+          <span className="descr">Vous avez déjà un compte ?</span>
+          <br />
+          <a href="/account/signin">Connectez-vous maintenant</a>
+        </div>
+      </form>
+    </div>
     )
 }
 export default Screen1;
