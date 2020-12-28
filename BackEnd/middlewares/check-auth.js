@@ -9,6 +9,7 @@ module.exports = (req,res,next)=>{
         req.AuthID = DecodedToken ;
         next();
     } catch (error) {
+        
         return res.status(401).json({
             error : "Auth failed"
         });

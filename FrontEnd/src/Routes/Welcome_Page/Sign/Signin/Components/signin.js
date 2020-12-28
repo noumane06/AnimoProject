@@ -1,132 +1,150 @@
-import React from 'react';
-import {NavLink  } from 'react-router-dom';
+import React , {useState} from 'react';
 import axios from 'axios';
-
+import {useFormik} from 'formik';
 import '../../CSS/account_mobile.scss';
+import { validate  } from './methods';
+import Lottie from 'react-lottie';
+import animationData from '../animations/animation.json';
 
-class signin extends React.Component {
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            email : "",
-            password : "",
-            isValid : true, 
-            isLoading : false,
-            returnTo : "" ,
-            error : null 
-        };
-        this.handlechange = this.handlechange.bind(this);
-        this.handlesubmit = this.handlesubmit.bind(this);
-    }
-    handlechange(e)
-    {
-        this.setState({
-            [e.target.id] : e.target.value ,
-            isValid : true 
-        });
-    }
-    handlesubmit(e)
-    {
-       this.setState({isLoading : true});
-       axios.post("/users/signin/",this.state)
-        .then(response =>{
-            if(response.status === 200)
-            {
-                if (this.state.returnTo !== "") {
-                    window.location.assign(this.state.returnTo);
-                }else
-                {
-                    window.location.replace("/home");
-                }
-            }else
-            {
-                
-                this.setState({
-                    isValid : false ,
-                    isLoading : false
-                });
-               
-            }
-        })
-        .catch(err =>{
-                
-                this.setState({
-                    isValid : false,
-                    isLoading : false 
-                });
-            console.log(err); 
+const Signin = ()=> {
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid",
+        },
+    };
+    const [Loading , setLoading] = useState(false);
+    const formik = useFormik({
+        initialValues: {
+          email: "",
+          password: "",
+        },
+        validate,
+        onSubmit: (values) => {
+          setLoading(true);
+          axios.post("/users/signin/",values)
+          .then(response =>{
+              if(response.status === 200)
+              {
+                window.location.assign("/home");
+              }else
+              {
+                setLoading(false);
+                formik.setFieldError("email", "Email invalid");
+                formik.setFieldError("password", "Mot de passe incorrect");
+              }
+          })
+          .catch(err =>{
+            setLoading(false);
+            formik.setFieldError("email", "Email invalid");
+            formik.setFieldError("password", "Mot de passe incorrect");
+  
+          })
+        },
+      });
 
-        })
-        e.preventDefault();
-    }
-    componentDidMount()
-    {
-        const params = window.location.search.split("=")[1];
-        if (params !== undefined && params !== "") {
-            this.setState({
-                returnTo : params 
-            });
-        }
-    }
-    
-    render() { 
-           return ( 
-               <>
-               <img src={
-                                     require('../../../../../res/Logo/animo iluustration icon.svg')}
-                                     alt="animo's logo orange version"
-                                     className="Animo_logo_orange_2" 
-                                     onClick={()=>{window.location.replace("/")}}
-                                />
-            <div className="AccountContainer">
-             <title>Sign in | Animo</title>
+           return (
+             <>
+               <img
+                 src={require("../../../../../res/Logo/animo iluustration icon.svg")}
+                 alt="animo's logo orange version"
+                 className="Animo_logo_orange_2"
+               />
+               <div className="AccountContainer">
+                 <title>Connectez-vous  | Animo</title>
+                 <h1>Connectez-vous</h1>
+                 <div className="menu">
+                   {/* Third party sign  */}
+                   <div className="third_paties_Container">
+                     <i className="fab fa-facebook-f iconf fa-lg"></i>
+                     <button className="fb_submit" type="submit">
+                       Connectez-vous avec Facebook
+                     </button>
+                   </div>
+                   <div className="third_paties_Container">
+                     <i className="fab fa-google icong fa-lg"></i>
+                     <button className="gl_submit" type="submit">
+                       Connectez-vous avec google
+                     </button>
+                   </div>
+                   <br/>
+                   {/* ************************ */}
+                   <hr class="divider"></hr>
 
-                <h1>Sign in</h1>
-                {/* Third party sign  */}
-                <div className="third_paties_Container">
-                    <i className="fab fa-facebook-f fa-lg inf"></i>
-                    <button className='fb_submit' type="submit">Sign in with facebook</button>
-                </div>
-                <div className="third_paties_Container">
-                    <i className="fab fa-google fa-lg ing"></i>
-                    <button className='gl_submit' type="submit">Sign in with google</button>
-                </div>
+                   <form onSubmit={formik.handleSubmit} method="post">
+                     <div className="inputs">
+                       <input
+                         placeholder="Votre email"
+                         className={
+                           formik.touched.email && formik.errors.email
+                             ? "field invalid"
+                             : "field"
+                         }
+                         id="email"
+                         name="email"
+                         type="email"
+                         onChange={formik.handleChange}
+                         onBlur={formik.handleBlur}
+                         value={formik.values.email}
+                       />
+                       <br />
+                     </div>
+                     {formik.touched.email && formik.errors.email ? (
+                       <div className="inv_msg">{formik.errors.email}</div>
+                     ) : null}
+                     <div className="inputs">
+                       <input
+                         className={
+                           formik.touched.password && formik.errors.password
+                             ? "field invalid"
+                             : "field"
+                         }
+                         onChange={formik.handleChange}
+                         onBlur={formik.handleBlur}
+                         value={formik.values.password}
+                         type="password"
+                         id="password"
+                         placeholder="Mot de passe"
+                       />
+                     </div>
+                     {formik.touched.password && formik.errors.password ? (
+                       <div className="inv_msg">{formik.errors.password}</div>
+                     ) : null}
 
-                {/* ************************ */}
+                     <div className="submitContainer">
+                       {Loading && (
+                         <button className="loading" type="submit" disabled>
+                           <Lottie
+                             options={defaultOptions}
+                             height={40}
+                             width={40}
+                           />
+                         </button>
+                       )}
+                       {!Loading && (
+                         <button
+                           type="submit"
+                           className="Submitbutton"
+                           style={{ textAlign: "center" }}
+                         >
+                           Se connecter
+                         </button>
+                       )}
 
-                <p className="span"><span >Or use your email</span></p> 
-                
-
-                <form onSubmit={this.handlesubmit} method="post"> 
-                    <label>Email address : </label>
-                    <div className="inputs">
-                         <i className="fa fa-user icon"></i>
-                        <input className={this.state.isValid ? 'field' : 'field invalid' } type="email" id="email" onChange={this.handlechange} required/><br/>
-                    </div>
-                    <div className={this.state.isValid ? 'val' : 'inv_msg' } >
-                        <p>Wrong email</p>
-                    </div>
-                    <label>Password : </label>
-                    <div className="inputs">
-                         <i className="fa fa-lock icon"></i>
-                         <input className={this.state.isValid ? 'field' : 'field invalid' } type="password" id="password" onChange={this.handlechange} required/><br/>
-                    </div>
-                    <div className={this.state.isValid ? 'val' : 'inv_msg' } >
-                        <p>Wrong password</p>
-                    </div>
-                
-                    <div className="submitContainer">
-                        <input className={this.state.isLoading ? "loading" : "Submitbutton"} type="submit" value={this.state.isLoading ? "Loading..." : "Sign in"}></input><br/>  
-                        <span className="descr">Don't have an account </span><br/>
-                        <a href="/account/signup">Sign up now</a>
-                    </div>
-
-                </form>
-            </div>
-                </>
-         ); 
-    }
+                       <br />
+                       <span className="descr">
+                         Vous n'avez pas de compte?{" "}
+                       </span>
+                       <br />
+                       <a href="/account/signup">Inscrivez-vous maintenant</a>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             </>
+           ); 
 }
  
-export default signin;
+export default Signin;

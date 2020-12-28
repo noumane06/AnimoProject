@@ -1,3 +1,4 @@
+
 export function validate(values) {
     const errors = {};
     if (!values.firstname) {
@@ -23,7 +24,6 @@ export function validate(values) {
     } else if (values.password.length < 8) {
         errors.password = 'Doit contenir au moins 8 caractères';
     }
-
     return errors;
 }
 

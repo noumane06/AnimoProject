@@ -17,11 +17,11 @@ const Price_infos = ({ post, PostType }) => {
         <div className="status_type buysell">{PostType}</div>
       )}
       {(post.PostType === "Offer" || post.PostType === "Offre") &&
-        post.TransactionType == "Sell" && (
+        post.TransactionType === "Sell" && (
           <div className="price">{post.Price} Dh</div>
         )}
       {(post.PostType === "Offer" || post.PostType === "Offre") &&
-        post.TransactionType == "Petsit" && (
+        post.TransactionType === "Petsit" && (
           <div className="price">{post.Duration}</div>
         )}
     </div>

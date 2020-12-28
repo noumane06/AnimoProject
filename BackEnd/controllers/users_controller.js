@@ -61,7 +61,6 @@ exports.user_signup = (req,res,next)=>{
                      password : hash ,
                      firstname : req.body.firstname , 
                      lastname : req.body.lastname , 
-                     username : req.body.username,
                      phone : req.body.phone,
                      birthDay: "1997-06-17T00:00:00.000+00:00" ,
                      Usrimg:  img,
@@ -105,26 +104,23 @@ exports.user_signup = (req,res,next)=>{
 };
 
 //  Sign in -------------------
-exports. user_signin = (req,res)=>{
+exports.user_signin = (req,res)=>{
     User.find({email : req.body.email})
     .exec()
     .then(userdata =>{
         if (userdata.length < 1 ) {
-            console.log("Mail dosn't exist");
             res.status(401).json({
-                message : "Auth failed "
+                message : "Mail dosn't exist"
             });
         }else
         {   
             bcrypt.compare(req.body.password , userdata[0].password , (err,result)=>{
                 if (err) {
-                    console.log("wrong mail or password ");
                     return res.status(401).json({
-                        message : "Auth failed 1"
+                        message : "Wrong mail or password"
                     });
                 }
                     if(result) {
-                    console.log("we made it")
                     const token = jwt.sign(
                         {
                             userId : userdata[0]._id
@@ -142,7 +138,8 @@ exports. user_signin = (req,res)=>{
                         path : '/'
                     })
                     return res.status(200).json({
-                        message : "Loggedin"
+                        message : "Loggedin",
+                        token
                     });   
                 }
                 else
@@ -154,8 +151,13 @@ exports. user_signin = (req,res)=>{
             });
         }
     })
+    .catch(err =>{
+        res.status(500).json({
+            message : 'internal error',
+            err
+        })
+    })
 };
-
 
 exports.user_delete = (req,res)=>{
     const id = req.params.userId ; 
@@ -190,8 +192,8 @@ exports.user_getbyId = (req,res,next) => {
                     id : result._id,
                     firstname : result.firstname , 
                     lastname : result.lastname , 
-                    username : result.username ,
-                    img : result.Usrimg
+                    img : result.Usrimg,
+                    phone : result.phone
                 }
             });
         } else {
@@ -205,6 +207,34 @@ exports.user_getbyId = (req,res,next) => {
     })
 }
 
+// return all notofications for the user 
+exports.user_getNotifications = (req,res, next)=>{
+    const id = req.AuthID.userId ;
+    User.findById(id)
+    .then(result => {
+        if (result) {
+            res.status(200).json({
+                message: "User Found",
+                result: {
+                    id : result._id,
+                    firstname : result.firstname , 
+                    lastname : result.lastname , 
+                    phone : result.phone ,
+                    img : result.Usrimg ,
+                    Notifications : result.Notifications,
+                    NotifView : result.NotifView
+                }
+            });
+        } else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
+}
 // Return the user own  profile --------------
 
 exports.User_Myprofile = (req , res) =>{
@@ -219,7 +249,7 @@ exports.User_Myprofile = (req , res) =>{
                     id : result._id,
                     firstname : result.firstname , 
                     lastname : result.lastname , 
-                    username : result.username ,
+                    phone : result.phone ,
                     img : result.Usrimg
                 }
             });
@@ -264,4 +294,17 @@ exports.Checking_User = (req,res,next)=>{
         message : "Valid cookie",
         userId : req.AuthID.userId 
     })
+}
+
+exports.postTest = (req,res)=>{
+    const username = req.body.username ;
+    if (username === 'noumane06') {
+        res.status(200).json({
+            message : 'Welcome back nariman'
+        })
+    } else {
+        res.status(404).json({
+            message : 'User not found'
+        })
+    }
 }

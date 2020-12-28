@@ -8,7 +8,7 @@ function PostContainer(props) {
         <div className="post_container">
                 {
                     props.posts.map(post =>(
-                        <Post key={post._id} post={post} />              
+                        <Post  key={post._id} post={post} />              
                     ))
                 }
         </div>

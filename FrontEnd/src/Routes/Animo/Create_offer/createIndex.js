@@ -9,7 +9,6 @@ import Error from './Components/ErrorSvg';
 import Cities from './Data/Cities';
 import DarkHeader from './Components/Dark_header';
 import { storage } from './firebase-config';
-import Splash from '../../../Components/Splash';
 // ----------------------------------------------
 
 // Modules import
@@ -19,7 +18,6 @@ import { Steps } from 'antd';
 import { Provider } from 'mobx-react';
 import axios from "axios";
 import { Spin } from 'antd';
-import { Link } from 'react-router-dom';
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -79,7 +77,6 @@ const steps = [
         title: 'Dernières touches'
     },
 ];
-const city = [];
 const postType = ["Demande","Offre"];
 const transaction = ["Garde d'animaux","Adoption"];
 const species = [ "Chats", "Chiens", "Oiseaux","Poisson d'eau douce", "Hamsters", "Lapins", "Chinchillas","Les chevaux","reptiles"];
@@ -207,7 +204,7 @@ class CreateOffer extends React.Component {
             }
         }
         
-        axios.post("http://localhost:9000/posts/", this.state.data ,{withCredentials : true})
+        axios.post("/posts/", this.state.data ,{withCredentials : true})
              .then((data) => {
                  console.log(data);
                  this.setState({ postDone: true });
@@ -280,7 +277,6 @@ class CreateOffer extends React.Component {
                 <div className="ant-upload-text">Télécharger</div>
             </div>
         );
-        let i = 0 ; 
             const { current } = this.state;
             return (
                 
@@ -298,7 +294,7 @@ class CreateOffer extends React.Component {
                         {/* --------------------------------------- */}
 
                             {steps[current].id === 1 && (
-                                <Step1 state={this.state} postType={postType} handleChange={this.handleChange} transaction={transaction} city={city}    />
+                                <Step1 state={this.state} postType={postType} handleChange={this.handleChange} transaction={transaction} city={Cities}    />
 
                             )}
 
@@ -356,7 +352,7 @@ class CreateOffer extends React.Component {
                                     <div className="PreviewPost">
                                         <Provider postsStore={postsStore} >
                                             <h1>Aperçu de l'annonce</h1>
-                                            <Post  post={this.state.data} />   
+                                            <Post  post={this.state.data} apercu={true} userId={this.props.userId}/>   
                                         </Provider>
                                     </div>
                                 )}
@@ -450,42 +446,15 @@ class CreateOffer extends React.Component {
 // -----------------------------------------------------------------
 // Main component to export 
 
-class Offer extends React.Component {
-    constructor(props) {
-
-        super(props);
-        this.state = {
-            loading : true ,
-            className: "SplashContainer"
-        }
-    }
-
-    UNSAFE_componentWillMount() {
-        ( () => {
-            
-            Cities.map(item => city.push(item));
-            this.setState({ className: "SplashContainer trans"});
-            setTimeout(() => {
-                this.setState({ loading: false });  
-            }, 500);
-        })();
-    }
-    render() {
-        let theChild = undefined;
-        if (!this.state.loading) {
-            theChild = <CreateOffer/>
-        } else {
-            theChild = <Splash  propsclass={this.state.className} route="create"/>
-        }
-        return ( 
-            <div>
-                <title>Créez votre offre | animo</title>
-                {theChild}
-            </div>
-         );
-    }
+const Offer = ({userId})=>{
+    let theChild = <CreateOffer userId={userId}/>
+    return ( 
+        <div>
+            <title>Créez votre offre | animo</title>
+            {theChild}
+        </div>
+     );
 }
- 
 // ----------------------------------------------
 
 export default Offer;

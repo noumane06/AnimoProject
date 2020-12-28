@@ -2,10 +2,12 @@
 
 import React from 'react';
 import {Route  , BrowserRouter ,Switch } from 'react-router-dom';
+import './Components/scss/Antd.scss'
 // components import 
 import Account_page from './Routes/Welcome_Page/Sign/Account_page';
 import Landing_page from './Routes/Welcome_Page/Landing/Landing_page';
 import AnimoContainer from './Routes/Animo/animo';
+
 // *****************************
 
 const Main_router = () => {

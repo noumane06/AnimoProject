@@ -1,6 +1,7 @@
 // dependencies 
 
 const Post = require('../models/post_model'); 
+const User = require('../models/user_model');
 const mongoose = require('mongoose');
 
 // *********************
@@ -30,7 +31,7 @@ exports.post_post = function (req,res) {
     });
     post.Sector = req.body.Sector ;
     post.UsrId = usrId ;
-
+    post.likes = [""];
     post.save()
     .then(result => {
         console.log(result);
@@ -152,25 +153,58 @@ exports.post_getBy_Usrid = (req , res ,next)=>{
 }
 
 
-exports.Post_Like  = (req ,res ) =>{
-    const id = req.query.userid ; 
-    Post.updateOne({_id : id},{likes : req.body.likes})
-    .then(result=>{
-        res.status(200).json(
-            {
-                message : "Updated succefully",
-                data : result
-            }
-        )
+exports.Post_Like = async (req, res) => {
+  const id = req.query.postid;
+  const userData = await Post.findOne({ _id: id }).select("UsrId").exec();
+  Post.updateOne({ _id: id }, { likes: req.body.likes })
+    .then((result) => {
+        if (userData!==null) {
+            const Notifications = {
+                Type: req.body.NotificationType,
+                postId: id,
+                usrId: req.AuthID.userId,
+                date: Date.now(),
+            };
+            
+            User.updateOne({ _id: userData.UsrId },
+              {
+                $push: {Notifications: Notifications},
+                $inc: { NotifView: 1 }
+              })
+              .then((result1) => {
+                  if (result1) {
+                    res.status(200).json({
+                      message: "Updated Succesfuly",
+                      result1,
+                      result,
+                    });
+                  } else {
+                    res.status(404).json({
+                      message: "User not found",
+                    });
+                  }
+              })
+              .catch((err) => {
+                console.log(err);
+                res.status(500).json({
+                  message: "An error occured whill updating user",
+                  error: err,
+                });
+              });
+        } else {
+            res.status(404).json({
+                message : "Post not found"
+            })
+        }
     })
-    .catch(err =>{
-        console.log(err);
-        res.status(404).json({
-            message : "The user is not here :/ , below more infos",
-            error : err
-        })
-    })
-}
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        message: "An error occured whill updating the post",
+        error: err,
+      });
+    });
+};
 
 // exports.deletePost = (req,res) =>{
 //     Post.deleteMany({Age : "1 month",Species:"cats"})

@@ -14,7 +14,7 @@ import axios from "axios";
           const page = 1 ;
           const url = "/posts?page="+ page;
           axios.get(url,{withCredentials : true}).then(res => {
-            this.count = res.data.count ;
+            this.count = res.data.count ; 
             this.posts = res.data.posts;
             resolve(this.posts);
           }).then(() => this.loading = false)

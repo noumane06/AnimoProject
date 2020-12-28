@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {observer , inject } from 'mobx-react';
-import { Skeleton, Spin } from 'antd';
+import { Skeleton } from 'antd';
 import Lottie from 'react-lottie';
 // Internal files and compenents 
 import './CSS/posts.scss';

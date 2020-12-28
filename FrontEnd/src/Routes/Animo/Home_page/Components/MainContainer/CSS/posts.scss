@@ -1,5 +1,5 @@
 body {
-  @import "./skeletonStyle.scss";
+
   .Nomoredata {
     border: none;
     font-family: "Roboto";
@@ -106,6 +106,9 @@ body {
         cursor: pointer;
         color: #2a2929;
       }
+      .name:hover {
+        text-decoration: underline;
+      }
       .post_time {
         font-size: 14px;
         color: rgb(91, 92, 95);
@@ -202,6 +205,9 @@ body {
         font-weight: 1000;
         width: 50%;
         cursor: pointer;
+      }
+      .status_type:hover {
+        text-decoration: underline;
       }
       .adoption {
         color: #ee6c4d;

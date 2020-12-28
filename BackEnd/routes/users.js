@@ -16,5 +16,6 @@ router.get('/signout',checkAuth,Usercontroller.user_signout);
 router.get('/:userid=:UsrId' ,checkAuth, Usercontroller.user_getbyId);
 router.get('/Myprofile',checkAuth, Usercontroller.User_Myprofile);
 router.get('/checkCoockie',checkAuth,Usercontroller.Checking_User);
+router.get('/Notifications',checkAuth,Usercontroller.user_getNotifications);
 router.delete('/:userId', Usercontroller.user_delete);
 module.exports = router ;

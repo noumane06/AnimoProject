@@ -11,14 +11,15 @@ const userSchema = mongoose.Schema({
         password : {type : String , required : true} ,
         firstname: {type : String , required : true } , 
         lastname : {type : String , required : true} , 
-        username : {type : String , required : true} ,
         phone :  {
-                type : Number ,
+                type : String ,
                 required : true 
         },
         birthDay: { type: Date, required: true } ,
         Usrimg: { type: String, required: false },
-        gender : {type : String , required : true}
+        gender : {type : String , required : true},
+        Notifications : [mongoose.Schema.Types.Mixed],
+        NotifView : {type : Number , default : 0}
     }); 
 
 module.exports = mongoose.model('User', userSchema);

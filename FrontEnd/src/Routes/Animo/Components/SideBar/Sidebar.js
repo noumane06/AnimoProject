@@ -63,12 +63,12 @@ function Side_bar() {
                 <footer className="footer">
                     
                     <div>
-                        <a>Propos</a>·
-                        <a>Contact</a>·
-                        <a>FAQ</a>·
-                        <a>Conditions generales</a>·
-                        <a>Confidentialité</a><br/>
-                        <strong>Animo © 2020 · Production de <a href="https://web.facebook.com/noumane.agouzil/" target="_blank">Noumane Agouzil</a> </strong>
+                        <a href="/home">Propos</a>·
+                        <a href="/home">Contact</a>·
+                        <a href="/home">FAQ</a>·
+                        <a href="/home">Conditions generales</a>·
+                        <a href="/home">Confidentialité</a><br/>
+                        <strong>Animo © 2020 · Production de <a href="https://web.facebook.com/noumane.agouzil/" target="_blank" rel="noopener noreferrer">Noumane Agouzil</a> </strong>
                     </div>
                 </footer>
             </div>

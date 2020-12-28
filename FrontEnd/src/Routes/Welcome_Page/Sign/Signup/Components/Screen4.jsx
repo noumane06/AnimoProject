@@ -3,7 +3,7 @@ import Lottie from 'react-lottie' ;
 import animationData from '../animations/animation.json';
 import verifiedAnimation from '../animations/verified.json';
 
-const Screen4 = ({Loading}) => {
+const Screen4 = ({Loading , Register}) => {
       const verifOptions = {
           loop: false,
           autoplay: true,
@@ -46,7 +46,7 @@ const Screen4 = ({Loading}) => {
                 </button>
               )}
               {!Loading && (
-                <button className="Submitbutton" type="submit">
+                <button className="Submitbutton" type="submit" onClick={Register}>
                 Procéder
                 </button>
               )}

@@ -20,7 +20,7 @@ const Description = ({post , userId}) => {
                    await likes.splice(likes.indexOf(userId),1);
                 }
                 setCheck(!checkbox);
-                const Url = '/posts/likes?userid='+post._id;
+                const Url = '/posts/likes?postid='+post._id;
                 axios.post(Url,{"likes":likes},{withCredentials : true})
                 .then(res=>{})
                 .catch(err => alert(err));
@@ -47,13 +47,13 @@ const Description = ({post , userId}) => {
                             </div>
                     </div>
                     <div className="right">
-                        {( post.PostType === "Offer" || post.PostType === "Offre" ) && post.TransactionType == "Sell" && (
+                        {( post.PostType === "Offer" || post.PostType === "Offre" ) && post.TransactionType === "Sell" && (
                           <div className="Price_tag">
                             {post.Price} Dh 
                           </div>  
                         )}
 
-                        {( post.PostType === "Offer" || post.PostType === "Offre" ) && post.TransactionType == "Petsit" && (
+                        {( post.PostType === "Offer" || post.PostType === "Offre" ) && post.TransactionType === "Petsit" && (
                           <div className="Petsit_Tag">
                             {post.Duration}
                           </div>  

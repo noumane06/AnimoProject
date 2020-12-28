@@ -5,15 +5,16 @@ import axios from "axios";
 import Lottie from "react-lottie";
 import { observer, inject } from "mobx-react";
 import moment from "moment";
+import { useHistory } from 'react-router-dom'
 
 // internal files and componenets
 import animationData from "../../../animation.json";
-import Price_infos from "./Post_Price";
-import Post_Body from "./Post_Body";
-import Post_Header from "./Post_Header";
+import PriceInfos from "./Post_Price";
+import PostBody from "./Post_Body";
+import PostHeader from "./Post_Header";
 
 const Post = inject("postsStore")(
-  observer(({ post }) => {
+  observer(({ post ,apercu,userId}) => {
     const defaultOptions = {
       loop: true,
       autoplay: true,
@@ -22,21 +23,25 @@ const Post = inject("postsStore")(
         preserveAspectRatio: "xMidYMid",
       },
     };
-
+    const History = useHistory() ;
     const [PostType, setPostType] = useState("");
     const [isFull, setFulltext] = useState(post.Describtion.length < 150);
     const [usrInfo, setUserInfo] = useState({});
     const [loading, setLoad] = useState(true);
     const [imgLoading, setImgLoading] = useState(true);
-    let value = "";
-    if (post.Describtion.length > 150) {
-      value = "...en voir plus";
-    }
+    
     useEffect(() => {
-      const Url = "/users/userid=" + post.UsrId;
+      var Url = "/users/userid=";
+      if (apercu) {
+        Url = Url + userId;
+      }else
+      {
+        Url = Url + post.UsrId;
+      }
       axios
         .get(Url, { withCredentials: true })
         .then((res) => {
+          console.log(res);
           setLoad(false);
           setUserInfo(res.data.result);
         })
@@ -81,6 +86,9 @@ const Post = inject("postsStore")(
     const handleLoading = () => {
       setImgLoading(false);
     };
+    const handleClick =()=>{
+      History.push(`/home/${post._id}`);
+    }
     return (
       <div className="LinkContainer">
         <div className="Post">
@@ -93,20 +101,22 @@ const Post = inject("postsStore")(
           {/* Post */}
           {!loading && (
             <>
-              <Post_Header
+              <PostHeader
                 imgLoading={imgLoading}
                 usrInfo={usrInfo}
                 handleLoading={handleLoading}
                 stringDate={stringDate}
               />
-              <Post_Body
+              <PostBody
                 post={post}
                 imgname={imgname}
                 token={token}
                 isFull={isFull}
                 setFulltext={setFulltext}
+                apercu={apercu}
+                handleClick={handleClick}
               />
-              <Price_infos post={post} PostType={PostType} />
+              <PriceInfos post={post} PostType={PostType} />
             </>
           )}
         </div>

@@ -24,6 +24,7 @@ export default class ProgressiveImage extends Component {
             <span>
                 <img
                     {...filteredProps}
+                    alt='progressive Img'
                     onLoad={() => {
                         this.setState({ highResImageLoaded: true });
                     }}
@@ -36,6 +37,7 @@ export default class ProgressiveImage extends Component {
                 {!this.state.highResImageLoaded &&(
                    <img
                     {...filteredProps}
+                    alt='progressive Img'
                     className={`${this.props.className} prog_img`}
                     {...highResImageLoaded && { style: { opacity: "0" } }}
                     src={overlaySrc}

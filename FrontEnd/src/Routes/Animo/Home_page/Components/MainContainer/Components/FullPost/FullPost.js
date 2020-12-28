@@ -6,7 +6,6 @@ import { Skeleton } from 'antd';
 import axios from 'axios';
 // internal files and components 
 import './CSS/FullPost.scss';
-import '../../CSS/skeletonStyle.scss'
 import HeadContainer from './Components/HeadContainer';
 import BodyContainer from './Components/BodyContainer/BodyContainer';
 import FooterContainer from './Components/FooterContainer/FooterContainer';

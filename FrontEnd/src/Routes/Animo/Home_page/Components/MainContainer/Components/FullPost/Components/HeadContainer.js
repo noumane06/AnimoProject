@@ -1,35 +1,48 @@
 // Modules import 
 
-import React from 'react';
-
-
+import React , {useEffect , useState} from 'react';
+import axios from 'axios';
+import moment from "moment";
 // internal files and components 
 
 // Begin ** 
-const HeadContainer  = ({post , likes})=>
+const HeadContainer  = ({post})=>
         {
+          const [Loading  , setLoad] = useState(false);
+          const [usrInfo, setUserInfo] = useState({});
+          const [imgLoading, setImgLoading] = useState(true);
+          useEffect(()=>{
+            var Url = "/users/userid="+post.UsrId;
+            axios.get(Url, { withCredentials: true })
+              .then((res) => {
+                console.log(res);
+                setLoad(false);
+                setUserInfo(res.data.result);
+              })
+              .catch((err) => console.log(err));
             
-            var date = "";
-            var h ="";
-            var m ="";
-            if (post !== undefined) {
-                date = new Date(post.publishDate);
-                h = date.getHours();
-                m = date.getMinutes()
-            }
-            
-            
+          },[])
+          const handleLoading = () => {
+            setImgLoading(false);
+          };
+          const date = new Date(post.publishDate);
+          const stringDate = moment(date).format("HH:mm");
             return (
               <>
-              {post !==undefined&&(
+              {post !==undefined && !Loading &&(
                 <div className="HeadContainer">
                 <div className="Profile">
-                  <span className="dot">
-                    <img src={post.Usrimg} alt="profile" className="prof" />
+                  <span className={imgLoading ? "dot circle" : "dot"}>
+                    <img
+                      src={usrInfo.img}
+                      alt="profile"
+                      className={imgLoading ? "prof hide" : "prof"}
+                      onLoad={handleLoading}
+                    />
                   </span>
                   <div className="usrInfo">
-                    <div className="name">
-                      {post.firstname} {post.lastname} · <span style={{fontWeight : 'normal',fontSize:'14px', color:'#707070'}}>{h}:{m < 10 ? "0" : ""}{m}</span>
+                    <div >
+                      <span className="name">{usrInfo.firstname} {usrInfo.lastname}</span> · <span style={{fontWeight : 'normal',fontSize:'14px', color:'#707070'}}>{stringDate}</span>
                     </div>
 
                     <div className="post_time">
@@ -55,7 +68,7 @@ const HeadContainer  = ({post , likes})=>
                       </g>
                     </g>
                   </svg>
-                  <span className="phone_text">0632126386</span>
+                  <span className="phone_text"><a href={`tel:${usrInfo.phone}`}>0{usrInfo.phone}</a></span>
                 </div>
               </div>
               )}

@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ProgressiveImage from "../../ProgressiveImage/Progressive";
 
-const Post_Body = ({ post, imgname, token, isFull, setFulltext }) => {
+const Post_Body = ({ post, imgname, token, isFull, setFulltext ,apercu , handleClick}) => {
   return (
     <>
       <hr style={{ border: "0.5px solid rgb(221 221 221 / 35%)" }} />
       {(post.PostType === "Offer" || post.PostType === "Offre") && (
-        <div className="Thumbnail_container">
+        <div className="Thumbnail_container" onClick={handleClick}>
           <ProgressiveImage
             className="Thumbnail_img"
             alt="puppies"
@@ -20,7 +20,7 @@ const Post_Body = ({ post, imgname, token, isFull, setFulltext }) => {
 
       <h2>{post.Title.charAt(0).toUpperCase() + post.Title.slice(1)}</h2>
       <div className="infos">
-        <div className="description">
+        <div className="description" >
           {!isFull ? post.Describtion.substr(0, 150) : post.Describtion}
           {!isFull ? (
             <span className="more" onClick={() => setFulltext(true)}>
@@ -33,7 +33,8 @@ const Post_Body = ({ post, imgname, token, isFull, setFulltext }) => {
         </div>
         <br />
 
-        <div className="Interaction_user">
+        {!apercu &&(
+          <div className="Interaction_user">
           <div className="likes">
             <i className="fas fa-heart" style={{ margin: " 0 6px 0 0" }}></i>
             {post.likes.length - 1} J'aime
@@ -47,6 +48,7 @@ const Post_Body = ({ post, imgname, token, isFull, setFulltext }) => {
             </Link>
           )}
         </div>
+        )}
         <hr style={{ border: "0.5px solid rgb(221 221 221 / 35%)" }} />
       </div>
     </>

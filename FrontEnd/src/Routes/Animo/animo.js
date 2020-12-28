@@ -6,7 +6,7 @@ import {Route  , Redirect ,Switch } from 'react-router-dom';
 import axios from 'axios';
 // components import 
 import CreateOffer from './Create_offer/createIndex';
-import Notification from './Notification/NotificationRoute';
+import Notification from './Notification/Notification';
 import Home from './Home_page/HomeRoute';
 import Splash from '../../Components/Splash';
 import SideBar from './Components/SideBar/Sidebar';
@@ -60,7 +60,7 @@ const AnimoContainer = ()=> {
                     </Route>
 
                     <Route path="/createoffer">
-                        <CreateOffer/>
+                        <CreateOffer userId={userId}/>
                     </Route>
                     {/* <Route path ="*" component={Not_found}/> */}
                   

@@ -46,6 +46,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv) {
+
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -298,7 +299,17 @@ module.exports = function(webpackEnv) {
       rules: [
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
-
+        {
+          test: /\.(png|jp(e*)g|svg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'images/[hash]-[name].[ext]',
+              },
+            },
+          ],
+        },
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
         {
@@ -316,6 +327,7 @@ module.exports = function(webpackEnv) {
           ],
           include: paths.appSrc,
         },
+
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall

@@ -1,6 +1,8 @@
 import React from 'react' ;
 import Lottie from 'react-lottie';
 import animationData from '../animations/animation.json';
+import { DatePicker } from 'antd';
+
 const Screen1 = ({formik , Loading })=>{
     const defaultOptions = {
         loop: true,
@@ -10,6 +12,10 @@ const Screen1 = ({formik , Loading })=>{
             preserveAspectRatio: "xMidYMid",
         },
     };
+
+    const HandleDateChange = (value, dateString)=>{
+        formik.setFieldValue('date',value);
+    }
     return(
       <div className="menu">
       
@@ -77,13 +83,24 @@ const Screen1 = ({formik , Loading })=>{
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
-            required
             type="password"
             id="password"
             placeholder="Mot de passe"
           />
         </div>
         {formik.touched.password && formik.errors.password ? <div className="inv_msg">{formik.errors.password}</div> : null}
+        <div className="inputs">
+          <label style={{fontWeight : 'bolder'}}>Date de naissance : </label><br/><br/>
+          <DatePicker 
+            onChange={HandleDateChange}
+            value={formik.values.date}
+            style={!formik.errors.date ? {borderRadius : "10px" , width:"50%"} : {borderRadius : "10px",borderColor:'#D8000C', width:"50%",borderWidth :"2px"}}
+            name="date"
+            id="date"
+            placeholder="Sélectionnez une date"
+          />
+        </div>
+        {formik.errors.date ? <div className="inv_msg">{formik.errors.date}</div> : null}
         <div className="gender">
             <label style={{fontWeight : 'bolder'}}>Sexe : </label>
             <div className="radio one">

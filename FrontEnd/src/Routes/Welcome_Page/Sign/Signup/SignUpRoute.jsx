@@ -2,24 +2,15 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Lottie from 'react-lottie' ;
 
 // Components -----------------
 import SignUp from './signup';
-import animationData from './animations/redirect.json';
 import '../CSS/Redirect.scss';
 // Render ---
 const SignUpRoute = ()=>{
     
     const [signedIn, setSignedIn] = useState("");
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid",
-        },
-    };
+    
     useEffect(() => {
         axios
         .get("/users/checkCoockie", { withCredentials: true })

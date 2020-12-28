@@ -1,7 +1,6 @@
 import React from 'react';
 import PostContainer from './PostContainer/PostContainer';
 import DateComponent from './DateComponent';
-import moment from 'moment';
 export default function Divider(postsStore) {
 
         var rows = [];
@@ -25,7 +24,7 @@ export default function Divider(postsStore) {
                 }
                 posts.push(container[i]);
                 if (nextDate!== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts} key={container[i]._id} />);
+                    rows.push(<PostContainer   posts={posts} key={container[i]._id} />);
                     posts = [];
                 } 
             }else
@@ -35,7 +34,7 @@ export default function Divider(postsStore) {
                 }
                 posts.push(container[i]);
                 if (nextDate !== date.getDate() ) {
-                    rows.push(<PostContainer posts={posts} key={container[i]._id}/>);
+                    rows.push(<PostContainer  posts={posts} key={container[i]._id}/>);
                     posts = [];
                 } 
             }

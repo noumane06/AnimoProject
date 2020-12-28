@@ -64,6 +64,7 @@ const ThumbnailContainer = (props)=>{
                                 {
                                     props.post.imageData.map((img)=>(  
                                         <img
+                                        alt="Carousel images"
                                         src={img}
                                         className="img"
                                         onClick={handleClick}
