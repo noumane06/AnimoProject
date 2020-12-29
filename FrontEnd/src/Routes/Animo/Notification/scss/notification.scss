@@ -2,9 +2,26 @@
 .NotifRouteContainer
 {
     display: flex;
-    justify-content: space-between;
     margin-top: 55px;
-    display: flex;
+    .NoNotif
+    {
+        text-align: center;
+        width: 400px;
+        span
+        {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0F1419;
+            line-height: 21px;
+        }
+        p 
+        {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5B7083;
+            line-height: 17.0625px;
+        }
+    }
     .NotifContainer
     {
         display: flex;
@@ -20,18 +37,28 @@
             width: 400px;
             margin-bottom: 30px;
 
-            .status
-            {
-                .heart
+           
+                .icon
                 {
                     margin-right: 5px;
+                    width: 15px;
+                    height: 15px;
                 }
-                display: flex;
-                align-items: center;
-                font-weight: bold;
-                color: #D7443E;
-                font-size: 12px;
-            }
+                .status
+                {
+                    display: flex;
+                    align-items: center;
+                    font-weight: bold;
+                    font-size: 12px;
+                }
+                .LikeStatus
+                {
+                   color: #D7443E; 
+                }
+                .ShareStatus
+                {
+                    color: #00c0ff;
+                }
             .title
             {
                 color: #2a2a2a;
@@ -59,9 +86,9 @@
                 cursor: pointer;
                 padding: 15px 20px;
                 display: flex;
-                border: 1px solid #2a2a2a1c;
-                border-radius: 10px;
-                margin-top: 10px;
+                border: 1px solid #d5d5d544;
+                border-radius: 15px;
+                margin-top: 15px;
                 background-color: #ffffff;
                 transition: all 0.2s ease;
                 .imgs
@@ -70,7 +97,7 @@
                 }
                 .ThumbImg
                 {
-                    border-radius: 10px;
+                    border-radius: 15px;
                 }
                 .PostInfos
                 {

@@ -17,6 +17,7 @@ const userSchema = mongoose.Schema({
         },
         birthDay: { type: Date, required: true } ,
         Usrimg: { type: String, required: false },
+        ThumbImg : {type : String , required : false},
         gender : {type : String , required : true},
         Notifications : [mongoose.Schema.Types.Mixed],
         NotifView : {type : Number , default : 0}

@@ -217,10 +217,6 @@ exports.user_getNotifications = (req,res, next)=>{
                 message: "User Found",
                 result: {
                     id : result._id,
-                    firstname : result.firstname , 
-                    lastname : result.lastname , 
-                    phone : result.phone ,
-                    img : result.Usrimg ,
                     Notifications : result.Notifications,
                     NotifView : result.NotifView
                 }
@@ -250,7 +246,8 @@ exports.User_Myprofile = (req , res) =>{
                     firstname : result.firstname , 
                     lastname : result.lastname , 
                     phone : result.phone ,
-                    img : result.Usrimg
+                    img : result.Usrimg ,
+                    NotifView : result.NotifView
                 }
             });
         } else {
@@ -260,7 +257,7 @@ exports.User_Myprofile = (req , res) =>{
         }
     })
     .catch(err => {
-        res.status(400).json(err);
+        res.status(500).json(err);
     })
 }
 

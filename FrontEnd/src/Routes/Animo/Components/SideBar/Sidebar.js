@@ -44,7 +44,7 @@ function Side_bar() {
 
                     <Home/></NavLink>    
 
-                    <NavLink to='/notification' activeClassName="active" ><Notif/></NavLink>
+                    <NavLink to='/notification' activeClassName="active" ><Notif  NotifView={usrInfo.NotifView} /></NavLink>
                   
                     <NavLink to='/explore' activeClassName="active" ><Explore/></NavLink>
               

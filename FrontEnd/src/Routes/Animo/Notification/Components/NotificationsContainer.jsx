@@ -1,14 +1,14 @@
 import NotificationCard from "./MiniComponents/NotificationCard"
-import React from 'react';
+import React , {useEffect , useState} from 'react';
 
-const NotificationsContainer = () => {
+const NotificationsContainer = ({Notifications}) => {
 
     return ( 
         <div className="NotifContainer">
-            <NotificationCard />
-            <NotificationCard />
-            <NotificationCard />
-            <NotificationCard />
+            {Notifications.map(Notification => (
+                <NotificationCard data={Notification} key={Notification.date} />
+            ))}
+             
         </div>
      );
 }
