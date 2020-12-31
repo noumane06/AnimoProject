@@ -21,7 +21,7 @@ const Description = ({post , userId}) => {
                 }
                 setCheck(!checkbox);
                 const Url = '/posts/likes?postid='+post._id;
-                axios.post(Url,{"likes":likes},{withCredentials : true})
+                axios.post(Url,{"likes":likes,"NotificationType":'Like'},{withCredentials : true})
                 .then(res=>{})
                 .catch(err => alert(err));
             }

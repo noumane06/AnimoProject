@@ -210,7 +210,7 @@ exports.user_getbyId = (req,res,next) => {
 // return all notofications for the user 
 exports.user_getNotifications = (req,res, next)=>{
     const id = req.AuthID.userId ;
-    User.findById(id)
+    User.findByIdAndUpdate({ _id: id },{NotifView : 0})
     .then(result => {
         if (result) {
             res.status(200).json({
@@ -294,14 +294,17 @@ exports.Checking_User = (req,res,next)=>{
 }
 
 exports.postTest = (req,res)=>{
-    const username = req.body.username ;
-    if (username === 'noumane06') {
+    User.updateMany({},{Notifications :[],NotifView : 0})
+    .then(result=>{
         res.status(200).json({
-            message : 'Welcome back nariman'
+            message : "success",
+            result
         })
-    } else {
-        res.status(404).json({
-            message : 'User not found'
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            err
         })
-    }
+    })
 }

@@ -168,7 +168,7 @@ exports.Post_Like = async (req, res) => {
             
             User.updateOne({ _id: userData.UsrId },
               {
-                $push: {Notifications: Notifications},
+                $push: { Notifications: {$each: [Notifications], $position: 0 } },
                 $inc: { NotifView: 1 }
               })
               .then((result1) => {
@@ -219,22 +219,22 @@ exports.Post_Like = async (req, res) => {
 //     })
 // }
 
-// exports.ChangeAll = (req , res)=>{
-//     Post.updateMany({},{likes :[""]})
-//     .then(data =>{
-//      res.status(200).json(
-//          {
-//              message : "Updated succesfully",
-//              data : data
-//          }
-//      )
-//     })
-//     .catch(err =>{
-//      console.log(err);
-//      res.status(404).json({
-//          message : "The user is not here :/ , below more infos",
-//          error : err
-//      })
-//      })
-//  }
+exports.ChangeAll = (req , res)=>{
+    Post.updateMany({},{likes :[""]})
+    .then(data =>{
+     res.status(200).json(
+         {
+             message : "Updated succesfully",
+             data : data
+         }
+     )
+    })
+    .catch(err =>{
+     console.log(err);
+     res.status(404).json({
+         message : "The user is not here :/ , below more infos",
+         error : err
+     })
+     })
+ }
  

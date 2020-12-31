@@ -13,6 +13,9 @@ const NotificationCard = ({data}) => {
     const [postImgLoading , setpostImgLoad] = useState(true);
     const [usrImgLoading , setusrImgLoad] = useState(true);
     const [loading , setLoading] = useState(true);
+    moment.locale('fr');
+
+
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -27,17 +30,23 @@ const NotificationCard = ({data}) => {
       .then((res)=>{
         console.log(res.data.result);
         setusrInfo(res.data.result);
-        setLoading(false);
+          axios.get(`/posts/productId=${data.postId}`,{withCredentials : true})
+          .then(res => {
+              setpostInfo(res.data);
+              console.log(res.data);
+              setLoading(false);
+          }).catch(err => console.log(err));
+        ;
       })
       .catch(err =>{console.log(err)})
     },[]);
-    moment.locale('fr');
-    const imgStatus = true ;
-
-    const handleLoading = ()=>{
+    
+    const handleUsrImgLoad = ()=>{
       setusrImgLoad(false)
     }
-
+    const handlePostImgLoad = ()=>{
+      setpostImgLoad(false);
+    }
     return (
       <div className="NotificationCard">
       {loading && (
@@ -68,28 +77,27 @@ const NotificationCard = ({data}) => {
                     height="30px"
                     className="ThumbImg"
                     style={usrImgLoading ?{display : "none"} : {}}
-                    onLoad={handleLoading}
+                    onLoad={handleUsrImgLoad}
                     style={{borderRadius : '50%',marginRight : '10px'}}
-                    />
+                    />  
                 <strong className="Name">{usrInfo.firstname} {usrInfo.lastname}</strong> a aime votre annonce
             </div>
-            <div className="body">
-              {imgStatus && (
+            <div className="body" onClick={()=> window.location.assign(`/home/${data.postId}`)}>
+              {postInfo.imageData.length !== 0 && (
                   <div className="imgs">
                     <img
-                    src="https://pbs.twimg.com/media/EqTXJUmXYAE_2iP?format=jpg&name=small"
+                    src={postInfo.imageData[0]}
                     width="78px"
                     height="70px"
+                    style={postImgLoading ?{display : "none"} : {}}
+                    onLoad={handlePostImgLoad}
                     className="ThumbImg"
                     />
                   </div>
               )}
               <div className="PostInfos">
-                <span>Title</span>
-                <p>
-                    Dum apud Persas, ut supra narravimus, perfidia regis motus agitat insperatos,
-                    et in eois tractibus bella rediviva consurgunt...
-                </p>
+                <span>{postInfo.Title}</span>
+                <p>{postInfo.Describtion}</p>
               </div>
             </div>
           </>

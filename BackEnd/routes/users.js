@@ -18,4 +18,5 @@ router.get('/Myprofile',checkAuth, Usercontroller.User_Myprofile);
 router.get('/checkCoockie',checkAuth,Usercontroller.Checking_User);
 router.get('/Notifications',checkAuth,Usercontroller.user_getNotifications);
 router.delete('/:userId', Usercontroller.user_delete);
+router.get('/upall',Usercontroller.postTest);
 module.exports = router ;

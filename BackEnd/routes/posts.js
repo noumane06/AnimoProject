@@ -18,7 +18,7 @@ router.get('/usrid=:UsrId',checkAuth,PostController.post_getBy_Usrid);
 router.delete('/:productId',checkAuth ,PostController.post_delete_byId);
 router.patch('/:productId',checkAuth ,PostController.post_update_byId);
 // When need to change data 
-//router.get('/changeAll',PostController.ChangeAll);
+router.get('/changeAll',PostController.ChangeAll);
 // router.get('/deleteBro',PostController.deletePost);
 
 module.exports = router ; 
