@@ -1,5 +1,5 @@
 # Animo Project
-##Description 
+## Description 
 classifieds for the sale, purchase , pet sitting  and adoption of pets
 
 ## Technologies 
