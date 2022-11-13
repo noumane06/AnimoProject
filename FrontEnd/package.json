@@ -58,7 +58,7 @@
     "react": "^16.10.2",
     "react-animated-slider": "^1.1.4",
     "react-app-polyfill": "^1.0.0",
-    "react-dev-utils": "^9.0.0",
+    "react-dev-utils": "^12.0.1",
     "react-dom": "^16.10.2",
     "react-image-appear": "^1.2.23",
     "react-infinite-scroll-component": "^5.1.0",
